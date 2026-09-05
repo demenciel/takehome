@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <x-seo.meta :seo="$seo ?? null" />
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
+    </head>
+    <body class="min-h-screen antialiased">
+        <a href="#content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2">
+            {{ __('common.skip_to_content') }}
+        </a>
+
+        <header class="border-b border-line bg-card/90 backdrop-blur">
+            <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
+                <a href="{{ route('home') }}" class="font-serif text-xl tracking-tight text-ink">
+                    {{ config('app.name') }}
+                </a>
+                <nav aria-label="Primary" class="flex items-center gap-4 text-sm font-medium text-ink-soft">
+                    <a href="{{ route('paycheck.canada') }}" class="hover:text-ink">{{ __('common.nav_calculator') }}</a>
+                    <a href="{{ route('home') }}#provinces" class="hidden hover:text-ink sm:inline">{{ __('common.nav_provinces') }}</a>
+                    <a href="{{ route('about') }}" class="hover:text-ink">{{ __('common.footer_about') }}</a>
+                </nav>
+            </div>
+        </header>
+
+        <main id="content">
+            {{ $slot }}
+        </main>
+
+        <footer class="mt-16 border-t border-line bg-card">
+            <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 text-sm text-ink-soft sm:px-6 md:flex-row md:justify-between">
+                <div>
+                    <p class="font-serif text-base text-ink">{{ config('app.name') }}</p>
+                    <p class="mt-2 max-w-md">{{ __('common.brand_tagline') }}</p>
+                    <p class="mt-3">{{ __('common.footer_disclaimer') }}</p>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <a href="{{ route('paycheck.canada') }}" class="hover:text-ink">{{ __('common.nav_calculator') }}</a>
+                    <a href="{{ route('about') }}" class="hover:text-ink">{{ __('common.footer_about') }}</a>
+                    <a href="{{ route('privacy') }}" class="hover:text-ink">{{ __('common.footer_privacy') }}</a>
+                    <a href="{{ route('sitemap') }}" class="hover:text-ink">Sitemap</a>
+                </div>
+            </div>
+        </footer>
+
+        @isset($seo)
+            <x-seo.json-ld :seo="$seo" />
+        @endisset
+
+        @livewireScripts
+    </body>
+</html>

@@ -1,0 +1,75 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/livewire/src/Features/SupportPagination/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Avenir Next', 'Segoe UI', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, ui-serif, Georgia, serif;
+    --color-ink: #16231c;
+    --color-ink-soft: #3d4a43;
+    --color-paper: #f6f3ec;
+    --color-card: #fffdf8;
+    --color-line: #ddd6c8;
+    --color-accent: #1f6b4a;
+    --color-accent-dark: #164f37;
+    --color-deduct: #8a3d3d;
+    --color-focus: #1f6b4a;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: var(--color-paper);
+        color: var(--color-ink);
+        font-family: var(--font-sans);
+    }
+
+    :focus-visible {
+        outline: 3px solid var(--color-focus);
+        outline-offset: 3px;
+    }
+}
+
+@utility input-field {
+    width: 100%;
+    min-height: 3.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-line);
+    background: #fff;
+    padding: 0.85rem 1rem;
+    font-size: 1.05rem;
+    color: var(--color-ink);
+}
+
+@utility btn-primary {
+    display: inline-flex;
+    min-height: 3.25rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: var(--color-accent);
+    padding: 0.85rem 1.25rem;
+    font-weight: 650;
+    color: #fff;
+}
+
+@utility btn-secondary {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-line);
+    background: #fff;
+    padding: 0.65rem 1rem;
+    font-weight: 600;
+    color: var(--color-ink);
+}
