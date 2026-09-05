@@ -8,14 +8,33 @@ This is not a payroll product, a tax-filing app, a government service, or a fina
 
 ## Local development
 
-Requires PHP 8.3+, Composer, Node 20+, and SQLite.
+Requires PHP 8.3+ with `pdo_mysql`, Composer, Node 20+, and MySQL 8.
+
+Create the database first:
+
+```sql
+CREATE DATABASE paycheque CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
 ```bash
 composer install
 npm install
 cp .env.example .env
 php artisan key:generate
-touch database/database.sqlite
+```
+
+Set MySQL credentials in `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=paycheque
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+```bash
 php artisan migrate --seed
 npm run build
 php artisan serve
@@ -42,7 +61,7 @@ vendor/bin/pint
 php artisan migrate --seed
 ```
 
-`DB_CONNECTION=sqlite` is the default. The database file is `database/database.sqlite`. No Redis and no external database are required.
+MySQL is the application database. Pest tests still use in-memory SQLite (`phpunit.xml`) so `php artisan test` does not need a running MySQL server.
 
 Set `APP_NAME=Paycheque.app` and `APP_URL` to the production host. Canonical URLs, Open Graph URLs, and the sitemap all use `APP_URL`.
 
@@ -172,21 +191,26 @@ Events are stored without exact salaries. Useful events: `calculator_started`, `
 
 ## Deployment
 
-Typical production stack: Linux, Nginx, PHP 8.3+, SQLite.
+Typical production stack: Linux, Nginx, PHP 8.3+ with `pdo_mysql`, MySQL 8.
 
-1. Set `APP_URL` to the public HTTPS origin (this is the canonical host).
-2. `php artisan migrate --force`
-3. `npm run build` (or build in CI and deploy `public/build`)
-4. `php artisan config:cache && php artisan route:cache && php artisan view:cache`
+1. Create the MySQL database and user, then set `DB_*` in `.env`.
+2. Set `APP_URL` to the public HTTPS origin (this is the canonical host).
+3. `php artisan migrate --force`
+4. `npm run build` (or build in CI and deploy `public/build`)
+5. `php artisan config:cache && php artisan route:cache && php artisan view:cache`
 
 No Redis. Queue can stay `sync`. Nginx `root` must be `public/`. Deny `.env`.
 
 ```bash
-chown -R www-data:www-data storage bootstrap/cache database
+chown -R www-data:www-data storage bootstrap/cache
 chmod -R ug+rwx storage bootstrap/cache
 ```
 
-Back up `database/database.sqlite` before deploys.
+Back up MySQL before deploys:
+
+```bash
+mysqldump -u "$DB_USERNAME" -p "$DB_DATABASE" > storage/backups/paycheque-$(date +%F).sql
+```
 
 ## Testing
 
