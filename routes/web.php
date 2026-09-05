@@ -7,10 +7,14 @@ use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\ToolController;
+use App\Support\Province;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PaycheckController::class, 'home'])->name('home');
 Route::get('/canada-paycheck-calculator', [PaycheckController::class, 'canada'])->name('paycheck.canada');
+Route::get('/canada-paycheque-calculator', function () {
+    return redirect()->route('paycheck.canada', status: 301);
+});
 Route::get('/paycheque-calculator', [ToolController::class, 'hub'])->defaults('tool', 'paycheque')->name('tools.paycheque');
 Route::get('/take-home-pay-calculator', [ToolController::class, 'hub'])->defaults('tool', 'take_home')->name('tools.take_home');
 Route::get('/salary-after-tax-calculator', [ToolController::class, 'hub'])->defaults('tool', 'salary_after_tax')->name('tools.salary_after_tax');
@@ -44,12 +48,26 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/{provinceSlug}-paycheck-calculator', [PaycheckController::class, 'province'])
+    ->where('provinceSlug', Province::slugPattern())
     ->name('paycheck.province');
 
+Route::get('/{provinceSlug}-paycheque-calculator', function (string $provinceSlug) {
+    $province = Province::fromSlug($provinceSlug);
+
+    abort_unless($province, 404);
+
+    return redirect()->route('paycheck.province', $province->slug(), 301);
+})->where('provinceSlug', Province::slugPattern());
+
 Route::get('/{provinceSlug}/{salary}-salary', [PaycheckController::class, 'salary'])
+    ->where('provinceSlug', Province::slugPattern())
     ->whereNumber('salary')
     ->name('paycheck.salary');
 
 Route::get('/{provinceSlug}/salary/{salary}', function (string $provinceSlug, int $salary) {
-    return redirect()->route('paycheck.salary', [$provinceSlug, $salary], 301);
-})->whereNumber('salary')->name('paycheck.salary.alt');
+    $province = Province::fromSlug($provinceSlug);
+
+    abort_unless($province, 404);
+
+    return redirect()->route('paycheck.salary', [$province->slug(), $salary], 301);
+})->where('provinceSlug', Province::slugPattern())->whereNumber('salary')->name('paycheck.salary.alt');

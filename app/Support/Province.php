@@ -59,13 +59,60 @@ enum Province: string
 
     public static function fromSlug(string $slug): ?self
     {
+        $normalized = strtolower($slug);
+
         foreach (self::cases() as $province) {
-            if ($province->slug() === $slug) {
+            if ($province->slug() === $normalized) {
                 return $province;
             }
         }
 
-        return null;
+        return self::aliases()[$normalized] ?? null;
+    }
+
+    /**
+     * Alternate slugs that 301 to the canonical province page.
+     *
+     * @return array<string, self>
+     */
+    public static function aliases(): array
+    {
+        return [
+            'bc' => self::BritishColumbia,
+            'britishcolumbia' => self::BritishColumbia,
+            'nb' => self::NewBrunswick,
+            'nl' => self::NewfoundlandAndLabrador,
+            'newfoundland' => self::NewfoundlandAndLabrador,
+            'newfoundland-labrador' => self::NewfoundlandAndLabrador,
+            'ns' => self::NovaScotia,
+            'pei' => self::PrinceEdwardIsland,
+            'pe' => self::PrinceEdwardIsland,
+            'nwt' => self::NorthwestTerritories,
+            'northwest-territory' => self::NorthwestTerritories,
+            'nt' => self::NorthwestTerritories,
+            'nu' => self::Nunavut,
+            'yt' => self::Yukon,
+            'on' => self::Ontario,
+            'qc' => self::Quebec,
+            'ab' => self::Alberta,
+            'mb' => self::Manitoba,
+            'sk' => self::Saskatchewan,
+        ];
+    }
+
+    public static function slugPattern(): string
+    {
+        $slugs = array_map(
+            fn (self $province) => preg_quote($province->slug(), '/'),
+            self::cases(),
+        );
+
+        $aliases = array_map(
+            fn (string $alias) => preg_quote($alias, '/'),
+            array_keys(self::aliases()),
+        );
+
+        return implode('|', array_merge($slugs, $aliases));
     }
 
     public static function fromCode(string $code): ?self

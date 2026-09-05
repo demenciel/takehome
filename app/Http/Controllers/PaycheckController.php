@@ -13,6 +13,7 @@ use App\Support\Province;
 use App\Support\SalaryCatalog;
 use App\Support\ToolCatalog;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PaycheckController extends Controller
@@ -69,11 +70,15 @@ class PaycheckController extends Controller
         ]);
     }
 
-    public function province(Request $request, string $provinceSlug): View
+    public function province(Request $request, string $provinceSlug): View|RedirectResponse
     {
         $province = Province::fromSlug($provinceSlug);
 
         abort_unless($province, 404);
+
+        if ($province->slug() !== $provinceSlug) {
+            return redirect()->route('paycheck.province', $province->slug(), 301);
+        }
 
         $this->pageView($request, $province);
 
@@ -105,11 +110,15 @@ class PaycheckController extends Controller
         ]);
     }
 
-    public function salary(Request $request, string $provinceSlug, int $salary): View
+    public function salary(Request $request, string $provinceSlug, int $salary): View|RedirectResponse
     {
         $province = Province::fromSlug($provinceSlug);
 
         abort_unless($province && SalaryCatalog::allows($province, $salary), 404);
+
+        if ($province->slug() !== $provinceSlug) {
+            return redirect()->route('paycheck.salary', [$province->slug(), $salary], 301);
+        }
 
         $this->pageView($request, $province, $salary);
 

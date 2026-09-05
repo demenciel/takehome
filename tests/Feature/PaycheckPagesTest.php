@@ -3,6 +3,7 @@
 use App\Livewire\HourlySalaryConverter;
 use App\Livewire\PaycheckCalculator;
 use App\Models\User;
+use App\Support\Province;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
@@ -79,6 +80,23 @@ it('renders unique Ontario province content', function () {
         ->assertSee('TD1ON', false)
         ->assertSee('$12,989', false)
         ->assertSee('$80,000 salary in Ontario', false);
+});
+
+it('renders every province and territory paycheck calculator', function (Province $province) {
+    $this->get('/'.$province->slug().'-paycheck-calculator')
+        ->assertOk()
+        ->assertSee($province->name().' Paycheck Calculator', false);
+})->with(Province::all());
+
+it('redirects Canadian-spelling and alias province URLs', function () {
+    $this->get('/british-columbia-paycheque-calculator')
+        ->assertRedirect('/british-columbia-paycheck-calculator');
+
+    $this->get('/pei-paycheck-calculator')
+        ->assertRedirect('/prince-edward-island-paycheck-calculator');
+
+    $this->get('/canada-paycheque-calculator')
+        ->assertRedirect('/canada-paycheck-calculator');
 });
 
 it('renders unique Quebec province content', function () {
