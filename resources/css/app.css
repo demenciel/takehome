@@ -61,6 +61,27 @@
     color: #fff;
 }
 
+@utility data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td {
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.75rem 0.85rem;
+    text-align: left;
+}
+
+.data-table thead th {
+    font-size: 0.8rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+}
+
 @utility btn-secondary {
     display: inline-flex;
     min-height: 2.75rem;

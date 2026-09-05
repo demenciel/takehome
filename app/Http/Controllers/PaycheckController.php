@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Calculators\Payroll\PayrollCalculator;
 use App\Content\PaycheckContent;
 use App\Services\Analytics\Analytics;
+use App\Services\Payroll\ExampleResultService;
 use App\Services\Seo\SeoPage;
+use App\Services\Tax\TaxFreshness;
+use App\Support\HourlyConversion;
+use App\Support\Money;
 use App\Support\Province;
+use App\Support\SalaryCatalog;
+use App\Support\ToolCatalog;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -15,14 +20,13 @@ class PaycheckController extends Controller
     public function __construct(
         private PaycheckContent $content,
         private Analytics $analytics,
+        private ExampleResultService $examples,
+        private TaxFreshness $freshness,
     ) {}
 
     public function home(Request $request): View
     {
-        $this->analytics->record('page_view', [
-            'tool_key' => 'paycheck',
-            'path' => $request->path(),
-        ]);
+        $this->pageView($request);
 
         return view('pages.home', [
             'seo' => new SeoPage(
@@ -33,20 +37,19 @@ class PaycheckController extends Controller
                     ['name' => __('common.home'), 'url' => route('home')],
                 ],
                 faqs: $this->content->nationalFaqs(),
+                includeWebsite: true,
             ),
             'provinces' => Province::all(),
-            'popularSalaries' => config('tools.popular_salaries'),
+            'popularSalaries' => SalaryCatalog::amounts(),
+            'exampleSalaries' => SalaryCatalog::examples(),
+            'hubs' => ToolCatalog::hubs(),
             'faqs' => $this->content->nationalFaqs(),
-            'taxYear' => (int) config('tax.current_year'),
         ]);
     }
 
     public function canada(Request $request): View
     {
-        $this->analytics->record('page_view', [
-            'tool_key' => 'paycheck',
-            'path' => $request->path(),
-        ]);
+        $this->pageView($request);
 
         return view('pages.paycheck.canada', [
             'seo' => new SeoPage(
@@ -60,9 +63,9 @@ class PaycheckController extends Controller
                 faqs: $this->content->nationalFaqs(),
             ),
             'provinces' => Province::all(),
-            'popularSalaries' => config('tools.popular_salaries'),
+            'popularSalaries' => SalaryCatalog::amounts(),
+            'related' => ToolCatalog::relatedLinks(),
             'faqs' => $this->content->nationalFaqs(),
-            'taxYear' => (int) config('tax.current_year'),
         ]);
     }
 
@@ -72,23 +75,25 @@ class PaycheckController extends Controller
 
         abort_unless($province, 404);
 
-        $this->analytics->record('page_view', [
-            'tool_key' => 'paycheck',
-            'province' => $province->value,
-            'path' => $request->path(),
-        ]);
+        $this->pageView($request, $province);
 
         $content = $this->content->province($province);
         $faqs = $this->content->provinceFaqs($province);
+        $examples = $this->examples->examples($province, SalaryCatalog::examples());
 
         return view('pages.paycheck.province', [
             'province' => $province,
             'content' => $content,
             'faqs' => $faqs,
-            'popularSalaries' => config('tools.popular_salaries'),
-            'taxYear' => (int) config('tax.current_year'),
+            'examples' => $examples,
+            'indexableSalaries' => array_values(array_filter(
+                SalaryCatalog::amounts(),
+                fn (int $amount) => SalaryCatalog::allows($province, $amount),
+            )),
+            'deductions' => $this->content->payrollDeductions($province),
+            'related' => ToolCatalog::relatedLinks($province),
             'seo' => new SeoPage(
-                title: $province->name().' Paycheck Calculator — Take-home pay',
+                title: $province->name().' Paycheck Calculator — Take-home pay '.$this->freshness->year(),
                 description: $content['intro'].' Enter a salary and pay frequency to see estimated '.$province->adjective().' take-home pay.',
                 canonical: route('paycheck.province', $province->slug()),
                 breadcrumbs: [
@@ -103,28 +108,23 @@ class PaycheckController extends Controller
     public function salary(Request $request, string $provinceSlug, int $salary): View
     {
         $province = Province::fromSlug($provinceSlug);
-        $allowed = config('tools.popular_salaries');
 
-        abort_unless($province && in_array($salary, $allowed, true), 404);
+        abort_unless($province && SalaryCatalog::allows($province, $salary), 404);
 
-        $this->analytics->record('page_view', [
-            'tool_key' => 'paycheck',
-            'province' => $province->value,
-            'annual_salary_cents' => $salary * 100,
-            'path' => $request->path(),
-        ]);
+        $this->pageView($request, $province, $salary);
 
-        $result = app(PayrollCalculator::class)->calculate([
-            'annual_salary' => $salary,
-            'province' => $province->value,
-            'frequency' => 'biweekly',
-        ]);
-
+        $page = $this->examples->salaryPage($province, $salary);
+        $result = $page['result'];
         $content = $this->content->province($province);
+        $explanation = $this->content->salaryExplanation($province, $salary, $result->metrics);
+        $hourly = HourlyConversion::hourlyFromAnnual(Money::fromDollars($salary));
+        $neighbors = SalaryCatalog::neighbors($salary);
+        $compare = SalaryCatalog::compare($salary);
+
         $faqs = [
             [
                 'question' => 'How much is a $'.number_format($salary).' salary after tax in '.$province->name().'?',
-                'answer' => 'On this page, the estimated biweekly take-home for a $'.number_format($salary).' salary in '.$province->name().' is '.$result->headlineAmount->format().'. Annual estimated take-home is '.$result->metrics['net_annual']->format().'. Your employer’s deductions can differ.',
+                'answer' => $explanation,
             ],
             ...$this->content->provinceFaqs($province),
         ];
@@ -133,12 +133,17 @@ class PaycheckController extends Controller
             'province' => $province,
             'salary' => $salary,
             'result' => $result,
+            'frequencies' => $page['frequencies'],
+            'hourly' => $hourly,
+            'hourAssumption' => HourlyConversion::assumptionLabel(),
+            'explanation' => $explanation,
             'content' => $content,
             'faqs' => $faqs,
-            'popularSalaries' => $allowed,
-            'taxYear' => (int) config('tax.current_year'),
+            'neighbors' => $neighbors,
+            'compare' => $compare,
+            'related' => ToolCatalog::relatedLinks($province),
             'seo' => new SeoPage(
-                title: '$'.number_format($salary).' salary after tax in '.$province->name(),
+                title: '$'.number_format($salary).' Salary After Tax in '.$province->name(),
                 description: 'Estimated take-home pay for a $'.number_format($salary).' salary in '.$province->name().' after income tax, '.($province->usesQpp() ? 'QPP' : 'CPP').', and EI.',
                 canonical: route('paycheck.salary', [$province->slug(), $salary]),
                 breadcrumbs: [
@@ -148,6 +153,16 @@ class PaycheckController extends Controller
                 ],
                 faqs: $faqs,
             ),
+        ]);
+    }
+
+    private function pageView(Request $request, ?Province $province = null, ?int $salary = null): void
+    {
+        $this->analytics->record('page_view', [
+            'tool_key' => 'paycheck',
+            'province' => $province?->value,
+            'annual_salary_cents' => $salary ? $salary * 100 : null,
+            'path' => $request->path(),
         ]);
     }
 }

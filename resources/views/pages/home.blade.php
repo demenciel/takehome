@@ -1,11 +1,12 @@
 <x-layouts.app :seo="$seo">
     <section class="mx-auto max-w-6xl px-4 pb-8 pt-10 sm:px-6 sm:pt-16">
         <div class="max-w-3xl">
-            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent">{{ config('app.name') }} · {{ $taxYear }}</p>
+            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-accent">{{ config('app.name') }} · {{ $taxFreshness->year() }}</p>
             <h1 class="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
                 {{ __('calculator.hero_title') }}
             </h1>
             <p class="mt-5 max-w-2xl text-lg text-ink-soft">{{ __('calculator.hero_subtitle') }}</p>
+            <x-tax-freshness class="mt-4" />
         </div>
 
         <div class="mt-10 grid items-start gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(16rem,0.7fr)]">
@@ -15,6 +16,9 @@
                 <h2 class="font-serif text-2xl">A trustworthy estimate</h2>
                 <p class="mt-3 text-ink-soft">Built on CRA payroll formulas. No account. No email. Your salary is not stored.</p>
                 <x-ad-slot name="sidebar" class="mt-6" />
+                <p class="mt-6 text-sm">
+                    <a href="{{ route('methodology') }}" class="font-semibold text-accent-dark underline">How the estimate is calculated</a>
+                </p>
             </aside>
         </div>
     </section>
@@ -41,7 +45,7 @@
         </div>
     </section>
 
-    <x-ad-slot name="content-mid" />
+    <x-ad-slot placement="middle" />
 
     <section id="provinces" class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <h2 class="font-serif text-3xl">Choose your province</h2>
@@ -58,15 +62,28 @@
     </section>
 
     <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <h2 class="font-serif text-3xl">Popular salaries</h2>
-        <p class="mt-3 max-w-2xl text-ink-soft">Open a salary page for a province when you want a ready-made estimate. These are the amounts we index.</p>
+        <h2 class="font-serif text-3xl">Popular Ontario salaries</h2>
+        <p class="mt-3 max-w-2xl text-ink-soft">Ready-made estimates for common Ontario salaries. Other provinces have their own salary pages where we have enough distinct search intent.</p>
         <div class="mt-6 flex flex-wrap gap-3">
-            @foreach ($popularSalaries as $amount)
+            @foreach ($exampleSalaries as $amount)
                 <a href="{{ route('paycheck.salary', ['ontario', $amount]) }}" class="rounded-full border border-line bg-card px-4 py-2 font-semibold hover:border-accent">
-                    ${{ number_format($amount) }}
+                    ${{ number_format($amount) }} in Ontario
                 </a>
             @endforeach
         </div>
+    </section>
+
+    <section class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+        <h2 class="font-serif text-3xl">Other calculators</h2>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+            @foreach ($hubs as $hub)
+                <li>
+                    <a href="{{ route($hub['route']) }}" class="flex min-h-14 items-center rounded-xl border border-line bg-card px-4 font-semibold hover:border-accent">
+                        {{ $hub['nav'] }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
     </section>
 
     <section class="mx-auto max-w-3xl px-4 py-6 sm:px-6">
@@ -75,5 +92,5 @@
     </section>
 
     <x-faq :faqs="$faqs" />
-    <x-ad-slot name="bottom-banner" />
+    <x-ad-slot placement="bottom" />
 </x-layouts.app>

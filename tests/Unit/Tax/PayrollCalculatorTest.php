@@ -2,7 +2,6 @@
 
 use App\Calculators\Payroll\PayrollCalculator;
 use App\Support\Money;
-use App\Support\PayFrequency;
 use App\Support\Province;
 
 function paycheck(array $overrides = []): array
@@ -34,6 +33,20 @@ it('calculates a known $50,000 New Brunswick case from T4127 Option 1', function
         ->and(metric($result, 'net_annual')->dollars())->toBe('39354.22');
 });
 
+it('calculates a $50,000 Ontario salary below the CPP2 threshold', function () {
+    $result = app(PayrollCalculator::class)->calculate(paycheck([
+        'annual_salary' => '50000',
+        'province' => 'ON',
+    ]));
+
+    expect(metric($result, 'cpp2')->isZero())->toBeTrue()
+        ->and(metric($result, 'ei')->dollars())->toBe('815.00')
+        ->and(metric($result, 'cpp')->dollars())->toBe('2766.75')
+        ->and(metric($result, 'federal_tax')->isPositive())->toBeTrue()
+        ->and(metric($result, 'provincial_tax')->isPositive())->toBeTrue()
+        ->and(metric($result, 'net_annual')->isPositive())->toBeTrue();
+});
+
 it('calculates a known $80,000 Ontario case including health premium', function () {
     $result = app(PayrollCalculator::class)->calculate(paycheck([
         'annual_salary' => '80000',
@@ -47,6 +60,31 @@ it('calculates a known $80,000 Ontario case including health premium', function 
         ->and(metric($result, 'federal_tax')->dollars())->toBe('9242.60')
         ->and(metric($result, 'provincial_tax')->dollars())->toBe('4884.79')
         ->and(metric($result, 'net_annual')->dollars())->toBe('60303.09');
+});
+
+it('calculates a $100,000 Ontario salary at CPP, CPP2, and EI ceilings', function () {
+    $result = app(PayrollCalculator::class)->calculate(paycheck([
+        'annual_salary' => '100000',
+        'province' => 'ON',
+    ]));
+
+    expect(metric($result, 'cpp')->dollars())->toBe('4230.45')
+        ->and(metric($result, 'cpp2')->dollars())->toBe('416.00')
+        ->and(metric($result, 'ei')->dollars())->toBe('1123.07')
+        ->and(metric($result, 'net_annual')->isPositive())->toBeTrue()
+        ->and((float) $result->metrics['effective_tax_rate'])->toBeGreaterThan(15);
+});
+
+it('calculates an Alberta salary with lower provincial tax than Ontario', function () {
+    $alberta = app(PayrollCalculator::class)->calculate(paycheck([
+        'annual_salary' => '80000',
+        'province' => 'AB',
+    ]));
+
+    expect(metric($alberta, 'cpp')->dollars())->toBe('4230.45')
+        ->and(metric($alberta, 'ei')->dollars())->toBe('1123.07')
+        ->and(metric($alberta, 'provincial_tax')->isPositive())->toBeTrue()
+        ->and(metric($alberta, 'net_annual')->isPositive())->toBeTrue();
 });
 
 it('uses QPP, QPIP, reduced EI, and the federal abatement in Quebec', function () {

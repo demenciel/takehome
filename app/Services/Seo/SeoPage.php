@@ -16,5 +16,9 @@ final class SeoPage
         public readonly array $breadcrumbs = [],
         public readonly array $faqs = [],
         public readonly string $ogType = 'website',
+        public readonly ?string $ogTitle = null,
+        public readonly ?string $ogDescription = null,
+        public readonly bool $includeWebsite = false,
+        public readonly bool $includeApplication = true,
     ) {}
 }

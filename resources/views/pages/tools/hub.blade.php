@@ -2,21 +2,27 @@
     <x-breadcrumbs :items="$seo->breadcrumbs" />
 
     <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
-        <h1 class="font-serif text-4xl text-ink sm:text-5xl">Canada Paycheck Calculator</h1>
-        <p class="mt-4 max-w-2xl text-lg text-ink-soft">Estimate take-home pay anywhere in Canada. Choose your province — the calculator never assumes it for you.</p>
+        <h1 class="font-serif text-4xl text-ink sm:text-5xl">{{ $page['h1'] }}</h1>
+        <p class="mt-4 max-w-2xl text-lg text-ink-soft">{{ $page['intro'] }}</p>
         <x-tax-freshness class="mt-4" />
         <x-ad-slot placement="top" />
         <div class="mt-8 max-w-2xl">
-            <livewire:paycheck-calculator />
+            @if ($page['frequency'])
+                <livewire:paycheck-calculator :frequency="$page['frequency']" />
+            @else
+                <livewire:paycheck-calculator />
+            @endif
         </div>
     </section>
 
-    <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <h2 class="font-serif text-3xl">Salary after tax in Canada</h2>
-        <p class="mt-4 max-w-3xl text-ink-soft">Canadian payroll deductions usually include federal income tax, provincial or territorial income tax, CPP or QPP, and EI. Quebec employees also pay QPIP and receive a federal tax abatement. This national calculator uses {{ $taxFreshness->year() }} CRA T4127 Option 1 for a full-year employee claiming the basic personal amount.</p>
+    <section class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+        @foreach ($page['sections'] as $section)
+            <h2 class="mt-10 font-serif text-3xl first:mt-0">{{ $section['heading'] }}</h2>
+            <p class="mt-4 text-ink-soft">{{ $section['copy'] }}</p>
+        @endforeach
     </section>
 
-    <section id="provinces" class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <h2 class="font-serif text-3xl">Province paycheck calculators</h2>
         <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($provinces as $province)

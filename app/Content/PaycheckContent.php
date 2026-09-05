@@ -56,7 +56,82 @@ class PaycheckContent
     {
         $specific = $this->province($province)['faqs'];
 
-        return array_merge($specific, $this->nationalFaqs());
+        return array_merge($specific, array_slice($this->nationalFaqs(), 0, 3));
+    }
+
+    /**
+     * @return list<array{heading: string, copy: string}>
+     */
+    public function payrollDeductions(Province $province): array
+    {
+        $year = config('tax.current_year');
+
+        if ($province->usesQpp()) {
+            return [
+                [
+                    'heading' => 'Federal income tax',
+                    'copy' => "Quebec residents still pay federal income tax, reduced by the 16.5% Quebec abatement. The {$year} federal basic personal amount for most filers is $16,452.",
+                ],
+                [
+                    'heading' => 'Quebec income tax',
+                    'copy' => 'Provincial tax is administered by Revenu Québec, not CRA T4127. This estimate uses the published 2026 Quebec brackets and the $18,952 basic personal amount.',
+                ],
+                [
+                    'heading' => 'QPP and QPP2',
+                    'copy' => 'Quebec employees contribute to QPP instead of CPP. Earnings above the MPE also attract QPP2. Those additional contributions reduce taxable income, matching payroll methodology.',
+                ],
+                [
+                    'heading' => 'EI and QPIP',
+                    'copy' => 'Quebec employees pay a lower federal EI rate and also pay Quebec Parental Insurance Plan premiums. Both are included when the province is Quebec.',
+                ],
+            ];
+        }
+
+        $cpp2 = $province->name() === 'Ontario'
+            ? 'CPP2 applies once pensionable earnings pass the YMPE ($74,600 in 2026) and continue to the YAMPE ($85,000).'
+            : 'CPP2 applies on pensionable earnings between the YMPE and YAMPE when salary is high enough.';
+
+        return [
+            [
+                'heading' => 'Federal income tax',
+                'copy' => "The same federal brackets apply in {$province->name()} as in other provinces outside Quebec. This calculator uses CRA T4127 Option 1 and claim code 1.",
+            ],
+            [
+                'heading' => $province->name().' income tax',
+                'copy' => $this->province($province)['body'][0]['copy'],
+            ],
+            [
+                'heading' => 'CPP and CPP2',
+                'copy' => 'Employees contribute 5.95% of pensionable earnings between the $3,500 exemption and the YMPE, up to $4,230.45. '.$cpp2,
+            ],
+            [
+                'heading' => 'Employment Insurance',
+                'copy' => 'The 2026 employee EI rate outside Quebec is 1.63% of insurable earnings up to $68,900, with a maximum premium of $1,123.07.',
+            ],
+        ];
+    }
+
+    /**
+     * @param  array<string, mixed>  $metrics
+     */
+    public function salaryExplanation(Province $province, int $salary, array $metrics): string
+    {
+        $formatted = '$'.number_format($salary);
+        $net = $metrics['net_annual']->format();
+        $federal = $metrics['federal_tax']->format();
+        $provincial = $metrics['provincial_tax']->format();
+        $pension = $province->usesQpp() ? 'QPP' : 'CPP';
+        $pensionAmount = $metrics['cpp']->format();
+        $second = $metrics['cpp2']->isPositive()
+            ? ' plus '.$metrics['cpp2']->format().' in '.($province->usesQpp() ? 'QPP2' : 'CPP2')
+            : '';
+        $ei = $metrics['ei']->format();
+        $qpip = $province->usesQpp() && $metrics['qpip']->isPositive()
+            ? ' QPIP is '.$metrics['qpip']->format().'.'
+            : '';
+        $rate = $metrics['effective_tax_rate'];
+
+        return "On a {$formatted} salary in {$province->name()}, this estimate puts annual take-home at {$net} after about {$federal} federal tax and {$provincial} {$province->adjective()} tax. {$pension} is {$pensionAmount}{$second}. EI is {$ei}.{$qpip} The effective income-tax rate on this page is about {$rate}% of gross salary — that rate does not include {$pension} or EI.";
     }
 
     /**

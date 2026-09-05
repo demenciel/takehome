@@ -1,8 +1,31 @@
 @props(['seo'])
 
 @php
-    $graph = [
-        [
+    $graph = [];
+
+    if ($seo->includeWebsite) {
+        $graph[] = [
+            '@type' => 'WebSite',
+            'name' => config('app.name'),
+            'url' => rtrim(config('app.url'), '/'),
+            'description' => __('common.brand_tagline'),
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => config('seo.organization_name'),
+                'url' => rtrim(config('seo.organization_url'), '/'),
+            ],
+        ];
+    }
+
+    $graph[] = [
+        '@type' => 'Organization',
+        'name' => config('seo.organization_name'),
+        'url' => rtrim(config('seo.organization_url'), '/'),
+        'description' => 'Independent Canadian paycheck calculator. Not a government service.',
+    ];
+
+    if ($seo->includeApplication) {
+        $graph[] = [
             '@type' => 'WebApplication',
             'name' => config('app.name'),
             'url' => $seo->canonical,
@@ -14,8 +37,8 @@
                 'price' => '0',
                 'priceCurrency' => config('tax.currency'),
             ],
-        ],
-    ];
+        ];
+    }
 
     if ($seo->breadcrumbs !== []) {
         $graph[] = [
@@ -42,9 +65,7 @@
             ])->all(),
         ];
     }
-@endphp
 
-@php
     $payload = [
         '@'.'context' => 'https://schema.org',
         '@graph' => $graph,

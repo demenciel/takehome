@@ -1,7 +1,14 @@
-@props(['name'])
+@props(['name' => null, 'placement' => null])
 
 @php
-    $enabled = config('ads.enabled') && data_get(config('ads.slots'), $name.'.enabled', false);
+    $aliases = [
+        'top' => 'top',
+        'middle' => 'middle',
+        'bottom' => 'bottom',
+    ];
+
+    $slot = $name ?? ($aliases[$placement ?? ''] ?? $placement ?? 'middle');
+    $enabled = config('ads.enabled') && data_get(config('ads.slots'), $slot.'.enabled', false);
     $provider = config('ads.provider');
 @endphp
 
@@ -14,9 +21,9 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="{{ config('ads.client') }}"
-             data-ad-slot="{{ $name }}"
-             data-ad-format="{{ data_get(config('ads.slots'), $name.'.format', 'auto') }}"></ins>
+             data-ad-slot="{{ $slot }}"
+             data-ad-format="{{ data_get(config('ads.slots'), $slot.'.format', 'auto') }}"></ins>
     @else
-        <p>Ad slot: {{ $name }}</p>
+        <p>Ad slot: {{ $slot }}</p>
     @endif
 </aside>

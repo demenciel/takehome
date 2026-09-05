@@ -160,8 +160,7 @@ class PayrollCalculator implements Calculator
         $shareText = __('calculator.share_text', [
             'salary' => $salary->format(),
             'province' => $province->name(),
-            'net' => $periodNet->format(),
-            'frequency' => $frequency->adverb(),
+            'net' => $netAnnual->format(),
         ]);
 
         $copyText = implode("\n", array_filter([

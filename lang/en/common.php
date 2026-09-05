@@ -8,6 +8,8 @@ return [
     'footer_disclaimer' => 'Estimates only. Not official tax advice.',
     'footer_privacy' => 'Privacy',
     'footer_about' => 'About',
+    'footer_methodology' => 'Methodology',
+    'footer_tax_rates' => 'Tax rates',
     'skip_to_content' => 'Skip to content',
     'home' => 'Home',
     'calculate' => 'Calculate my take-home',

@@ -6,6 +6,18 @@ return [
     'client' => env('ADS_CLIENT', ''),
 
     'slots' => [
+        'top' => [
+            'enabled' => true,
+            'format' => 'horizontal',
+        ],
+        'middle' => [
+            'enabled' => true,
+            'format' => 'rectangle',
+        ],
+        'bottom' => [
+            'enabled' => true,
+            'format' => 'horizontal',
+        ],
         'result-inline' => [
             'enabled' => true,
             'format' => 'in-article',

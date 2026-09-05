@@ -51,7 +51,7 @@ return [
     'using_basic_claim' => 'Uses the basic personal amount (claim code 1). You can add optional deductions below.',
     'quebec_estimate_note' => 'Quebec provincial tax is estimated from Revenu Québec 2026 rates. Actual Revenu Québec payroll withholding can differ.',
     'cpp2_note' => 'This estimate includes second additional CPP/QPP contributions on earnings above the YMPE.',
-    'share_text' => 'I make :salary/year in :province. Estimated take-home is :net :frequency.',
+    'share_text' => 'I make :salary/year in :province. My estimated take-home pay is :net/year.',
     'frequencies' => [
         'annual' => 'Annual',
         'monthly' => 'Monthly',

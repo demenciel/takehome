@@ -8,28 +8,21 @@ use App\Services\Analytics\Analytics;
 use App\Support\PayFrequency;
 use App\Support\Province;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Url;
 use Livewire\Component;
 use Throwable;
 
 class PaycheckCalculator extends Component
 {
-    #[Url(as: 'mode', except: 'annual')]
     public string $inputMode = 'annual';
 
-    #[Url(as: 'salary', except: '')]
     public string $salary = '';
 
-    #[Url(as: 'hourly', except: '')]
     public string $hourlyWage = '';
 
-    #[Url(as: 'hours', except: '40')]
     public string $hoursPerWeek = '40';
 
-    #[Url(as: 'province', except: '')]
     public string $province = '';
 
-    #[Url(as: 'frequency', except: 'biweekly')]
     public string $frequency = 'biweekly';
 
     public string $rrsp = '';
@@ -50,7 +43,7 @@ class PaycheckCalculator extends Component
 
     public bool $hasCalculated = false;
 
-    public function mount(?string $province = null, ?int $salary = null, ?string $frequency = null, bool $autoCalculate = false): void
+    public function mount(?string $province = null, ?int $salary = null, ?string $frequency = null, ?string $inputMode = null, bool $autoCalculate = false): void
     {
         if ($province) {
             $resolved = Province::fromCode($province) ?? Province::fromSlug($province);
@@ -66,6 +59,10 @@ class PaycheckCalculator extends Component
 
         if ($frequency && PayFrequency::tryFrom($frequency)) {
             $this->frequency = $frequency;
+        }
+
+        if ($inputMode && in_array($inputMode, ['annual', 'hourly'], true)) {
+            $this->inputMode = $inputMode;
         }
 
         if ($autoCalculate && $this->province !== '' && ($this->salary !== '' || $this->hourlyWage !== '')) {
@@ -129,7 +126,7 @@ class PaycheckCalculator extends Component
 
     public function markShared(): void
     {
-        app(Analytics::class)->record('result_shared', [
+        app(Analytics::class)->record('share_clicked', [
             'tool_key' => 'paycheck',
             'province' => $this->province ?: null,
             'frequency' => $this->frequency,
