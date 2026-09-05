@@ -4,6 +4,7 @@ use App\Livewire\HourlySalaryConverter;
 use App\Livewire\PaycheckCalculator;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 
 uses(RefreshDatabase::class);
@@ -129,6 +130,9 @@ it('exposes sitemap and robots files', function () {
         ->assertSee('80000-salary', false)
         ->assertSee('methodology', false)
         ->assertSee('tax-rates', false)
+        ->assertSee('privacy', false)
+        ->assertSee('terms', false)
+        ->assertSee('contact', false)
         ->assertSee('hourly-to-salary-calculator', false)
         ->assertDontSee('yukon/80000-salary', false)
         ->assertDontSee('/admin', false)
@@ -157,6 +161,41 @@ it('renders methodology and tax-rate pages from official sources', function () {
     $this->get('/about')
         ->assertOk()
         ->assertSee('Not a government service', false);
+});
+
+it('renders privacy, terms, and contact pages', function () {
+    $this->get('/privacy')
+        ->assertOk()
+        ->assertSee('Privacy policy', false)
+        ->assertSee('Google Analytics', false)
+        ->assertSee('Google AdSense', false)
+        ->assertSee('session cookie', false)
+        ->assertSee('salary range bucket', false);
+
+    $this->get('/terms')
+        ->assertOk()
+        ->assertSee('Terms of use', false)
+        ->assertSee('Estimates only', false);
+
+    $this->get('/contact')
+        ->assertOk()
+        ->assertSee('Contact', false)
+        ->assertSee('name="message"', false);
+});
+
+it('validates the contact form', function () {
+    $this->post('/contact', [])
+        ->assertSessionHasErrors(['name', 'email', 'message']);
+});
+
+it('accepts a valid contact message', function () {
+    Mail::fake();
+
+    $this->post('/contact', [
+        'name' => 'Alex',
+        'email' => 'alex@example.com',
+        'message' => 'Question about Ontario CPP.',
+    ])->assertRedirect()->assertSessionHas('status');
 });
 
 it('calculates take-home pay through Livewire', function () {

@@ -7,6 +7,8 @@ return [
     'nav_how_it_works' => 'How it works',
     'footer_disclaimer' => 'Estimates only. Not official tax advice.',
     'footer_privacy' => 'Privacy',
+    'footer_terms' => 'Terms',
+    'footer_contact' => 'Contact',
     'footer_about' => 'About',
     'footer_methodology' => 'Methodology',
     'footer_tax_rates' => 'Tax rates',

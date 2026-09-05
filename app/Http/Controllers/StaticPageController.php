@@ -7,6 +7,9 @@ use App\Services\Tax\TaxFreshness;
 use App\Services\Tax\TaxRuleProvider;
 use App\Support\Province;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class StaticPageController extends Controller
 {
@@ -67,9 +70,14 @@ class StaticPageController extends Controller
     public function privacy(): View
     {
         return view('pages.privacy', [
+            'usesGoogleAnalytics' => filled(config('analytics.measurement_id')),
+            'usesLocalAnalytics' => (bool) config('analytics.enabled'),
+            'adsEnabled' => (bool) config('ads.enabled'),
+            'adsProvider' => (string) config('ads.provider'),
+            'updated' => config('site.privacy_updated'),
             'seo' => new SeoPage(
-                title: 'Privacy',
-                description: 'This calculator does not store your salary or ask for a SIN, employer, or bank details.',
+                title: 'Privacy policy',
+                description: 'How Paycheque.app handles calculator inputs, cookies, Google Analytics, and advertising.',
                 canonical: route('privacy'),
                 breadcrumbs: [
                     ['name' => __('common.home'), 'url' => route('home')],
@@ -78,5 +86,62 @@ class StaticPageController extends Controller
                 includeApplication: false,
             ),
         ]);
+    }
+
+    public function terms(): View
+    {
+        return view('pages.terms', [
+            'updated' => config('site.terms_updated'),
+            'seo' => new SeoPage(
+                title: 'Terms of use',
+                description: 'Terms for using Paycheque.app, including that results are estimates and not tax advice.',
+                canonical: route('terms'),
+                breadcrumbs: [
+                    ['name' => __('common.home'), 'url' => route('home')],
+                    ['name' => 'Terms', 'url' => route('terms')],
+                ],
+                includeApplication: false,
+            ),
+        ]);
+    }
+
+    public function contact(): View
+    {
+        return view('pages.contact', [
+            'contactEmail' => config('site.contact_email'),
+            'seo' => new SeoPage(
+                title: 'Contact',
+                description: 'Contact Paycheque.app about the calculator, tax data, privacy, or a problem with the site.',
+                canonical: route('contact'),
+                breadcrumbs: [
+                    ['name' => __('common.home'), 'url' => route('home')],
+                    ['name' => 'Contact', 'url' => route('contact')],
+                ],
+                includeApplication: false,
+            ),
+        ]);
+    }
+
+    public function storeContact(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:120'],
+            'email' => ['required', 'email', 'max:255'],
+            'message' => ['required', 'string', 'max:5000'],
+        ]);
+
+        $to = (string) config('site.contact_email');
+
+        Mail::raw(
+            "From: {$data['name']} <{$data['email']}>\n\n{$data['message']}",
+            function ($message) use ($to, $data): void {
+                $message
+                    ->to($to)
+                    ->replyTo($data['email'], $data['name'])
+                    ->subject('Paycheque.app contact form');
+            },
+        );
+
+        return back()->with('status', 'Thanks. Your message was sent. Do not include a SIN, bank details, or a full tax return.');
     }
 }

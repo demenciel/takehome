@@ -9,6 +9,12 @@
         <p class="mt-4 text-ink-soft">Tax rules are stored as versioned data files and calculated in PHP. There is no AI API and no call to an external tax service when you calculate. The current rules follow CRA T4127 payroll formulas, with Revenu Québec parameters for Quebec provincial tax. Details are on the <a href="{{ route('methodology') }}" class="font-semibold text-accent-dark underline">methodology</a> page.</p>
         <h2 class="mt-10 font-serif text-3xl">What this is not</h2>
         <p class="mt-4 text-ink-soft">It is not an employer payroll system, a tax-filing product, or official tax advice. Actual paycheques depend on TD1 claims, benefits, pensions, and your employer’s software.</p>
-        <p class="mt-6"><a href="{{ route('privacy') }}" class="font-semibold text-accent-dark underline">Privacy</a> — calculations do not require an account.</p>
+        <h2 class="mt-10 font-serif text-3xl">Contact and policies</h2>
+        <ul class="mt-4 list-disc space-y-2 pl-6 text-ink-soft">
+            <li><a href="{{ route('contact') }}" class="font-semibold text-accent-dark underline">Contact</a></li>
+            <li><a href="{{ route('privacy') }}" class="font-semibold text-accent-dark underline">Privacy policy</a> — cookies, analytics, and ads</li>
+            <li><a href="{{ route('terms') }}" class="font-semibold text-accent-dark underline">Terms of use</a></li>
+            <li><a href="{{ route('methodology') }}" class="font-semibold text-accent-dark underline">Methodology</a></li>
+        </ul>
     </article>
 </x-layouts.app>

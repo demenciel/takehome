@@ -23,6 +23,11 @@ Route::get('/about', [StaticPageController::class, 'about'])->name('about');
 Route::get('/methodology', [StaticPageController::class, 'methodology'])->name('methodology');
 Route::get('/tax-rates', [StaticPageController::class, 'taxRates'])->name('tax-rates');
 Route::get('/privacy', [StaticPageController::class, 'privacy'])->name('privacy');
+Route::get('/terms', [StaticPageController::class, 'terms'])->name('terms');
+Route::get('/contact', [StaticPageController::class, 'contact'])->name('contact');
+Route::post('/contact', [StaticPageController::class, 'storeContact'])
+    ->middleware('throttle:5,1')
+    ->name('contact.store');
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 Route::get('/robots.txt', RobotsController::class)->name('robots');
 

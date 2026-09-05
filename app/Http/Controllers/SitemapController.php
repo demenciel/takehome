@@ -18,6 +18,8 @@ class SitemapController extends Controller
             route('methodology'),
             route('tax-rates'),
             route('privacy'),
+            route('terms'),
+            route('contact'),
         ];
 
         foreach (ToolCatalog::hubs() as $hub) {

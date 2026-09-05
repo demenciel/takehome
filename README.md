@@ -157,7 +157,7 @@ Register calculation modules in `config/tools.php`. Reuse `x-layouts.app`, `x-se
 - Province pages: `/{province}-paycheck-calculator`
 - Salary pages: `/{province}/{salary}-salary` for catalog entries only
 - Specialized hubs: `/paycheque-calculator`, `/take-home-pay-calculator`, `/salary-after-tax-calculator`, `/hourly-to-salary-calculator`, `/salary-to-hourly-calculator`, `/biweekly-pay-calculator`, `/weekly-pay-calculator`
-- Guides: `/methodology`, `/about`, `/tax-rates`
+- Guides and legal: `/methodology`, `/about`, `/tax-rates`, `/privacy`, `/terms`, `/contact`
 - `/sitemap.xml` is generated from routes + `SalaryCatalog` + `ToolCatalog`. It excludes admin, login, and non-indexable salary combinations.
 - `/robots.txt` allows public pages, disallows `/admin`, and points at the sitemap.
 - Structured data: `WebSite` (home), `Organization`, `WebApplication` on calculator pages, `BreadcrumbList`, and `FAQPage` only when FAQs are visible. No fake ratings.

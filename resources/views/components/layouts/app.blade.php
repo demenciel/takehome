@@ -4,20 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <x-seo.meta :seo="$seo ?? null" />
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVZRWG4BSV"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-YVZRWG4BSV');
-    </script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <x-seo.meta :seo="$seo ?? null" />
+        @if (filled(config('analytics.measurement_id')))
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('analytics.measurement_id') }}"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', @json(config('analytics.measurement_id')));
+            </script>
+        @endif
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
 
@@ -62,6 +59,8 @@
                 <a href="{{ route('tax-rates') }}" class="hover:text-ink">{{ __('common.footer_tax_rates') }}</a>
                 <a href="{{ route('about') }}" class="hover:text-ink">{{ __('common.footer_about') }}</a>
                 <a href="{{ route('privacy') }}" class="hover:text-ink">{{ __('common.footer_privacy') }}</a>
+                <a href="{{ route('terms') }}" class="hover:text-ink">{{ __('common.footer_terms') }}</a>
+                <a href="{{ route('contact') }}" class="hover:text-ink">{{ __('common.footer_contact') }}</a>
                 <a href="{{ route('sitemap') }}" class="hover:text-ink">Sitemap</a>
             </div>
         </div>
