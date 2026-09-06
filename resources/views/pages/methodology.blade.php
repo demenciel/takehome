@@ -48,6 +48,21 @@
             @endforeach
         </ul>
 
+        <h2 class="mt-10 font-serif text-3xl">Overtime pay calculator</h2>
+        <p class="mt-4 text-ink-soft">Gross overtime uses jurisdiction rules stored in <code>resources/employment/overtime.php</code>: the standard weekly threshold, a daily threshold where the statute has one, and the overtime multiplier. Hours you enter as overtime are paid at that premium. Regular hours stay at the regular wage.</p>
+        <p class="mt-4 text-ink-soft">After-tax overtime is not overtime pay times an assumed tax rate. The calculator annualizes the pay period (weekly × 52, biweekly × 26, and so on), then compares the payroll engine with and without the overtime. The difference is the estimated amount you keep. Occupations, averaging agreements, and federally regulated workplaces can follow different employment-standards rules.</p>
+
+        <h2 class="mt-10 font-serif text-3xl">Bonus tax calculator</h2>
+        <p class="mt-4 text-ink-soft">A bonus is treated as extra employment income. The engine runs twice — on salary alone, then on salary plus bonus. Net bonus is the difference in annual take-home. CPP/QPP, CPP2/QPP2, EI, and QPIP only increase if you are still below those annual ceilings. Employer withholding on the bonus cheque can differ from this annual estimate.</p>
+
+        <h2 class="mt-10 font-serif text-3xl">Raise calculator</h2>
+        <p class="mt-4 text-ink-soft">The raise calculator compares payroll results on the current salary and the new salary. Net raise is new take-home minus old take-home. Monthly, biweekly, and weekly extras divide that annual difference by 12, 26, and 52. You can also enter a raise percentage; the new salary is calculated first, then the same comparison runs.</p>
+
+        <h2 class="mt-10 font-serif text-3xl">Canadian Armed Forces salary calculator</h2>
+        <p class="mt-4 text-ink-soft">CAF base pay is read from versioned files under <code>resources/military/2025/</code>. The official National Defence Regular Force monthly tables and Reserve Force Class A/B daily tables are still published as effective 1 April 2025. Those are the current published rank scales used here. April 2026 CAF compensation changes were mainly allowances (environmental, domestic operations, and similar), which this calculator does not estimate.</p>
+        <p class="mt-4 text-ink-soft">Take-home pay uses the same {{ $taxFreshness->year() }} federal/provincial tax, CPP/QPP, CPP2/QPP2, EI, and QPIP engine as the paycheck calculator. Regular Force pension is estimated from Treasury Board rates effective 1 January 2026: 9.10% up to the YMPE of $74,600 and 11.69% above it. Members with 35 years of pensionable service are not modeled. Reserve Force pension is omitted because 2026 Reserve plan rates are not published on that same table.</p>
+        <p class="mt-4 text-ink-soft">Actual CAF pay can differ because of occupation group, specialist pay, Class of reserve service, allowances, and individual pensionable service. Allowances and benefits are not included unless the user types an amount.</p>
+
         <h2 class="mt-10 font-serif text-3xl">When tax data is updated</h2>
         <p class="mt-4 text-ink-soft">Federal and most provincial amounts change in January. CRA sometimes publishes a July T4127 for mid-year provincial changes. This site records the retrieved date with the rule set. The {{ $taxFreshness->year() }} files were last checked on {{ $taxFreshness->lastUpdatedLabel() }}.</p>
         <p class="mt-4"><a href="{{ route('tax-rates') }}" class="font-semibold text-accent-dark underline">Current rates used by the calculator</a></p>

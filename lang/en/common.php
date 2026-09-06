@@ -3,6 +3,7 @@
 return [
     'brand_tagline' => 'Know exactly how much of your salary you take home.',
     'nav_calculator' => 'Paycheck calculator',
+    'nav_calculators' => 'Calculators',
     'nav_provinces' => 'Provinces',
     'nav_how_it_works' => 'How it works',
     'footer_disclaimer' => 'Estimates only. Not official tax advice.',

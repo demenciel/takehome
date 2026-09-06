@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\MilitaryCalculatorController;
 use App\Http\Controllers\PaycheckController;
 use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SpecializedCalculatorController;
 use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\ToolController;
 use App\Support\Province;
@@ -22,6 +24,19 @@ Route::get('/hourly-to-salary-calculator', [ToolController::class, 'conversion']
 Route::get('/salary-to-hourly-calculator', [ToolController::class, 'conversion'])->defaults('tool', 'salary_to_hourly')->name('tools.salary_to_hourly');
 Route::get('/biweekly-pay-calculator', [ToolController::class, 'hub'])->defaults('tool', 'biweekly')->name('tools.biweekly');
 Route::get('/weekly-pay-calculator', [ToolController::class, 'hub'])->defaults('tool', 'weekly')->name('tools.weekly');
+Route::get('/overtime-pay-calculator', [SpecializedCalculatorController::class, 'overtime'])->name('tools.overtime');
+Route::get('/bonus-tax-calculator', [SpecializedCalculatorController::class, 'bonus'])->name('tools.bonus');
+Route::get('/raise-calculator', [SpecializedCalculatorController::class, 'raise'])->name('tools.raise');
+Route::get('/salary-increase-calculator', function () {
+    return redirect()->route('tools.raise', status: 301);
+});
+Route::get('/military-salary-calculator', MilitaryCalculatorController::class)->name('tools.military');
+Route::get('/caf-salary-calculator', function () {
+    return redirect()->route('tools.military', status: 301);
+});
+Route::get('/canadian-military-pay-calculator', function () {
+    return redirect()->route('tools.military', status: 301);
+});
 
 Route::get('/about', [StaticPageController::class, 'about'])->name('about');
 Route::get('/methodology', [StaticPageController::class, 'methodology'])->name('methodology');
@@ -46,6 +61,18 @@ Route::prefix('admin')->group(function () {
         Route::get('/', DashboardController::class)->name('admin.dashboard');
     });
 });
+
+Route::get('/{provinceSlug}-overtime-pay-calculator', [SpecializedCalculatorController::class, 'overtimeProvince'])
+    ->where('provinceSlug', Province::slugPattern())
+    ->name('tools.overtime.province');
+
+Route::get('/{provinceSlug}-bonus-tax-calculator', [SpecializedCalculatorController::class, 'bonusProvince'])
+    ->where('provinceSlug', Province::slugPattern())
+    ->name('tools.bonus.province');
+
+Route::get('/{provinceSlug}-raise-calculator', [SpecializedCalculatorController::class, 'raiseProvince'])
+    ->where('provinceSlug', Province::slugPattern())
+    ->name('tools.raise.province');
 
 Route::get('/{provinceSlug}-paycheck-calculator', [PaycheckController::class, 'province'])
     ->where('provinceSlug', Province::slugPattern())

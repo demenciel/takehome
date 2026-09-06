@@ -32,6 +32,9 @@ class SitemapController extends Controller
 
         foreach (Province::all() as $province) {
             $urls[] = route('paycheck.province', $province->slug());
+            $urls[] = route('tools.overtime.province', $province->slug());
+            $urls[] = route('tools.bonus.province', $province->slug());
+            $urls[] = route('tools.raise.province', $province->slug());
 
             foreach (SalaryCatalog::amounts() as $salary) {
                 if (SalaryCatalog::allows($province, $salary)) {

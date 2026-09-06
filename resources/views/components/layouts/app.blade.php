@@ -35,7 +35,17 @@
                 {{ config('app.name') }}
             </a>
             <nav aria-label="Primary" class="flex items-center gap-4 text-sm font-medium text-ink-soft">
-                <a href="{{ route('paycheck.canada') }}" class="hover:text-ink">{{ __('common.nav_calculator') }}</a>
+                <details class="relative">
+                    <summary class="cursor-pointer list-none hover:text-ink">{{ __('common.nav_calculators') }}</summary>
+                    <ul class="absolute right-0 z-20 mt-2 w-64 rounded-xl border border-line bg-card p-2 shadow-sm">
+                        <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('paycheck.canada') }}">Paycheque calculator</a></li>
+                        <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.overtime') }}">Overtime pay calculator</a></li>
+                        <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.bonus') }}">Bonus tax calculator</a></li>
+                        <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.raise') }}">Raise calculator</a></li>
+                        <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.military') }}">CAF salary calculator</a></li>
+                        <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.hourly_to_salary') }}">Hourly ↔ salary</a></li>
+                    </ul>
+                </details>
                 <a href="{{ route('home') }}#provinces"
                     class="hidden hover:text-ink sm:inline">{{ __('common.nav_provinces') }}</a>
                 <a href="{{ route('methodology') }}"
@@ -59,7 +69,11 @@
             </div>
             <div class="flex flex-col gap-2">
                 <a href="{{ route('paycheck.canada') }}" class="hover:text-ink">{{ __('common.nav_calculator') }}</a>
-                <a href="{{ route('tools.take_home') }}" class="hover:text-ink">Take-home pay calculator</a>
+                <a href="{{ route('tools.overtime') }}" class="hover:text-ink">Overtime pay calculator</a>
+                <a href="{{ route('tools.bonus') }}" class="hover:text-ink">Bonus tax calculator</a>
+                <a href="{{ route('tools.raise') }}" class="hover:text-ink">Raise calculator</a>
+                <a href="{{ route('tools.military') }}" class="hover:text-ink">CAF salary calculator</a>
+                <a href="{{ route('tools.hourly_to_salary') }}" class="hover:text-ink">Hourly to salary calculator</a>
                 <a href="{{ route('methodology') }}" class="hover:text-ink">{{ __('common.footer_methodology') }}</a>
                 <a href="{{ route('tax-rates') }}" class="hover:text-ink">{{ __('common.footer_tax_rates') }}</a>
                 <a href="{{ route('about') }}" class="hover:text-ink">{{ __('common.footer_about') }}</a>

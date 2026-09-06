@@ -82,6 +82,15 @@
     color: var(--color-ink-soft);
 }
 
+.data-table th.text-right,
+.data-table td.text-right {
+    text-align: right;
+}
+
+nav summary::-webkit-details-marker {
+    display: none;
+}
+
 @utility btn-secondary {
     display: inline-flex;
     min-height: 2.75rem;

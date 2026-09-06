@@ -31,6 +31,16 @@
 
         <div class="mt-10 grid gap-8 lg:grid-cols-2">
             <section>
+                <h2 class="font-serif text-2xl">Calculators</h2>
+                <ul class="mt-4 space-y-2">
+                    @forelse ($tools as $row)
+                        <li class="flex justify-between border-b border-line py-2"><span>{{ $row->tool_key }}</span><span>{{ $row->total }}</span></li>
+                    @empty
+                        <li class="text-ink-soft">No completed calculations yet.</li>
+                    @endforelse
+                </ul>
+            </section>
+            <section>
                 <h2 class="font-serif text-2xl">Popular provinces</h2>
                 <ul class="mt-4 space-y-2">
                     @forelse ($provinces as $row)

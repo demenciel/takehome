@@ -15,8 +15,12 @@ final class ToolCatalog
         return [
             ['slug' => 'canada-paycheck-calculator', 'route' => 'paycheck.canada', 'title' => 'Canada Paycheck Calculator', 'nav' => 'Canada paycheck calculator'],
             ['slug' => 'paycheque-calculator', 'route' => 'tools.paycheque', 'title' => 'Paycheque Calculator', 'nav' => 'Paycheque calculator'],
-            ['slug' => 'take-home-pay-calculator', 'route' => 'tools.take_home', 'title' => 'Take-Home Pay Calculator', 'nav' => 'Take-home pay calculator'],
+            ['slug' => 'take-home-pay-calculator', 'route' => 'tools.take_home', 'title' => 'Take-home pay calculator', 'nav' => 'Take-home pay calculator'],
             ['slug' => 'salary-after-tax-calculator', 'route' => 'tools.salary_after_tax', 'title' => 'Salary After Tax Calculator', 'nav' => 'Salary after tax'],
+            ['slug' => 'overtime-pay-calculator', 'route' => 'tools.overtime', 'title' => 'Overtime Pay Calculator', 'nav' => 'Overtime pay calculator'],
+            ['slug' => 'bonus-tax-calculator', 'route' => 'tools.bonus', 'title' => 'Bonus Tax Calculator', 'nav' => 'Bonus tax calculator'],
+            ['slug' => 'raise-calculator', 'route' => 'tools.raise', 'title' => 'Raise Calculator', 'nav' => 'Raise calculator'],
+            ['slug' => 'military-salary-calculator', 'route' => 'tools.military', 'title' => 'CAF Salary Calculator', 'nav' => 'CAF salary calculator'],
             ['slug' => 'hourly-to-salary-calculator', 'route' => 'tools.hourly_to_salary', 'title' => 'Hourly to Salary Calculator', 'nav' => 'Hourly to salary'],
             ['slug' => 'salary-to-hourly-calculator', 'route' => 'tools.salary_to_hourly', 'title' => 'Salary to Hourly Calculator', 'nav' => 'Salary to hourly'],
             ['slug' => 'biweekly-pay-calculator', 'route' => 'tools.biweekly', 'title' => 'Biweekly Pay Calculator', 'nav' => 'Biweekly pay'],
@@ -27,22 +31,47 @@ final class ToolCatalog
     /**
      * @return list<array{label: string, url: string}>
      */
-    public static function relatedLinks(?Province $province = null): array
+    public static function relatedLinks(?Province $province = null, string $context = 'paycheck'): array
     {
-        $links = [
-            ['label' => 'Canada paycheck calculator', 'url' => route('paycheck.canada')],
-            ['label' => 'Take-home pay calculator', 'url' => route('tools.take_home')],
-            ['label' => 'Hourly-to-salary calculator', 'url' => route('tools.hourly_to_salary')],
-            ['label' => 'Salary-to-hourly calculator', 'url' => route('tools.salary_to_hourly')],
-            ['label' => 'Biweekly pay calculator', 'url' => route('tools.biweekly')],
-            ['label' => 'How the estimate is calculated', 'url' => route('methodology')],
+        $paycheckUrl = $province
+            ? route('paycheck.province', $province->slug())
+            : route('paycheck.canada');
+        $paycheckLabel = $province
+            ? $province->name().' paycheck calculator'
+            : 'Canada paycheck calculator';
+
+        $all = [
+            'paycheck' => ['label' => $paycheckLabel, 'url' => $paycheckUrl],
+            'overtime' => [
+                'label' => $province ? $province->name().' overtime pay calculator' : 'Overtime pay calculator',
+                'url' => $province ? route('tools.overtime.province', $province->slug()) : route('tools.overtime'),
+            ],
+            'bonus' => [
+                'label' => $province ? $province->name().' bonus tax calculator' : 'Bonus tax calculator',
+                'url' => $province ? route('tools.bonus.province', $province->slug()) : route('tools.bonus'),
+            ],
+            'raise' => [
+                'label' => $province ? $province->name().' raise calculator' : 'Raise calculator',
+                'url' => $province ? route('tools.raise.province', $province->slug()) : route('tools.raise'),
+            ],
+            'hourly' => ['label' => 'Hourly to salary calculator', 'url' => route('tools.hourly_to_salary')],
+            'salary_after_tax' => ['label' => 'Salary after tax calculator', 'url' => route('tools.salary_after_tax')],
+            'military' => ['label' => 'Canadian Armed Forces salary calculator', 'url' => route('tools.military')],
+            'methodology' => ['label' => 'How the estimate is calculated', 'url' => route('methodology')],
         ];
 
-        if ($province) {
-            array_unshift($links, [
-                'label' => $province->name().' paycheck calculator',
-                'url' => route('paycheck.province', $province->slug()),
-            ]);
+        $order = match ($context) {
+            'overtime' => ['paycheck', 'hourly', 'raise', 'methodology'],
+            'bonus' => ['paycheck', 'raise', 'salary_after_tax', 'methodology'],
+            'raise' => ['paycheck', 'bonus', 'hourly', 'methodology'],
+            'military' => ['paycheck', 'salary_after_tax', 'methodology'],
+            default => ['overtime', 'bonus', 'raise', 'hourly', 'military', 'methodology'],
+        };
+
+        $links = array_map(fn (string $key) => $all[$key], $order);
+
+        if ($province && $context === 'paycheck') {
+            array_unshift($links, $all['paycheck']);
         }
 
         return $links;

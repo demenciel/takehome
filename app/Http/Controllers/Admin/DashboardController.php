@@ -22,12 +22,41 @@ class DashboardController extends Controller
             ->pluck('total', 'name');
 
         $pageViews = (int) ($counts['page_view'] ?? 0);
-        $started = (int) ($counts['calculator_started'] ?? 0);
-        $completed = (int) ($counts['calculator_completed'] ?? 0);
+        $started = (int) ($counts['calculator_started'] ?? 0)
+            + (int) ($counts['overtime_calculator_started'] ?? 0)
+            + (int) ($counts['bonus_calculator_started'] ?? 0)
+            + (int) ($counts['raise_calculator_started'] ?? 0)
+            + (int) ($counts['military_salary_calculator_started'] ?? 0);
+        $completed = (int) ($counts['calculator_completed'] ?? 0)
+            + (int) ($counts['overtime_calculator_completed'] ?? 0)
+            + (int) ($counts['bonus_calculator_completed'] ?? 0)
+            + (int) ($counts['raise_calculator_completed'] ?? 0)
+            + (int) ($counts['military_salary_calculator_completed'] ?? 0);
+
+        $tools = AnalyticsEvent::query()
+            ->select('tool_key', DB::raw('count(*) as total'))
+            ->whereIn('name', [
+                'calculator_completed',
+                'overtime_calculator_completed',
+                'bonus_calculator_completed',
+                'raise_calculator_completed',
+                'military_salary_calculator_completed',
+            ])
+            ->whereNotNull('tool_key')
+            ->where('created_at', '>=', $since)
+            ->groupBy('tool_key')
+            ->orderByDesc('total')
+            ->get();
 
         $provinces = AnalyticsEvent::query()
             ->select('province', DB::raw('count(*) as total'))
-            ->where('name', 'calculator_completed')
+            ->whereIn('name', [
+                'calculator_completed',
+                'overtime_calculator_completed',
+                'bonus_calculator_completed',
+                'raise_calculator_completed',
+                'military_salary_calculator_completed',
+            ])
             ->whereNotNull('province')
             ->where('created_at', '>=', $since)
             ->groupBy('province')
@@ -68,6 +97,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', [
             'toolPages' => ToolPage::query()->orderBy('name')->get(),
+            'tools' => $tools,
             'pageViews' => $pageViews,
             'started' => $started,
             'completed' => $completed,
