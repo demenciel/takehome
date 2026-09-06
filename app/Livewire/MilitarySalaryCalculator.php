@@ -16,7 +16,7 @@ class MilitarySalaryCalculator extends Component
 {
     public string $component = 'regular';
 
-    public string $rank = 'private';
+    public string $rank = 'corporal';
 
     public string $payLevel = 'standard';
 
@@ -24,7 +24,7 @@ class MilitarySalaryCalculator extends Component
 
     public string $province = 'ON';
 
-    public string $frequency = 'semimonthly';
+    public string $frequency = 'monthly';
 
     public string $reserveDays = '37';
 
@@ -40,8 +40,13 @@ class MilitarySalaryCalculator extends Component
 
     public bool $hasCalculated = false;
 
-    public function mount(?string $province = null): void
-    {
+    public function mount(
+        ?string $province = null,
+        ?string $rank = null,
+        ?string $increment = null,
+        ?string $frequency = null,
+        bool $autoCalculate = false,
+    ): void {
         if ($province) {
             $resolved = Province::fromCode($province) ?? Province::fromSlug($province);
 
@@ -50,7 +55,23 @@ class MilitarySalaryCalculator extends Component
             }
         }
 
+        if ($rank) {
+            $this->rank = $rank;
+        }
+
+        if ($increment !== null && $increment !== '') {
+            $this->increment = (string) $increment;
+        }
+
+        if ($frequency && PayFrequency::tryFrom($frequency)) {
+            $this->frequency = $frequency;
+        }
+
         $this->syncPaySelection();
+
+        if ($autoCalculate) {
+            $this->calculate();
+        }
     }
 
     public function updatedComponent(): void
@@ -66,8 +87,7 @@ class MilitarySalaryCalculator extends Component
 
     public function updatedPayLevel(): void
     {
-        $increments = array_keys($this->provider()->increments($this->component, $this->rank, $this->payLevel));
-        $this->increment = $increments[0];
+        $this->syncPaySelection();
     }
 
     public function calculate(): void
@@ -166,10 +186,21 @@ class MilitarySalaryCalculator extends Component
     private function syncPaySelection(): void
     {
         $levels = $this->provider()->payLevels($this->component, $this->rank);
-        $this->payLevel = in_array($this->payLevel, $levels, true) ? $this->payLevel : $levels[0];
 
-        $increments = array_keys($this->provider()->increments($this->component, $this->rank, $this->payLevel));
-        $this->increment = in_array($this->increment, $increments, true) ? $this->increment : $increments[0];
+        if (! in_array($this->payLevel, $levels, true)) {
+            $this->payLevel = $levels[0];
+        }
+
+        $increments = array_map('strval', array_keys($this->provider()->increments($this->component, $this->rank, $this->payLevel)));
+        $increment = (string) $this->increment;
+
+        if (! in_array($increment, $increments, true)) {
+            $this->increment = $increments[0];
+
+            return;
+        }
+
+        $this->increment = $increment;
     }
 
     private function provider(): MilitaryPayRateProvider

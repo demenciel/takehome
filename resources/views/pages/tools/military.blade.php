@@ -8,7 +8,13 @@
         <p class="mt-2 text-sm text-ink-soft">{{ $sources['edition'] }}. Pay tables last checked {{ $sources['retrieved_date'] }}.</p>
         <x-ad-slot placement="top" />
         <div class="mt-8 max-w-2xl">
-            <livewire:military-salary-calculator />
+            <livewire:military-salary-calculator
+                :rank="$example['pay']['rank']"
+                :increment="$example['pay']['increment']"
+                frequency="monthly"
+                :province="$example['payroll']->inputs['province']"
+                :auto-calculate="true"
+            />
         </div>
     </section>
 

@@ -10,9 +10,9 @@
         <x-ad-slot placement="top" />
         <div class="mt-8 max-w-2xl">
             @if ($province)
-                <livewire:bonus-tax-calculator :province="$province->value" />
+                <livewire:bonus-tax-calculator :province="$province->value" :auto-calculate="true" />
             @else
-                <livewire:bonus-tax-calculator />
+                <livewire:bonus-tax-calculator :auto-calculate="true" />
             @endif
         </div>
     </section>

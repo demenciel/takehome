@@ -537,12 +537,15 @@ class AnswerSummaryBuilder
         Money $weekly,
         ?Money $hourly = null,
     ): array {
+        $incomeTax = $result->metrics['federal_tax']->add($result->metrics['provincial_tax']);
+
         $facts = [
             ['label' => 'Annual gross', 'value' => $gross->format()],
             ['label' => 'Annual net', 'value' => $result->metrics['net_annual']->format()],
             ['label' => 'Monthly net', 'value' => $monthly->format()],
             ['label' => 'Biweekly net', 'value' => $biweekly->format()],
             ['label' => 'Weekly net', 'value' => $weekly->format()],
+            ['label' => 'Income tax', 'value' => $incomeTax->format()],
             ['label' => 'Federal tax', 'value' => $result->metrics['federal_tax']->format()],
             ['label' => $province->name().' tax', 'value' => $result->metrics['provincial_tax']->format()],
             ['label' => $province->usesQpp() ? 'QPP / QPP2' : 'CPP / CPP2', 'value' => $result->metrics['cpp']->add($result->metrics['cpp2'])->format()],

@@ -1,5 +1,10 @@
 <?php
 
+use App\Livewire\BonusTaxCalculator;
+use App\Livewire\MilitarySalaryCalculator as MilitarySalaryCalculatorComponent;
+use App\Livewire\OvertimePayCalculator;
+use App\Livewire\PaycheckCalculator;
+use App\Livewire\RaiseCalculator;
 use App\Models\AnalyticsEvent;
 use App\Services\Military\MilitarySalaryCalculator;
 use App\Services\Overtime\OvertimePayEstimator;
@@ -8,6 +13,7 @@ use App\Support\Money;
 use App\Support\PayFrequency;
 use App\Support\Province;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
 
 uses(RefreshDatabase::class);
 
@@ -36,6 +42,8 @@ it('puts a direct answer below the H1 on an Ontario salary page', function () {
         ->toContain('Monthly net')
         ->toContain('Biweekly net')
         ->toContain('Weekly net')
+        ->toContain('Income tax')
+        ->toContain('$14,127.39')
         ->toContain('Federal tax')
         ->toContain('Ontario tax')
         ->toContain('CPP / CPP2')
@@ -136,6 +144,77 @@ it('exposes CAF pay-table date, exclusions, and a computed take-home example', f
         ->assertSee($example['payroll']->metrics['net_annual']->format(), false)
         ->assertSee('Methodology', false)
         ->assertSee('https://www.canada.ca/en/department-national-defence/services/benefits-military/pay-pension-benefits/pay/regular.html', false);
+});
+
+it('uses the same annual payroll result in the salary table and calculator', function () {
+    Livewire::test(PaycheckCalculator::class, [
+        'province' => 'ON',
+        'salary' => 80000,
+        'frequency' => 'annual',
+        'autoCalculate' => true,
+    ])->assertSee('$60,303.09')
+        ->assertSee('$14,127.39')
+        ->assertSee('$4,446.45')
+        ->assertSee('$1,123.07');
+});
+
+it('uses the same overtime example in the table and calculator', function () {
+    $example = app(OvertimePayEstimator::class)->estimate(
+        Province::Ontario,
+        Money::fromDollars('30'),
+        40,
+        8,
+        PayFrequency::Weekly,
+    );
+
+    Livewire::test(OvertimePayCalculator::class, ['province' => 'ON', 'autoCalculate' => true])
+        ->assertSee($example['overtime_pay']->format())
+        ->assertSee($example['after_tax_overtime']->format());
+});
+
+it('uses the same bonus example in the table and calculator', function () {
+    $example = app(PayrollComparison::class)->compare(
+        Province::Ontario,
+        Money::fromDollars(80000),
+        Money::fromDollars(90000),
+    );
+
+    Livewire::test(BonusTaxCalculator::class, ['autoCalculate' => true])
+        ->assertSee($example['net_annual_delta']->format())
+        ->assertSee($example['tax_delta']->format());
+});
+
+it('uses the same raise example in the table and calculator', function () {
+    $example = app(PayrollComparison::class)->compare(
+        Province::Ontario,
+        Money::fromDollars(75000),
+        Money::fromDollars(85000),
+    );
+
+    Livewire::test(RaiseCalculator::class, ['autoCalculate' => true])
+        ->assertSee($example['net_annual_delta']->format())
+        ->assertSee($example['net_annual_delta']->divideBy(12)->format());
+});
+
+it('uses the same CAF example in the table and calculator', function () {
+    $example = app(MilitarySalaryCalculator::class)->calculate(
+        'regular',
+        'corporal',
+        '1',
+        Province::Ontario,
+        PayFrequency::Monthly,
+    );
+
+    Livewire::test(MilitarySalaryCalculatorComponent::class, [
+        'rank' => 'corporal',
+        'increment' => '1',
+        'frequency' => 'monthly',
+        'autoCalculate' => true,
+    ])->assertSet('rank', 'corporal')
+        ->assertSet('increment', '1')
+        ->assertSee($example['pay']['rate']->format())
+        ->assertSee($example['payroll']->metrics['net_annual']->format())
+        ->assertSee($example['payroll']->metrics['net_annual']->divideBy(12)->format());
 });
 
 it('keeps salary-page canonicals and does not add thin question URLs', function () {

@@ -100,7 +100,7 @@
         <h2 class="font-serif text-3xl">Calculate Your Own Paycheque</h2>
         <p class="mt-3 max-w-2xl text-ink-soft">Change the salary, hours, or optional deductions. Calculator state stays on this page and is not a separate indexable URL.</p>
         <div class="mt-6 max-w-2xl">
-            <livewire:paycheck-calculator :province="$province->value" :salary="$salary" :auto-calculate="true" />
+            <livewire:paycheck-calculator :province="$province->value" :salary="$salary" frequency="annual" :auto-calculate="true" />
         </div>
     </section>
 

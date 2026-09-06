@@ -10,9 +10,9 @@
         <x-ad-slot placement="top" />
         <div class="mt-8 max-w-2xl">
             @if ($province)
-                <livewire:overtime-pay-calculator :province="$province->value" />
+                <livewire:overtime-pay-calculator :province="$province->value" :auto-calculate="true" />
             @else
-                <livewire:overtime-pay-calculator />
+                <livewire:overtime-pay-calculator :auto-calculate="true" />
             @endif
         </div>
     </section>
