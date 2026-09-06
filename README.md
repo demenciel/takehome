@@ -1,16 +1,18 @@
 # Paycheque.app
 
-A Canadian paycheck / take-home pay calculator, and the foundation for other low-maintenance payroll utilities on the same Laravel site.
+Independent Canadian paycheck / take-home pay calculator.
 
-**Know exactly how much of your salary you take home.**
+It estimates federal tax, provincial or territorial tax, CPP or QPP, EI (and QPIP in Quebec), and net pay from a salary, province, and pay frequency.
 
-This is not a payroll product, a tax-filing app, a government service, or a financial platform. It is a fast, anonymous estimator built on official CRA / Revenu Québec published rules.
+It is **not** a government service, payroll system, tax-filing product, or official CRA / Revenu Québec tool. Results are estimates.
+
+Stack: Laravel 12, PHP 8.3+, Livewire 3, Blade, Tailwind, MySQL, Pest.
+
+---
 
 ## Local development
 
-Requires PHP 8.3+ with `pdo_mysql`, Composer, Node 20+, and MySQL 8.
-
-Create the database first:
+Needs PHP 8.3+ with `pdo_mysql`, Composer, Node 20+, and MySQL 8.
 
 ```sql
 CREATE DATABASE paycheque CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -23,9 +25,11 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-Set MySQL credentials in `.env`:
+Set MySQL in `.env`:
 
 ```env
+APP_NAME=Paycheque.app
+APP_URL=http://localhost
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -40,34 +44,26 @@ npm run build
 php artisan serve
 ```
 
-Vite development workflow (in a second terminal):
+Dev assets:
 
 ```bash
 npm run dev
-```
-
-Or:
-
-```bash
+# or
 composer run dev
 ```
 
-Useful commands:
-
 ```bash
 php artisan test
-./vendor/bin/pest
 vendor/bin/pint
-php artisan migrate --seed
 ```
 
-MySQL is the application database. Pest tests still use in-memory SQLite (`phpunit.xml`) so `php artisan test` does not need a running MySQL server.
+Pest uses in-memory SQLite (`phpunit.xml`). Tests do not need MySQL.
 
-Set `APP_NAME=Paycheque.app` and `APP_URL` to the production host. Canonical URLs, Open Graph URLs, and the sitemap all use `APP_URL`.
+---
 
 ## Tax data
 
-Tax rules must not live in controllers, Livewire, or Blade.
+Rates must not live in controllers, Livewire, or Blade.
 
 ```text
 resources/tax/{year}/
@@ -82,20 +78,21 @@ resources/tax/{year}/
     ...                  # one file per province/territory
 ```
 
-Amounts are dollar strings so they can be checked against CRA tables. The engine converts them to integer cents.
+Amounts are CAD dollar strings. The engine converts them to integer cents.
 
-`CURRENT_TAX_YEAR` in `.env` selects the active year. `TaxFreshness` reads `sources.php` for “Tax year” and “Last updated” on every tax-related page.
+- `CURRENT_TAX_YEAR` selects the active folder.
+- `TaxFreshness` reads `sources.php` for **Tax year** and **Last updated** on every tax-related page.
 
-### Updating for a new year
+### Update for a new year
 
-1. Copy `resources/tax/2026` to `resources/tax/2027`.
-2. Edit the PHP files from official sources. Do not invent rates.
-3. Update `sources.php` with the new edition, `retrieved_date`, and citation list.
+1. Copy `resources/tax/2026` → `resources/tax/2027`.
+2. Edit files from official sources. Do not invent rates.
+3. Update `sources.php` (`edition`, `retrieved_date`, citations).
 4. Set `CURRENT_TAX_YEAR=2027`.
-5. Run `php artisan test`. Update fixtures only after recalculating from the official source.
-6. Compare a few salaries against [PDOC](https://www.canada.ca/en/revenue-agency/services/e-services/digital-services-businesses/payroll-deductions-online-calculator.html).
+5. Run `php artisan test`. Change fixtures only after recalculating from the source.
+6. Spot-check a few salaries against [CRA PDOC](https://www.canada.ca/en/revenue-agency/services/e-services/digital-services-businesses/payroll-deductions-online-calculator.html).
 
-Primary sources:
+Sources:
 
 - [T4127 Payroll Deductions Formulas](https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/t4127-payroll-deductions-formulas-computer-programs.html)
 - [T4032 Payroll Deductions Tables](https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/t4032-payroll-deductions-tables.html)
@@ -103,73 +100,105 @@ Primary sources:
 - [Revenu Québec tax rates](https://www.revenuquebec.ca/en/citizens/income-tax-return/completing-your-income-tax-return/income-tax-rates/)
 - Quebec Finance personal-tax parameters PDF for the new year
 
-The engine follows CRA T4127 **Option 1** for a full-year employee with claim code 1:
+### How a paycheck is calculated
 
-1. Annual CPP/QPP, CPP2/QPP2, EI, and QPIP
-2. Additional CPP/QPP (factor F5) reduces taxable income
-3. Federal T3 / T1, including the 16.5% Quebec abatement
-4. Provincial T4 / T2, including Ontario health premium/surtax, BC tax reduction, Alberta K5P
-5. Quebec provincial tax uses Revenu Québec parameters (CRA does not compute Quebec T2)
+CRA T4127 **Option 1**, full-year employee, claim code 1:
+
+1. Annual CPP/QPP, CPP2/QPP2, EI, QPIP
+2. Additional CPP/QPP (F5) reduces taxable income
+3. Federal tax, including the 16.5% Quebec abatement
+4. Provincial/territorial tax (Ontario health premium/surtax, BC reduction, Alberta K5P, Yukon K4P where they apply)
+5. Quebec provincial tax uses Revenu Québec parameters (CRA T2 = 0 for Quebec)
+
+Pay frequency only divides the **same annual totals** (12 / 24 / 26 / 52). Hourly conversion assumes 40 hours × 52 weeks unless the user changes hours.
+
+---
 
 ## Adding a province
 
-All 13 jurisdictions already have calculator landing pages.
+All 13 jurisdictions already have landing pages.
 
-1. Add the enum case and slug in `app/Support/Province.php`.
-2. Add `resources/tax/{year}/{province}.php`.
-3. Register the file in `TaxRuleProvider`.
-4. Write distinct copy in `app/Content/PaycheckContent.php` (intro, how tax works, FAQs). Do not only swap the province name.
-5. If the province should get indexable salary pages, add its code to `config/tools.php` → `salary_page_provinces`.
+1. Enum + slug in `app/Support/Province.php` (add aliases if people will type short forms).
+2. Tax file `resources/tax/{year}/{name}.php`.
+3. Register the file in `app/Services/Tax/TaxRuleProvider.php`.
+4. Unique copy in `app/Content/PaycheckContent.php`. Do not only swap the province name.
+5. To index salary pages, add the code to `config/tools.php` → `salary_page_provinces`.
 
-Quebec must keep its own QPP / QPIP / abatement path. Do not treat it as a regular province.
+Quebec is not a regular province: QPP, QPIP, lower EI, federal abatement, Revenu Québec tax.
+
+Hyphenated slugs (`british-columbia`, `prince-edward-island`, …) are listed explicitly in `Province::slugPattern()` so the `/{slug}-paycheck-calculator` route matches. Canadian spelling `/{slug}-paycheque-calculator` 301s to `paycheck`.
+
+---
 
 ## Adding a salary page
 
-Do not create a controller or Blade file per salary.
+Do **not** add a controller or Blade file per salary.
 
-1. Add the integer amount to `config/tools.php` → `popular_salaries`.
-2. The amount is only indexable in provinces listed in `salary_page_provinces`.
-3. Example take-home tables on province pages use `example_salaries`.
-4. Routes are `/{province}/{salary}-salary`. The sitemap includes only catalog-allowed combinations.
+1. Add the amount to `config/tools.php` → `popular_salaries`.
+2. It is only indexed in `salary_page_provinces` (currently ON, QC, BC, AB, NB, NS, MB).
+3. Province example tables use `example_salaries`.
+4. URL: `/{province}/{salary}-salary`. Alternate `/{province}/salary/{salary}` 301s.
 
-Do not generate thousands of thin pages. Only add amounts people actually search.
+Do not generate thousands of thin pages.
+
+---
 
 ## Adding a new calculator
 
-The app is a utility platform. A new tool should need:
+A new tool should need:
 
-1. A class implementing `App\Calculators\Contracts\Calculator` (if it calculates something)
-2. Input validation (Livewire or a form request)
-3. A result object or `CalculatorResult`
+1. A class implementing `App\Calculators\Contracts\Calculator` (if it calculates)
+2. Input validation (Livewire or form request)
+3. A result object (`CalculatorResult` or similar)
 4. A Blade/Livewire page
-5. Unique SEO copy (see `CalculatorHubContent` or a new content class)
+5. Unique SEO copy (`CalculatorHubContent` or a new content class)
 6. A named route
 7. Pest tests
-8. An entry in `ToolCatalog` / sitemap if the page should be indexed
+8. `ToolCatalog` + sitemap if it should be indexed
 
-Register calculation modules in `config/tools.php`. Reuse `x-layouts.app`, `x-seo.meta`, `x-ad-slot`, `x-tax-freshness`, and analytics. Do not call an external API for calculations. Do not couple new tools to `PayrollCalculator` unless they actually need payroll tax.
+Register modules in `config/tools.php`. Reuse `x-layouts.app`, `x-seo.meta`, `x-ad-slot`, `x-tax-freshness`. Calculate in PHP. Do not call an external tax API.
+
+---
 
 ## SEO
 
 - Server-rendered Blade. Calculator inputs are Livewire state, not query-string URLs.
-- Every indexable page sets title, description, canonical, Open Graph, robots, and JSON-LD through `SeoPage`.
-- Query-string variants (`?salary=80000`) are `noindex,follow` and keep the clean canonical.
-- Province pages: `/{province}-paycheck-calculator`
-- Salary pages: `/{province}/{salary}-salary` for catalog entries only
-- Specialized hubs: `/paycheque-calculator`, `/take-home-pay-calculator`, `/salary-after-tax-calculator`, `/hourly-to-salary-calculator`, `/salary-to-hourly-calculator`, `/biweekly-pay-calculator`, `/weekly-pay-calculator`
-- Guides and legal: `/methodology`, `/about`, `/tax-rates`, `/privacy`, `/terms`, `/contact`
-- `/sitemap.xml` is generated from routes + `SalaryCatalog` + `ToolCatalog`. It excludes admin, login, and non-indexable salary combinations.
-- `/robots.txt` allows public pages, disallows `/admin`, and points at the sitemap.
-- Structured data: `WebSite` (home), `Organization`, `WebApplication` on calculator pages, `BreadcrumbList`, and `FAQPage` only when FAQs are visible. No fake ratings.
+- `SeoPage` sets title, description, canonical, Open Graph, robots, JSON-LD.
+- `?salary=80000` is `noindex,follow` and keeps the clean canonical.
+- `APP_URL` is the canonical host (set this on Laravel Cloud).
 
-Internal linking is built into the province and salary templates: salary tables, adjacent salaries, and `x-related-calculators`.
+| Kind | URL |
+| --- | --- |
+| Home | `/` |
+| National | `/canada-paycheck-calculator` |
+| Province | `/{province}-paycheck-calculator` |
+| Salary | `/{province}/{salary}-salary` |
+| Hubs | `/paycheque-calculator`, `/take-home-pay-calculator`, `/salary-after-tax-calculator`, `/hourly-to-salary-calculator`, `/salary-to-hourly-calculator`, `/biweekly-pay-calculator`, `/weekly-pay-calculator` |
+| Guides | `/methodology`, `/tax-rates` |
+| Legal | `/about`, `/privacy`, `/terms`, `/contact` |
+| Crawl | `/sitemap.xml`, `/robots.txt` |
+
+Sitemap is built from routes + `SalaryCatalog` + `ToolCatalog`. It excludes admin, login, and non-catalog salary URLs.
+
+Structured data: `WebSite` (home), `Organization`, `WebApplication` on calculator pages, `BreadcrumbList`, `FAQPage` only when FAQs are on the page. No fake ratings.
+
+---
+
+## Privacy, terms, contact
+
+- `/privacy` must describe what is actually on: first-party session cookie, first-party event buckets (no exact salary), Google Analytics when `ANALYTICS_MEASUREMENT_ID` is set, AdSense when ads are enabled, contact-form fields, hosting logs.
+- `/terms` — estimates only, not advice.
+- `/contact` — name / email / message, throttled. Set `CONTACT_EMAIL` to an inbox you read. Mail uses `MAIL_*`.
+- Update `config/site.php` dates when those policies change.
+
+---
 
 ## Ads
 
-Ads stay off until an ad network is ready.
-
 ```env
 ADS_ENABLED=false
+ADS_PROVIDER=adsense
+ADS_CLIENT=
 ```
 
 ```blade
@@ -178,39 +207,54 @@ ADS_ENABLED=false
 <x-ad-slot placement="bottom" />
 ```
 
-Slot names are configured in `config/ads.php`. Never place an ad inside the salary input or above the primary calculate button.
+Slots: `config/ads.php`. Leave ads off until AdSense is approved. Do not put an ad inside the salary field or above Calculate.
+
+---
 
 ## Analytics
 
 ```env
 ANALYTICS_ENABLED=true
 ANALYTICS_PROVIDER=local
+ANALYTICS_MEASUREMENT_ID=G-XXXXXXXX
 ```
 
-Events are stored without exact salaries. Useful events: `calculator_started`, `calculator_completed`, `province_selected`, `pay_frequency_selected`, `share_clicked`. Admin is at `/admin` after seeding `ADMIN_EMAIL` / `ADMIN_PASSWORD`.
+- First-party events (province, frequency, salary **range**, path) go to MySQL. Exact salary is not stored.
+- GA4 loads only when `ANALYTICS_MEASUREMENT_ID` is set. Do not send salary values to gtag.
+- Admin: set `ADMIN_EMAIL` / `ADMIN_PASSWORD`, migrate --seed, visit `/admin`.
 
-## Deployment
+---
 
-Typical production stack: Linux, Nginx, PHP 8.3+ with `pdo_mysql`, MySQL 8.
+## Laravel Cloud
 
-1. Create the MySQL database and user, then set `DB_*` in `.env`.
-2. Set `APP_URL` to the public HTTPS origin (this is the canonical host).
-3. `php artisan migrate --force`
-4. `npm run build` (or build in CI and deploy `public/build`)
-5. `php artisan config:cache && php artisan route:cache && php artisan view:cache`
+1. Attach Cloud MySQL. Do **not** set `DB_HOST=127.0.0.1`.
+2. Let Cloud inject `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`.
+3. Set `APP_URL` to the public `https://` origin.
+4. Set `ANALYTICS_MEASUREMENT_ID`, `CONTACT_EMAIL`, `ADMIN_*` as needed.
+5. Deploy command should run `php artisan migrate --force`.
+6. After changing env vars, redeploy so config cache refreshes.
 
-No Redis. Queue can stay `sync`. Nginx `root` must be `public/`. Deny `.env`.
+`CACHE_STORE=database` and `SESSION_DRIVER=database` need migrations (`cache`, `sessions`). The tax-year badge uses the cache table.
 
-```bash
-chown -R www-data:www-data storage bootstrap/cache
-chmod -R ug+rwx storage bootstrap/cache
-```
+---
 
-Back up MySQL before deploys:
+## Environment variables
 
-```bash
-mysqldump -u "$DB_USERNAME" -p "$DB_DATABASE" > storage/backups/paycheque-$(date +%F).sql
-```
+| Variable | Purpose |
+| --- | --- |
+| `APP_NAME` / `APP_URL` | Brand and canonical host |
+| `DB_*` | MySQL |
+| `CURRENT_TAX_YEAR` | Active rule folder |
+| `TAX_RULES_CACHE_TTL` | Seconds to cache loaded tax files |
+| `ADS_ENABLED` / `ADS_PROVIDER` / `ADS_CLIENT` | AdSense |
+| `ANALYTICS_ENABLED` / `ANALYTICS_MEASUREMENT_ID` | First-party events + GA4 |
+| `CONTACT_EMAIL` / `LEGAL_NAME` | Contact form and legal pages |
+| `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Seeded admin user |
+| `MAIL_*` | Contact form delivery |
+
+See `.env.example`.
+
+---
 
 ## Testing
 
@@ -218,10 +262,14 @@ mysqldump -u "$DB_USERNAME" -p "$DB_DATABASE" > storage/backups/paycheque-$(date
 php artisan test
 ```
 
-Coverage includes known New Brunswick and Ontario cases, Quebec payroll treatment, CPP/CPP2/EI ceilings, pay-frequency consistency, hourly conversion, province/salary routes, sitemap/robots/canonicals, and admin authorization.
+Covers known NB/ON cases, Quebec payroll, CPP/CPP2/EI ceilings, frequencies, hourly conversion, all 13 province routes, salary catalog 404s, hyphenated slugs, paycheque redirects, sitemap/robots/canonicals, privacy/terms/contact, admin auth.
+
+---
 
 ## Maintenance
 
-Annually: copy the tax-year folder, update official sources, run Pest, review province copy, recheck sitemap and `APP_URL`.
+**Monthly:** `/admin` for province mix and completion rate. Do not store salaries.
 
-Monthly: glance at `/admin` for province mix and completion rate. Do not store salaries.
+**When enabling ads:** set AdSense env vars, turn `ADS_ENABLED=true`, reread `/privacy`.
+
+**Annually:** copy the tax-year folder, update official sources, run Pest, review province copy, confirm `APP_URL` and sitemap in Search Console.
