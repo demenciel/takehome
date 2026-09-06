@@ -24,6 +24,18 @@
         'description' => 'Independent Canadian paycheck calculator. Not a government service.',
     ];
 
+    $graph[] = [
+        '@type' => 'WebPage',
+        'name' => $seo->title,
+        'url' => $seo->canonical,
+        'description' => $seo->description,
+        'isPartOf' => [
+            '@type' => 'WebSite',
+            'name' => config('app.name'),
+            'url' => rtrim(config('app.url'), '/'),
+        ],
+    ];
+
     if ($seo->includeApplication) {
         $graph[] = [
             '@type' => 'WebApplication',

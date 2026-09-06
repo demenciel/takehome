@@ -3,8 +3,8 @@
 
     <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
         <h1 class="font-serif text-4xl text-ink sm:text-5xl">{{ $province->name() }} Paycheck Calculator</h1>
+        <x-answer-summary :summary="$summary" />
         <p class="mt-4 max-w-2xl text-lg text-ink-soft">{{ $content['intro'] }}</p>
-        <x-tax-freshness class="mt-4" />
         <x-ad-slot placement="top" />
         <div class="mt-8 max-w-2xl">
             <livewire:paycheck-calculator :province="$province->value" />

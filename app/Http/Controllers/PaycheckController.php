@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Content\PaycheckContent;
 use App\Services\Analytics\Analytics;
 use App\Services\Payroll\ExampleResultService;
+use App\Services\Seo\AnswerSummaryBuilder;
 use App\Services\Seo\SeoPage;
 use App\Services\Tax\TaxFreshness;
 use App\Support\HourlyConversion;
@@ -23,6 +24,7 @@ class PaycheckController extends Controller
         private Analytics $analytics,
         private ExampleResultService $examples,
         private TaxFreshness $freshness,
+        private AnswerSummaryBuilder $answers,
     ) {}
 
     public function home(Request $request): View
@@ -45,6 +47,7 @@ class PaycheckController extends Controller
             'exampleSalaries' => SalaryCatalog::examples(),
             'hubs' => ToolCatalog::hubs(),
             'faqs' => $this->content->nationalFaqs(),
+            'summary' => $this->answers->canada(),
         ]);
     }
 
@@ -67,6 +70,7 @@ class PaycheckController extends Controller
             'popularSalaries' => SalaryCatalog::amounts(),
             'related' => ToolCatalog::relatedLinks(),
             'faqs' => $this->content->nationalFaqs(),
+            'summary' => $this->answers->canada(),
         ]);
     }
 
@@ -83,14 +87,25 @@ class PaycheckController extends Controller
         $this->pageView($request, $province);
 
         $content = $this->content->province($province);
-        $faqs = $this->content->provinceFaqs($province);
         $examples = $this->examples->examples($province, SalaryCatalog::examples());
+        $featured = $this->answers->featuredExample($examples);
+        $summary = $this->answers->province($province, $featured);
+        $faqs = $this->content->provinceFaqs($province);
+
+        if ($featured) {
+            array_unshift($faqs, [
+                'question' => 'How much is $'.number_format($featured['salary']).' after tax in '.$province->name().'?',
+                'answer' => 'Estimated take-home is '.$featured['net_annual']->format().' a year, with an effective income-tax rate of '.$featured['effective_tax_rate'].'%.',
+            ]);
+            $faqs = array_slice($faqs, 0, 8);
+        }
 
         return view('pages.paycheck.province', [
             'province' => $province,
             'content' => $content,
             'faqs' => $faqs,
             'examples' => $examples,
+            'summary' => $summary,
             'indexableSalaries' => array_values(array_filter(
                 SalaryCatalog::amounts(),
                 fn (int $amount) => SalaryCatalog::allows($province, $amount),
@@ -130,13 +145,7 @@ class PaycheckController extends Controller
         $neighbors = SalaryCatalog::neighbors($salary);
         $compare = SalaryCatalog::compare($salary);
 
-        $faqs = [
-            [
-                'question' => 'How much is a $'.number_format($salary).' salary after tax in '.$province->name().'?',
-                'answer' => $explanation,
-            ],
-            ...$this->content->provinceFaqs($province),
-        ];
+        $faqs = $this->answers->salaryFaqs($province, $salary, $result, $page['frequencies'], $hourly, $explanation);
 
         return view('pages.paycheck.salary', [
             'province' => $province,
@@ -148,6 +157,7 @@ class PaycheckController extends Controller
             'explanation' => $explanation,
             'content' => $content,
             'faqs' => $faqs,
+            'summary' => $this->answers->salary($province, $salary, $result, $page['frequencies'], $hourly),
             'neighbors' => $neighbors,
             'compare' => $compare,
             'related' => ToolCatalog::relatedLinks($province),

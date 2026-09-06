@@ -3,7 +3,7 @@
 
     <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
         <h1 class="font-serif text-4xl text-ink sm:text-5xl">${{ number_format($salary) }} Salary After Tax in {{ $province->name() }}</h1>
-        <x-tax-freshness class="mt-4" />
+        <x-answer-summary :summary="$summary" facts-as="table" />
 
         <div class="mt-8 rounded-2xl border border-line bg-card p-6 sm:p-8">
             <p class="text-sm font-semibold uppercase tracking-wide text-ink-soft">Estimated annual take-home</p>
@@ -30,48 +30,6 @@
                 </tbody>
             </table>
         </div>
-    </section>
-
-    <section class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
-        <h2 class="font-serif text-3xl">${{ number_format($salary) }} {{ $province->name() }} Salary Breakdown</h2>
-        <dl class="mt-6 divide-y divide-line border-y border-line">
-            <div class="flex justify-between gap-4 py-3">
-                <dt class="text-ink-soft">Gross income</dt>
-                <dd class="font-semibold">${{ number_format($salary) }}</dd>
-            </div>
-            <div class="flex justify-between gap-4 py-3">
-                <dt class="text-ink-soft">Federal tax</dt>
-                <dd class="font-semibold">{{ $result->metrics['federal_tax']->format() }}</dd>
-            </div>
-            <div class="flex justify-between gap-4 py-3">
-                <dt class="text-ink-soft">{{ $province->name() }} tax</dt>
-                <dd class="font-semibold">{{ $result->metrics['provincial_tax']->format() }}</dd>
-            </div>
-            <div class="flex justify-between gap-4 py-3">
-                <dt class="text-ink-soft">{{ $province->usesQpp() ? 'QPP' : 'CPP' }}</dt>
-                <dd class="font-semibold">{{ $result->metrics['cpp']->format() }}</dd>
-            </div>
-            @if ($result->metrics['cpp2']->isPositive())
-                <div class="flex justify-between gap-4 py-3">
-                    <dt class="text-ink-soft">{{ $province->usesQpp() ? 'QPP2' : 'CPP2' }}</dt>
-                    <dd class="font-semibold">{{ $result->metrics['cpp2']->format() }}</dd>
-                </div>
-            @endif
-            <div class="flex justify-between gap-4 py-3">
-                <dt class="text-ink-soft">EI</dt>
-                <dd class="font-semibold">{{ $result->metrics['ei']->format() }}</dd>
-            </div>
-            @if ($result->metrics['qpip']->isPositive())
-                <div class="flex justify-between gap-4 py-3">
-                    <dt class="text-ink-soft">QPIP</dt>
-                    <dd class="font-semibold">{{ $result->metrics['qpip']->format() }}</dd>
-                </div>
-            @endif
-            <div class="flex justify-between gap-4 py-3">
-                <dt class="text-ink-soft">Net income</dt>
-                <dd class="font-semibold">{{ $result->metrics['net_annual']->format() }}</dd>
-            </div>
-        </dl>
         <p class="mt-4 text-sm text-ink-soft">{{ __('calculator.disclaimer') }}</p>
     </section>
 
@@ -79,6 +37,21 @@
         <h2 class="font-serif text-3xl">How Much Is ${{ number_format($salary) }} After Tax in {{ $province->name() }}?</h2>
         <p class="mt-4 text-ink-soft">{{ $explanation }}</p>
         <p class="mt-4 text-ink-soft">{{ $content['intro'] }}</p>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+        <h2 class="font-serif text-3xl">What is ${{ number_format($salary) }} per month after tax?</h2>
+        <p class="mt-4 text-ink-soft">{{ $faqs[1]['answer'] }}</p>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+        <h2 class="font-serif text-3xl">What is ${{ number_format($salary) }} biweekly after tax?</h2>
+        <p class="mt-4 text-ink-soft">{{ $faqs[2]['answer'] }}</p>
+    </section>
+
+    <section class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+        <h2 class="font-serif text-3xl">What deductions come off this salary?</h2>
+        <p class="mt-4 text-ink-soft">{{ $faqs[3]['answer'] }} {{ $faqs[4]['answer'] }}</p>
     </section>
 
     <section class="mx-auto max-w-3xl px-4 py-8 sm:px-6">

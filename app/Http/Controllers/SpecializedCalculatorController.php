@@ -9,6 +9,7 @@ use App\Services\Analytics\Analytics;
 use App\Services\Overtime\OvertimePayEstimator;
 use App\Services\Overtime\OvertimeRuleProvider;
 use App\Services\Payroll\PayrollComparison;
+use App\Services\Seo\AnswerSummaryBuilder;
 use App\Services\Seo\SeoPage;
 use App\Support\Money;
 use App\Support\PayFrequency;
@@ -28,6 +29,7 @@ class SpecializedCalculatorController extends Controller
         private OvertimeRuleProvider $overtimeRules,
         private OvertimePayEstimator $overtimeEstimator,
         private PayrollComparison $comparison,
+        private AnswerSummaryBuilder $answers,
     ) {}
 
     public function overtime(Request $request): View
@@ -128,16 +130,21 @@ class SpecializedCalculatorController extends Controller
         $this->pageView($request, 'overtime', $province);
 
         $route = $province ? route('tools.overtime.province', $province->slug()) : route('tools.overtime');
+        $rules = $page['rules'] ?? ($example['rules'] ?? null);
+        $faqs = $example
+            ? $this->answers->overtimeFaqs($page['faqs'], $example, $province, $rules)
+            : $page['faqs'];
 
         return view('pages.tools.overtime', [
             'page' => $page,
             'province' => $province,
             'example' => $example,
+            'summary' => $example ? $this->answers->overtime($province, $example, $rules) : null,
             'provinces' => Province::all(),
             'rulesProvider' => $this->overtimeRules,
             'related' => ToolCatalog::relatedLinks($province, 'overtime'),
-            'faqs' => $page['faqs'],
-            'seo' => $this->seo($page, $route, $province ? $province->name().' overtime calculator' : $page['h1']),
+            'faqs' => $faqs,
+            'seo' => $this->seo($page, $route, $province ? $province->name().' overtime calculator' : $page['h1'], $faqs),
         ]);
     }
 
@@ -150,15 +157,19 @@ class SpecializedCalculatorController extends Controller
         $this->pageView($request, 'bonus', $province);
 
         $route = $province ? route('tools.bonus.province', $province->slug()) : route('tools.bonus');
+        $faqs = $example
+            ? $this->answers->bonusFaqs($page['faqs'], $example, $province)
+            : $page['faqs'];
 
         return view('pages.tools.bonus', [
             'page' => $page,
             'province' => $province,
             'example' => $example,
+            'summary' => $example ? $this->answers->bonus($province, $example) : null,
             'provinces' => Province::all(),
             'related' => ToolCatalog::relatedLinks($province, 'bonus'),
-            'faqs' => $page['faqs'],
-            'seo' => $this->seo($page, $route, $province ? $province->name().' bonus calculator' : $page['h1']),
+            'faqs' => $faqs,
+            'seo' => $this->seo($page, $route, $province ? $province->name().' bonus calculator' : $page['h1'], $faqs),
         ]);
     }
 
@@ -171,22 +182,27 @@ class SpecializedCalculatorController extends Controller
         $this->pageView($request, 'raise', $province);
 
         $route = $province ? route('tools.raise.province', $province->slug()) : route('tools.raise');
+        $faqs = $example
+            ? $this->answers->raiseFaqs($page['faqs'], $example, $province)
+            : $page['faqs'];
 
         return view('pages.tools.raise', [
             'page' => $page,
             'province' => $province,
             'example' => $example,
+            'summary' => $example ? $this->answers->raise($province, $example) : null,
             'provinces' => Province::all(),
             'related' => ToolCatalog::relatedLinks($province, 'raise'),
-            'faqs' => $page['faqs'],
-            'seo' => $this->seo($page, $route, $province ? $province->name().' raise calculator' : $page['h1']),
+            'faqs' => $faqs,
+            'seo' => $this->seo($page, $route, $province ? $province->name().' raise calculator' : $page['h1'], $faqs),
         ]);
     }
 
     /**
      * @param  array<string, mixed>  $page
+     * @param  list<array{question: string, answer: string}>|null  $faqs
      */
-    private function seo(array $page, string $canonical, string $crumb): SeoPage
+    private function seo(array $page, string $canonical, string $crumb, ?array $faqs = null): SeoPage
     {
         return new SeoPage(
             title: $page['title'],
@@ -196,7 +212,7 @@ class SpecializedCalculatorController extends Controller
                 ['name' => __('common.home'), 'url' => route('home')],
                 ['name' => $crumb, 'url' => $canonical],
             ],
-            faqs: $page['faqs'],
+            faqs: $faqs ?? $page['faqs'],
             ogTitle: $page['title'],
             ogDescription: $page['description'],
         );

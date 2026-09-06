@@ -3,8 +3,10 @@
 
     <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
         <h1 class="font-serif text-4xl text-ink sm:text-5xl">{{ $page['h1'] }}</h1>
+        @if ($summary)
+            <x-answer-summary :summary="$summary" />
+        @endif
         <p class="mt-4 max-w-2xl text-lg text-ink-soft">{{ $page['intro'] }}</p>
-        <x-tax-freshness class="mt-4" />
         <x-ad-slot placement="top" />
         <div class="mt-8 max-w-2xl">
             @if ($province)
@@ -63,6 +65,33 @@
                 , this estimate annualizes {{ $example['annual_with']->format() }} and compares it with {{ $example['annual_without']->format() }} without the overtime.
                 The overtime premium is {{ $example['overtime_pay']->format() }} gross per week; the estimated after-tax value of that overtime is {{ $example['after_tax_overtime']->format() }} per week.
             </p>
+            <div class="mt-6 overflow-x-auto">
+                <table class="data-table min-w-[24rem]">
+                    <caption class="mb-3 text-left text-lg font-semibold">Weekly overtime example</caption>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Hourly wage</th>
+                            <td>$30.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Overtime hours</th>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Overtime rate</th>
+                            <td>{{ $example['overtime_rate']->format() }}/hour</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gross overtime</th>
+                            <td>{{ $example['overtime_pay']->format() }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Estimated after-tax overtime</th>
+                            <td>{{ $example['after_tax_overtime']->format() }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     @endif
 

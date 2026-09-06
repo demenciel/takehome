@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Content\CalculatorHubContent;
 use App\Services\Analytics\Analytics;
+use App\Services\Seo\AnswerSummaryBuilder;
 use App\Services\Seo\SeoPage;
 use App\Support\Province;
 use App\Support\ToolCatalog;
@@ -15,6 +16,7 @@ class ToolController extends Controller
     public function __construct(
         private CalculatorHubContent $content,
         private Analytics $analytics,
+        private AnswerSummaryBuilder $answers,
     ) {}
 
     public function hub(Request $request, string $tool): View
@@ -33,6 +35,7 @@ class ToolController extends Controller
             'provinces' => Province::all(),
             'related' => ToolCatalog::relatedLinks(),
             'faqs' => $faqs,
+            'summary' => $this->answers->hub($page['h1'].' — what does this estimate?', $page['intro']),
             'seo' => new SeoPage(
                 title: $page['title'],
                 description: $page['description'],
@@ -59,6 +62,7 @@ class ToolController extends Controller
             'page' => $page,
             'related' => ToolCatalog::relatedLinks(),
             'faqs' => $page['faqs'],
+            'summary' => $this->answers->conversion($page['mode']),
             'seo' => new SeoPage(
                 title: $page['title'],
                 description: $page['description'],

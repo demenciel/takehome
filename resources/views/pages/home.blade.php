@@ -5,8 +5,8 @@
             <h1 class="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
                 {{ __('calculator.hero_title') }}
             </h1>
+            <x-answer-summary class="mt-6" :summary="$summary" />
             <p class="mt-5 max-w-2xl text-lg text-ink-soft">{{ __('calculator.hero_subtitle') }}</p>
-            <x-tax-freshness class="mt-4" />
         </div>
 
         <div class="mt-10 grid items-start gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(16rem,0.7fr)]">

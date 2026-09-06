@@ -3,8 +3,8 @@
 
     <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
         <h1 class="font-serif text-4xl text-ink sm:text-5xl">{{ $page['h1'] }}</h1>
+        <x-answer-summary :summary="$summary" />
         <p class="mt-4 max-w-2xl text-lg text-ink-soft">{{ $page['intro'] }}</p>
-        <x-tax-freshness class="mt-4" compact />
         <div class="mt-8 max-w-2xl">
             <livewire:hourly-salary-converter :mode="$page['mode']" />
         </div>

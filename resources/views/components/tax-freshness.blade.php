@@ -8,6 +8,8 @@
     <span>Tax year: {{ $freshness->year() }}</span>
     <span aria-hidden="true"> · </span>
     <span>Last updated: {{ $freshness->lastUpdatedLabel() }}</span>
+    <span aria-hidden="true"> · </span>
+    <a href="{{ route('methodology') }}" class="font-semibold text-accent-dark underline">Methodology</a>
     @unless ($compact)
         <span class="mt-1 block">{{ $freshness->attribution() }}</span>
     @endunless

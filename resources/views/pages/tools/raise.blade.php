@@ -3,8 +3,10 @@
 
     <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
         <h1 class="font-serif text-4xl text-ink sm:text-5xl">{{ $page['h1'] }}</h1>
+        @if ($summary)
+            <x-answer-summary :summary="$summary" />
+        @endif
         <p class="mt-4 max-w-2xl text-lg text-ink-soft">{{ $page['intro'] }}</p>
-        <x-tax-freshness class="mt-4" />
         <x-ad-slot placement="top" />
         <div class="mt-8 max-w-2xl">
             @if ($province)
@@ -58,6 +60,20 @@
                             <th scope="row">Income tax</th>
                             <td>{{ $example['baseline']->metrics['federal_tax']->add($example['baseline']->metrics['provincial_tax'])->format() }}</td>
                             <td>{{ $example['modified']->metrics['federal_tax']->add($example['modified']->metrics['provincial_tax'])->format() }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Monthly net</th>
+                            <td>{{ $example['baseline']->metrics['net_annual']->divideBy(12)->format() }}</td>
+                            <td>{{ $example['modified']->metrics['net_annual']->divideBy(12)->format() }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Biweekly net</th>
+                            <td>{{ $example['baseline']->metrics['net_annual']->divideBy(26)->format() }}</td>
+                            <td>{{ $example['modified']->metrics['net_annual']->divideBy(26)->format() }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Net raise</th>
+                            <td colspan="2">{{ $example['net_annual_delta']->format() }} a year ({{ $example['keep_percent'] }}% kept)</td>
                         </tr>
                     </tbody>
                 </table>

@@ -3,8 +3,10 @@
 
     <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
         <h1 class="font-serif text-4xl text-ink sm:text-5xl">{{ $page['h1'] }}</h1>
+        @if ($summary)
+            <x-answer-summary :summary="$summary" />
+        @endif
         <p class="mt-4 max-w-2xl text-lg text-ink-soft">{{ $page['intro'] }}</p>
-        <x-tax-freshness class="mt-4" />
         <x-ad-slot placement="top" />
         <div class="mt-8 max-w-2xl">
             @if ($province)
@@ -33,7 +35,39 @@
                 , the estimated incremental tax is {{ $example['tax_delta']->format() }}
                 and the extra CPP/QPP and EI/QPIP is {{ $example['pension_delta']->add($example['insurance_delta'])->format() }}.
                 Estimated net bonus: {{ $example['net_annual_delta']->format() }} ({{ $example['keep_percent'] }}% kept).
+                Employer withholding may differ; this is the estimated annual tax liability.
             </p>
+            <div class="mt-6 overflow-x-auto">
+                <table class="data-table min-w-[24rem]">
+                    <caption class="mb-3 text-left text-lg font-semibold">Bonus impact</caption>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Gross bonus</th>
+                            <td>$10,000.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Estimated additional tax</th>
+                            <td>{{ $example['tax_delta']->format() }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">CPP/QPP impact</th>
+                            <td>{{ $example['pension_delta']->format() }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">EI/QPIP impact</th>
+                            <td>{{ $example['insurance_delta']->format() }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Estimated net bonus</th>
+                            <td>{{ $example['net_annual_delta']->format() }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Share kept</th>
+                            <td>{{ $example['keep_percent'] }}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     @endif
 
