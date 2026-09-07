@@ -281,6 +281,96 @@ class AnswerSummaryBuilder
      * @param  array<string, mixed>  $example
      * @return array<string, mixed>
      */
+    public function parental(array $example): array
+    {
+        $weekly = $example['weekly_ei']->format();
+        $monthly = $example['monthly_ei']->format();
+        $total = $example['ei_total']->format();
+        $year = $example['year'] ?? $this->freshness->year();
+
+        return $this->make(
+            question: 'How much will I make on parental leave in Canada?',
+            answer: "On an \$80,000 Ontario salary, estimated federal EI for maternity plus standard parental leave is {$weekly} a week in {$year} — the published weekly maximum — or about {$monthly} a month before tax. Over {$example['leave_weeks']} counted weeks that is about {$total}. Eligibility still depends on insurable hours and a Service Canada claim. Québec uses QPIP, not federal EI.",
+            facts: [
+                ['label' => 'Example salary', 'value' => '$80,000'],
+                ['label' => 'Example province', 'value' => 'Ontario'],
+                ['label' => 'Leave path', 'value' => 'Maternity + standard parental'],
+                ['label' => 'Estimated weekly EI', 'value' => $weekly],
+                ['label' => 'Approximate monthly EI', 'value' => $monthly],
+                ['label' => 'Counted weeks', 'value' => (string) $example['leave_weeks']],
+                ['label' => 'Estimated total EI', 'value' => $total],
+                ['label' => $year.' weekly maximum (standard)', 'value' => $example['parental']['max_weekly']->format()],
+            ],
+            jurisdiction: 'Canada (federal EI; Ontario example)',
+            sources: $this->benefitSources(),
+            updated: config('benefits.last_reviewed'),
+        );
+    }
+
+    /**
+     * @param  array<string, mixed>  $example
+     * @return array<string, mixed>
+     */
+    public function eiBenefits(array $example): array
+    {
+        $year = $this->freshness->year();
+        $weekly = $example['weekly_benefit']->format();
+        $total = $example['total']->format();
+
+        return $this->make(
+            question: "What is the maximum EI maternity benefit in {$year}?",
+            answer: "The {$year} maximum weekly EI maternity benefit is {$example['max_weekly']->format()}, which is {$example['rate_percent']}% of insurable weekly earnings up to the yearly maximum. Maternity benefits last up to {$example['max_weeks']} weeks. On an \$80,000 example that is {$weekly} a week, or {$total} over {$example['weeks']} weeks before tax.",
+            facts: [
+                ['label' => $year.' maternity rate', 'value' => $example['rate_percent'].'%'],
+                ['label' => $year.' weekly maximum', 'value' => $example['max_weekly']->format()],
+                ['label' => 'Maternity weeks', 'value' => 'Up to '.$example['max_weeks']],
+                ['label' => 'Example weekly benefit', 'value' => $weekly],
+                ['label' => 'Example total (15 weeks)', 'value' => $total],
+                ['label' => 'Standard parental maximum', 'value' => $this->benefitMaximumLabel('standard_parental')],
+                ['label' => 'Extended parental maximum', 'value' => $this->benefitMaximumLabel('extended_parental')],
+            ],
+            jurisdiction: 'Canada (federal EI)',
+            sources: $this->benefitSources(),
+            updated: config('benefits.last_reviewed'),
+        );
+    }
+
+    /**
+     * @param  array<string, mixed>  $example
+     * @return array<string, mixed>
+     */
+    public function baby(array $example): array
+    {
+        $remaining = $example['remaining_purchases']->format();
+        $monthly = $example['monthly_recurring']->format();
+        $firstYear = $example['first_year_cost']->format();
+
+        return $this->make(
+            question: 'How much does a baby cost in Canada?',
+            answer: "There is no single Canadian baby-cost figure. Using this page’s editable planning defaults, estimated remaining startup purchases are {$remaining} and monthly baby expenses are {$monthly}, or about {$firstYear} over the first year before childcare. Edit every line — gifts, used items, and skipped purchases change the total.",
+            facts: [
+                ['label' => 'Planned startup (defaults)', 'value' => $example['planned_startup']->format()],
+                ['label' => 'Remaining purchases', 'value' => $remaining],
+                ['label' => 'Monthly baby expenses', 'value' => $monthly],
+                ['label' => 'First-year recurring total', 'value' => $example['recurring_first_year']->format()],
+                ['label' => 'First-year cost before childcare', 'value' => $firstYear],
+                ['label' => 'Childcare assumed', 'value' => 'No, unless entered'],
+            ],
+            jurisdiction: 'Canada',
+            sources: [
+                [
+                    'title' => 'CRA Child and Family Benefits Calculator',
+                    'url' => config('external-links.government.ccb_calculator'),
+                ],
+            ],
+            updated: config('baby-budget.last_reviewed'),
+        );
+    }
+
+    /**
+     * @param  array<string, mixed>  $example
+     * @return array<string, mixed>
+     */
     public function military(array $example): array
     {
         $pay = $example['pay'];
@@ -448,6 +538,55 @@ class AnswerSummaryBuilder
      * @param  array<string, mixed>  $example
      * @return list<array{question: string, answer: string}>
      */
+    public function parentalFaqs(array $base, array $example): array
+    {
+        return $this->mergeFaqs([
+            [
+                'question' => 'How much will I make on parental leave in Canada?',
+                'answer' => "On the \$80,000 Ontario example, estimated federal EI is {$example['weekly_ei']->format()} a week, or {$example['ei_total']->format()} over {$example['leave_weeks']} counted weeks before tax.",
+            ],
+            [
+                'question' => 'How much is that per month?',
+                'answer' => "Approximate monthly EI on that example is {$example['monthly_ei']->format()} before tax. Regular estimated take-home while working is {$example['employment']['net_monthly']->format()} a month.",
+            ],
+        ], $base);
+    }
+
+    /**
+     * @param  list<array{question: string, answer: string}>  $base
+     * @param  array<string, mixed>  $example
+     * @return list<array{question: string, answer: string}>
+     */
+    public function eiBenefitsFaqs(array $base, array $example): array
+    {
+        return $this->mergeFaqs([
+            [
+                'question' => 'What is the maximum EI maternity benefit in '.$this->freshness->year().'?',
+                'answer' => "The published weekly maximum is {$example['max_weekly']->format()} for up to {$example['max_weeks']} weeks. The \$80,000 example is {$example['weekly_benefit']->format()} a week, or {$example['total']->format()} over {$example['weeks']} weeks.",
+            ],
+        ], $base);
+    }
+
+    /**
+     * @param  list<array{question: string, answer: string}>  $base
+     * @param  array<string, mixed>  $example
+     * @return list<array{question: string, answer: string}>
+     */
+    public function babyFaqs(array $base, array $example): array
+    {
+        return $this->mergeFaqs([
+            [
+                'question' => 'How much does a baby cost in Canada?',
+                'answer' => "There is no single figure. The editable defaults on this page start at {$example['remaining_purchases']->format()} in remaining startup purchases and {$example['monthly_recurring']->format()} a month in recurring baby expenses.",
+            ],
+        ], $base);
+    }
+
+    /**
+     * @param  list<array{question: string, answer: string}>  $base
+     * @param  array<string, mixed>  $example
+     * @return list<array{question: string, answer: string}>
+     */
     public function militaryFaqs(array $base, array $example): array
     {
         $pay = $example['pay'];
@@ -557,6 +696,27 @@ class AnswerSummaryBuilder
         }
 
         return $facts;
+    }
+
+    private function benefitMaximumLabel(string $program): string
+    {
+        $year = (int) config('benefits.year', $this->freshness->year());
+        $rules = config('benefits.years.'.$year.'.ei.'.$program, []);
+        $max = number_format((float) ($rules['max_weekly'] ?? 0), 2);
+        $rate = number_format(((float) ($rules['rate'] ?? 0)) * 100, 0);
+
+        return '$'.$max.' / week at '.$rate.'%';
+    }
+
+    /**
+     * @return list<array{title: string, url: string}>
+     */
+    private function benefitSources(): array
+    {
+        return array_map(fn (array $source) => [
+            'title' => $source['title'],
+            'url' => $source['url'],
+        ], array_slice(config('benefits.sources', []), 0, 3));
     }
 
     /**

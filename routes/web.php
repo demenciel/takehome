@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\FamilyCalculatorController;
 use App\Http\Controllers\MilitaryCalculatorController;
 use App\Http\Controllers\PaycheckController;
 use App\Http\Controllers\RobotsController;
@@ -37,6 +38,15 @@ Route::get('/caf-salary-calculator', function () {
 Route::get('/canadian-military-pay-calculator', function () {
     return redirect()->route('tools.military', status: 301);
 });
+Route::get('/parental-leave-calculator', [FamilyCalculatorController::class, 'parental'])->name('tools.parental');
+Route::get('/maternity-leave-calculator', function () {
+    return redirect()->route('tools.parental', status: 301);
+});
+Route::get('/ei-maternity-parental-benefits', [FamilyCalculatorController::class, 'eiBenefits'])->name('tools.ei_benefits');
+Route::get('/ei-parental-benefits', function () {
+    return redirect()->route('tools.ei_benefits', status: 301);
+});
+Route::get('/baby-cost-calculator', [FamilyCalculatorController::class, 'baby'])->name('tools.baby');
 
 Route::get('/about', [StaticPageController::class, 'about'])->name('about');
 Route::get('/methodology', [StaticPageController::class, 'methodology'])->name('methodology');

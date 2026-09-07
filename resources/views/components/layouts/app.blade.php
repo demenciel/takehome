@@ -48,6 +48,9 @@
                         <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.bonus') }}">Bonus tax calculator</a></li>
                         <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.raise') }}">Raise calculator</a></li>
                         <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.military') }}">CAF salary calculator</a></li>
+                        <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.parental') }}">Parental leave calculator</a></li>
+                        <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.ei_benefits') }}">EI maternity & parental</a></li>
+                        <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.baby') }}">Baby cost calculator</a></li>
                         <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="{{ route('tools.hourly_to_salary') }}">Hourly ↔ salary</a></li>
                     </ul>
                 </details>
@@ -78,6 +81,9 @@
                 <a href="{{ route('tools.bonus') }}" class="hover:text-ink">Bonus tax calculator</a>
                 <a href="{{ route('tools.raise') }}" class="hover:text-ink">Raise calculator</a>
                 <a href="{{ route('tools.military') }}" class="hover:text-ink">CAF salary calculator</a>
+                <a href="{{ route('tools.parental') }}" class="hover:text-ink">Parental leave calculator</a>
+                <a href="{{ route('tools.ei_benefits') }}" class="hover:text-ink">EI maternity & parental benefits</a>
+                <a href="{{ route('tools.baby') }}" class="hover:text-ink">Baby cost calculator</a>
                 <a href="{{ route('tools.hourly_to_salary') }}" class="hover:text-ink">Hourly to salary calculator</a>
                 <a href="{{ route('methodology') }}" class="hover:text-ink">{{ __('common.footer_methodology') }}</a>
                 <a href="{{ route('tax-rates') }}" class="hover:text-ink">{{ __('common.footer_tax_rates') }}</a>

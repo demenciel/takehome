@@ -25,6 +25,9 @@ final class ToolCatalog
             ['slug' => 'salary-to-hourly-calculator', 'route' => 'tools.salary_to_hourly', 'title' => 'Salary to Hourly Calculator', 'nav' => 'Salary to hourly'],
             ['slug' => 'biweekly-pay-calculator', 'route' => 'tools.biweekly', 'title' => 'Biweekly Pay Calculator', 'nav' => 'Biweekly pay'],
             ['slug' => 'weekly-pay-calculator', 'route' => 'tools.weekly', 'title' => 'Weekly Pay Calculator', 'nav' => 'Weekly pay'],
+            ['slug' => 'parental-leave-calculator', 'route' => 'tools.parental', 'title' => 'Canadian Parental Leave Calculator', 'nav' => 'Parental leave calculator'],
+            ['slug' => 'ei-maternity-parental-benefits', 'route' => 'tools.ei_benefits', 'title' => 'EI Maternity & Parental Benefits', 'nav' => 'EI maternity & parental benefits'],
+            ['slug' => 'baby-cost-calculator', 'route' => 'tools.baby', 'title' => 'Canadian Baby Cost Calculator', 'nav' => 'Baby cost calculator'],
         ];
     }
 
@@ -57,6 +60,9 @@ final class ToolCatalog
             'hourly' => ['label' => 'Hourly to salary calculator', 'url' => route('tools.hourly_to_salary')],
             'salary_after_tax' => ['label' => 'Salary after tax calculator', 'url' => route('tools.salary_after_tax')],
             'military' => ['label' => 'Canadian Armed Forces salary calculator', 'url' => route('tools.military')],
+            'parental' => ['label' => 'Canadian parental leave calculator', 'url' => route('tools.parental')],
+            'ei_benefits' => ['label' => 'EI maternity and parental benefits', 'url' => route('tools.ei_benefits')],
+            'baby' => ['label' => 'Canadian baby cost calculator', 'url' => route('tools.baby')],
             'methodology' => ['label' => 'How the estimate is calculated', 'url' => route('methodology')],
         ];
 
@@ -65,6 +71,9 @@ final class ToolCatalog
             'bonus' => ['paycheck', 'raise', 'salary_after_tax', 'methodology'],
             'raise' => ['paycheck', 'bonus', 'hourly', 'methodology'],
             'military' => ['paycheck', 'salary_after_tax', 'methodology'],
+            'parental' => ['ei_benefits', 'baby', 'paycheck', 'methodology'],
+            'ei_benefits' => ['parental', 'baby', 'paycheck', 'methodology'],
+            'baby' => ['parental', 'ei_benefits', 'paycheck', 'methodology'],
             default => ['overtime', 'bonus', 'raise', 'hourly', 'military', 'methodology'],
         };
 
