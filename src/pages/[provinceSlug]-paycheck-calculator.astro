@@ -1,0 +1,109 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AnswerSummary from '../components/AnswerSummary.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import ContentBlocks from '../components/ContentBlocks.astro';
+import AdSlot from '../components/AdSlot.astro';
+import PaycheckCalculator from '../components/PaycheckCalculator.astro';
+import { provinceAnswer } from '../lib/answers';
+import { payrollDeductions, provinceCopy, provinceFaqs } from '../lib/content/paycheck';
+import { relatedLinks } from '../lib/related';
+import { allProvinces, isCanonicalProvinceSlug, provinceFromSlug } from '../lib/province';
+import { EXAMPLE_SALARIES, POPULAR_SALARIES, SALARY_PAGE_PROVINCES, absoluteUrl } from '../lib/catalog';
+import { calculatePayroll } from '../lib/tax/payroll';
+import { CURRENT_TAX_YEAR } from '../lib/tax/rules';
+
+export function getStaticPaths() {
+  return allProvinces().map((province) => ({ params: { provinceSlug: province.slug } }));
+}
+
+const { provinceSlug } = Astro.params;
+if (!provinceSlug || !isCanonicalProvinceSlug(provinceSlug)) {
+  return Astro.redirect('/');
+}
+const province = provinceFromSlug(provinceSlug)!;
+const content = provinceCopy(province);
+const examples = EXAMPLE_SALARIES.map((salary) => {
+  const result = calculatePayroll({ annual_salary: String(salary), province: province.code, frequency: 'annual' });
+  return {
+    salary,
+    net_annual: result.metrics.net_annual,
+    effective_tax_rate: result.metrics.effective_tax_rate,
+  };
+});
+const featured = examples.find((example) => example.salary === 80000) ?? examples[0];
+const faqs = [
+  {
+    question: `How much is $${featured.salary.toLocaleString('en-CA')} after tax in ${province.name}?`,
+    answer: `Estimated take-home is ${featured.net_annual.format()} a year, with an effective income-tax rate of ${featured.effective_tax_rate}%.`,
+  },
+  ...provinceFaqs(province),
+].slice(0, 8);
+const indexableSalaries = SALARY_PAGE_PROVINCES.includes(province.code) ? POPULAR_SALARIES : [];
+const seo = {
+  title: `${province.name} Paycheck Calculator — Take-home pay ${CURRENT_TAX_YEAR}`,
+  description: `${content.intro} Enter a salary and pay frequency to see estimated ${province.adjective} take-home pay.`,
+  canonical: absoluteUrl(`/${province.slug}-paycheck-calculator`),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: `${province.name} paycheck calculator`, url: absoluteUrl(`/${province.slug}-paycheck-calculator`) },
+  ],
+  faqs,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl sm:text-5xl">{province.name} Paycheck Calculator</h1>
+    <AnswerSummary class="mt-6" summary={provinceAnswer(province, featured)} />
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">{content.intro}</p>
+    <AdSlot name="top" />
+    <div class="mt-8 max-w-2xl">
+      <PaycheckCalculator province={province.code} />
+    </div>
+  </section>
+  <ContentBlocks blocks={content.body} />
+  <section class="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+    <h2 class="font-serif text-3xl">What a {province.name} paycheck deducts</h2>
+    {payrollDeductions(province).map((block) => (
+      <article class="mt-6">
+        <h3 class="text-xl font-semibold">{block.heading}</h3>
+        <p class="mt-3 text-ink-soft">{block.copy}</p>
+      </article>
+    ))}
+  </section>
+  {indexableSalaries.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+      <h2 class="font-serif text-3xl">{province.name} salary pages</h2>
+      <div class="mt-6 flex flex-wrap gap-3">
+        {indexableSalaries.map((salary) => (
+          <a href={`/${province.slug}/${salary}-salary`} class="rounded-full border border-line bg-card px-4 py-2 font-semibold hover:border-accent">
+            ${salary.toLocaleString('en-CA')}
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <h2 class="font-serif text-3xl">Example take-home amounts</h2>
+    <div class="mt-4 overflow-x-auto">
+      <table class="data-table">
+        <thead><tr><th>Salary</th><th>Estimated annual take-home</th><th>Effective tax rate</th></tr></thead>
+        <tbody>
+          {examples.map((example) => (
+            <tr>
+              <th>${example.salary.toLocaleString('en-CA')}</th>
+              <td>{example.net_annual.format()}</td>
+              <td>{example.effective_tax_rate}%</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <Faq faqs={faqs} />
+  <Related links={relatedLinks(province)} />
+</Base>

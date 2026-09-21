@@ -1,0 +1,75 @@
+---
+import { allProvinces } from '../lib/province';
+import { PAY_FREQUENCIES, frequencyLabel } from '../lib/frequency';
+import { militaryRanks } from '../lib/military';
+
+const provinces = allProvinces();
+const ranks = militaryRanks('regular');
+---
+
+<div class="rounded-2xl border border-line bg-card p-5 shadow-sm sm:p-8" data-military>
+  <form class="space-y-5" data-military-form novalidate>
+    <fieldset class="space-y-3">
+      <legend class="text-sm font-semibold text-ink-soft">Component</legend>
+      <div class="grid grid-cols-2 gap-2">
+        <label class="flex min-h-12 cursor-pointer items-center justify-center rounded-xl border border-line px-3 text-sm font-semibold has-[:checked]:border-accent has-[:checked]:bg-accent/10">
+          <input type="radio" name="component" value="regular" class="sr-only" checked />
+          Regular Force
+        </label>
+        <label class="flex min-h-12 cursor-pointer items-center justify-center rounded-xl border border-line px-3 text-sm font-semibold has-[:checked]:border-accent has-[:checked]:bg-accent/10">
+          <input type="radio" name="component" value="reserve" class="sr-only" />
+          Reserve Force
+        </label>
+      </div>
+    </fieldset>
+    <div>
+      <label for="rank" class="mb-2 block text-sm font-semibold">Rank</label>
+      <select id="rank" name="rank" class="input-field">
+        {ranks.map((rank) => (
+          <option value={rank.key} selected={rank.key === 'corporal'}>{rank.name}</option>
+        ))}
+      </select>
+    </div>
+    <div data-level-fields hidden>
+      <label for="payLevel" class="mb-2 block text-sm font-semibold">Pay level</label>
+      <select id="payLevel" name="payLevel" class="input-field"></select>
+    </div>
+    <div>
+      <label for="increment" class="mb-2 block text-sm font-semibold">Pay increment</label>
+      <select id="increment" name="increment" class="input-field">
+        <option value="1" selected>Pay increment 1</option>
+      </select>
+    </div>
+    <div data-reserve-fields hidden>
+      <label for="reserveDays" class="mb-2 block text-sm font-semibold">Paid reserve days this year</label>
+      <input id="reserveDays" name="reserveDays" type="text" inputmode="numeric" class="input-field" value="37" />
+    </div>
+    <div>
+      <label for="province" class="mb-2 block text-sm font-semibold">Province for tax estimate</label>
+      <select id="province" name="province" class="input-field" required>
+        {provinces.map((option) => (
+          <option value={option.code} selected={option.code === 'ON'}>{option.name}</option>
+        ))}
+      </select>
+    </div>
+    <div>
+      <label for="frequency" class="mb-2 block text-sm font-semibold">Display frequency</label>
+      <select id="frequency" name="frequency" class="input-field">
+        {PAY_FREQUENCIES.map((option) => (
+          <option value={option} selected={option === 'monthly'}>{frequencyLabel(option)}</option>
+        ))}
+      </select>
+    </div>
+    <div>
+      <label for="allowances" class="mb-2 block text-sm font-semibold">Taxable allowances (optional, annual)</label>
+      <input id="allowances" name="allowances" type="text" inputmode="decimal" class="input-field" placeholder="0" />
+    </div>
+    <button type="submit" class="btn-primary">Estimate CAF take-home</button>
+    <p data-error class="text-sm text-deduct" hidden></p>
+  </form>
+  <div data-result class="mt-8" hidden></div>
+</div>
+<script>
+  import { initMilitary } from '../scripts/military';
+  initMilitary();
+</script>

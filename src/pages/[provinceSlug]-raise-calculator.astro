@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AnswerSummary from '../components/AnswerSummary.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import ContentBlocks from '../components/ContentBlocks.astro';
+import RaiseCalculator from '../components/RaiseCalculator.astro';
+import { raiseAnswer } from '../lib/answers';
+import { raiseProvince } from '../lib/content/specialized';
+import { relatedLinks } from '../lib/related';
+import { allProvinces, isCanonicalProvinceSlug, provinceFromSlug } from '../lib/province';
+import { absoluteUrl } from '../lib/catalog';
+import { comparePayroll } from '../lib/tax/comparison';
+import { Money } from '../lib/money';
+
+export function getStaticPaths() {
+  return allProvinces().map((province) => ({ params: { provinceSlug: province.slug } }));
+}
+
+const { provinceSlug } = Astro.params;
+if (!provinceSlug || !isCanonicalProvinceSlug(provinceSlug)) {
+  return Astro.redirect('/');
+}
+const province = provinceFromSlug(provinceSlug)!;
+const page = raiseProvince(province);
+const example = comparePayroll(province, Money.fromDollars(75000), Money.fromDollars(85000));
+const seo = {
+  title: page.title,
+  description: page.description,
+  canonical: absoluteUrl(`/${province.slug}-raise-calculator`),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: `${province.name} raise calculator`, url: absoluteUrl(`/${province.slug}-raise-calculator`) },
+  ],
+  faqs: page.faqs,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl sm:text-5xl">{page.h1}</h1>
+    <AnswerSummary class="mt-6" summary={raiseAnswer(province, example)} />
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">{page.intro}</p>
+    <div class="mt-8 max-w-2xl">
+      <RaiseCalculator province={province.code} />
+    </div>
+  </section>
+  <ContentBlocks blocks={page.sections} />
+  <Faq faqs={page.faqs} />
+  <Related links={relatedLinks(province, 'raise')} />
+</Base>

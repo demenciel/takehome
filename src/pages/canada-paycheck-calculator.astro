@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AnswerSummary from '../components/AnswerSummary.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import AdSlot from '../components/AdSlot.astro';
+import PaycheckCalculator from '../components/PaycheckCalculator.astro';
+import { canadaAnswer } from '../lib/answers';
+import { nationalFaqs } from '../lib/content/paycheck';
+import { relatedLinks } from '../lib/related';
+import { allProvinces } from '../lib/province';
+import { absoluteUrl } from '../lib/catalog';
+import { CURRENT_TAX_YEAR } from '../lib/tax/rules';
+
+const faqs = nationalFaqs();
+const summary = canadaAnswer();
+const seo = {
+  title: 'Canada Paycheck Calculator — Salary after tax',
+  description: 'Use the Canada paycheck calculator to estimate take-home pay after federal tax, provincial tax, CPP or QPP, and EI for the current tax year.',
+  canonical: absoluteUrl('/canada-paycheck-calculator'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: 'Canada paycheck calculator', url: absoluteUrl('/canada-paycheck-calculator') },
+  ],
+  faqs,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl text-ink sm:text-5xl">Canada Paycheck Calculator</h1>
+    <AnswerSummary class="mt-6" summary={summary} />
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">Estimate take-home pay anywhere in Canada. Choose your province — the calculator never assumes it for you.</p>
+    <AdSlot name="top" />
+    <div class="mt-8 max-w-2xl">
+      <PaycheckCalculator />
+    </div>
+  </section>
+  <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <h2 class="font-serif text-3xl">Salary after tax in Canada</h2>
+    <p class="mt-4 max-w-3xl text-ink-soft">Canadian payroll deductions usually include federal income tax, provincial or territorial income tax, CPP or QPP, and EI. Quebec employees also pay QPIP and receive a federal tax abatement. This national calculator uses {CURRENT_TAX_YEAR} CRA T4127 Option 1 for a full-year employee claiming the basic personal amount.</p>
+  </section>
+  <section id="provinces" class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <h2 class="font-serif text-3xl">Province paycheck calculators</h2>
+    <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {allProvinces().map((province) => (
+        <li>
+          <a href={`/${province.slug}-paycheck-calculator`} class="flex min-h-14 items-center rounded-xl border border-line bg-card px-4 font-semibold hover:border-accent">
+            {province.name} paycheck calculator
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <AdSlot name="middle" />
+  <Faq faqs={faqs} />
+  <Related links={relatedLinks()} />
+  <AdSlot name="bottom" />
+</Base>

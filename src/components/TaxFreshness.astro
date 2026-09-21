@@ -1,0 +1,9 @@
+---
+import { taxFreshness } from '../lib/tax/rules';
+
+const freshness = taxFreshness();
+---
+
+<p class="text-sm text-ink-soft">
+  Tax year: {freshness.year} · Last updated: {freshness.lastUpdatedLabel}
+</p>

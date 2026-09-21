@@ -9,14 +9,15 @@
     "preview": "astro preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "deploy": "astro build && wrangler deploy",
-    "cf-typegen": "wrangler types"
+    "deploy": "astro build && wrangler deploy"
+  },
+  "engines": {
+    "node": ">=22.14.0"
   },
   "dependencies": {
     "astro": "^5.14.0"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.5.1",
     "@tailwindcss/vite": "^4.1.13",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",

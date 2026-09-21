@@ -1,0 +1,50 @@
+---
+import { PAY_FREQUENCIES, frequencyLabel, type PayFrequency } from '../lib/frequency';
+import ProvinceSelect from './ProvinceSelect.astro';
+
+interface Props {
+  province?: string;
+  frequency?: PayFrequency;
+}
+
+const { province = '', frequency = 'weekly' } = Astro.props;
+---
+
+<div class="rounded-2xl border border-line bg-card p-5 shadow-sm sm:p-8" data-overtime>
+  <form class="space-y-5" data-overtime-form novalidate>
+    <ProvinceSelect value={province} />
+    <div>
+      <label for="hourlyWage" class="mb-2 block text-sm font-semibold">Hourly wage</label>
+      <input id="hourlyWage" name="hourlyWage" type="text" inputmode="decimal" class="input-field" placeholder="30.00" value="30" />
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="regularHours" class="mb-2 block text-sm font-semibold">Regular hours this period</label>
+        <input id="regularHours" name="regularHours" type="text" inputmode="decimal" class="input-field" value="40" />
+      </div>
+      <div>
+        <label for="overtimeHours" class="mb-2 block text-sm font-semibold">Overtime hours</label>
+        <input id="overtimeHours" name="overtimeHours" type="text" inputmode="decimal" class="input-field" value="8" />
+      </div>
+    </div>
+    <div>
+      <label for="frequency" class="mb-2 block text-sm font-semibold">Pay frequency</label>
+      <select id="frequency" name="frequency" class="input-field">
+        {PAY_FREQUENCIES.filter((option) => option !== 'annual').map((option) => (
+          <option value={option} selected={option === frequency}>{frequencyLabel(option)}</option>
+        ))}
+      </select>
+    </div>
+    <label class="flex items-center gap-3 text-sm">
+      <input type="checkbox" name="contractPremium" />
+      My contract pays 1.5× my regular wage (used for New Brunswick)
+    </label>
+    <button type="submit" class="btn-primary">Calculate overtime</button>
+    <p data-error class="text-sm text-deduct" hidden></p>
+  </form>
+  <div data-result class="mt-8" hidden></div>
+</div>
+<script>
+  import { initOvertime } from '../scripts/overtime';
+  initOvertime();
+</script>

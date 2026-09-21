@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { absoluteUrl } from '../lib/catalog';
+import { ADS_ENABLED, ADS_PROVIDER, ANALYTICS_MEASUREMENT_ID, CONTACT_EMAIL, PRIVACY_UPDATED, SITE_NAME } from '../lib/site';
+
+const seo = {
+  title: `Privacy policy | ${SITE_NAME}`,
+  description: 'How Paycheque.app handles calculator inputs, analytics, and advertising. Financial calculations run locally in your browser.',
+  canonical: absoluteUrl('/privacy'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: 'Privacy', url: absoluteUrl('/privacy') },
+  ],
+  includeApplication: false,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-4xl">Privacy policy</h1>
+    <p class="mt-3 text-sm text-ink-soft">Last updated: {PRIVACY_UPDATED}</p>
+    <p class="mt-6 text-lg text-ink-soft">{SITE_NAME} is an independent Canadian paycheck calculator. You can use it without creating an account. This page describes what we actually collect and what third parties may collect when you visit.</p>
+    <h2 class="mt-10 font-serif text-3xl">What we do not collect</h2>
+    <p class="mt-4 text-ink-soft">We do not ask for a Social Insurance Number, employer name, bank details, tax slips, or login for the calculator. We do not store the salary you type as a personal financial record. We do not sell salary data. There is no user account and no first-party database of calculator inputs.</p>
+    <h2 class="mt-10 font-serif text-3xl">Calculator inputs</h2>
+    <p class="mt-4 text-ink-soft">Salary, province, pay frequency, bonus, raise, overtime hours, military rank, and other financial inputs are used only in your browser. They are not posted to a server and are not written to a user profile. Calculations run locally in JavaScript/TypeScript.</p>
+    <h2 class="mt-10 font-serif text-3xl">Cookies</h2>
+    <p class="mt-4 text-ink-soft">The public site does not need a first-party session cookie for calculations. If Google Analytics or AdSense are enabled, those services set their own cookies.</p>
+    <h2 class="mt-10 font-serif text-3xl">Google Analytics</h2>
+    {ANALYTICS_MEASUREMENT_ID ? (
+      <p class="mt-4 text-ink-soft">We use Google Analytics 4 to understand how people find and use the site (pages viewed, approximate location, device and browser, referral source). Google sets cookies and similar technologies for this. We do not send the salary, wage, bonus, raise, overtime, military pay, or take-home values you enter to Google Analytics.</p>
+    ) : (
+      <p class="mt-4 text-ink-soft">Google Analytics is not loaded unless a measurement ID is configured. When it is enabled, Google sets cookies and collects standard usage data. We do not send the salary you enter to Google Analytics.</p>
+    )}
+    <p class="mt-4 text-ink-soft">Google’s own policy: <a href="https://policies.google.com/privacy" class="font-semibold text-accent-dark underline" rel="noopener noreferrer">policies.google.com/privacy</a>.</p>
+    <h2 class="mt-10 font-serif text-3xl">Advertising (Google AdSense)</h2>
+    {ADS_ENABLED && ADS_PROVIDER === 'adsense' ? (
+      <p class="mt-4 text-ink-soft">This site currently displays advertisements through Google AdSense. AdSense uses cookies and advertising/measurement technologies to show ads, measure them, and in some cases personalize them.</p>
+    ) : (
+      <p class="mt-4 text-ink-soft">Advertisements are not currently shown. If we enable ads, they will be served by Google AdSense. AdSense uses cookies and advertising/measurement technologies to show, measure, and sometimes personalize ads.</p>
+    )}
+    <p class="mt-4 text-ink-soft">When ads run, Google’s advertising policies apply: <a href="https://policies.google.com/technologies/ads" class="font-semibold text-accent-dark underline" rel="noopener noreferrer">policies.google.com/technologies/ads</a>.</p>
+    <h2 class="mt-10 font-serif text-3xl">Contact messages</h2>
+    <p class="mt-4 text-ink-soft">If you email us, we receive the message you send so we can reply. Do not include a SIN or bank details. We do not use contact email as a mailing list.</p>
+    <h2 class="mt-10 font-serif text-3xl">Hosting</h2>
+    <p class="mt-4 text-ink-soft">The site is hosted as static files on Cloudflare. Standard access logs (IP address, user agent, requested URL, time) may be processed to operate and secure the service. There is no application database.</p>
+    <h2 class="mt-10 font-serif text-3xl">Your choices</h2>
+    <ul class="mt-4 list-disc space-y-2 pl-6 text-ink-soft">
+      <li>Use the calculator without an account.</li>
+      <li>Block or delete cookies in your browser. Calculations still run locally.</li>
+      <li>Use Google’s ad settings and Analytics opt-out tools.</li>
+    </ul>
+    <h2 class="mt-10 font-serif text-3xl">Contact</h2>
+    <p class="mt-4 text-ink-soft">Questions about this policy: <a href="/contact" class="font-semibold text-accent-dark underline">contact page</a> or <a href={`mailto:${CONTACT_EMAIL}`} class="font-semibold text-accent-dark underline">{CONTACT_EMAIL}</a>.</p>
+  </article>
+</Base>

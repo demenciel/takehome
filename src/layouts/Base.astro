@@ -1,0 +1,109 @@
+---
+import '../styles/global.css';
+import { jsonLd, type SeoPage } from '../lib/seo';
+import { SITE_NAME, ANALYTICS_MEASUREMENT_ID, ADS_ENABLED, ADSENSE_LOADER_CLIENT } from '../lib/site';
+
+interface Props {
+  seo: SeoPage;
+}
+
+const { seo } = Astro.props;
+const schema = jsonLd(seo);
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <link rel="canonical" href={seo.canonical} />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={seo.ogTitle ?? seo.title} />
+    <meta property="og:description" content={seo.ogDescription ?? seo.description} />
+    <meta property="og:url" content={seo.canonical} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={seo.ogTitle ?? seo.title} />
+    <meta name="twitter:description" content={seo.ogDescription ?? seo.description} />
+    {ANALYTICS_MEASUREMENT_ID && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_MEASUREMENT_ID}`}></script>
+        <script is:inline define:vars={{ ANALYTICS_MEASUREMENT_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', ANALYTICS_MEASUREMENT_ID);
+        </script>
+      </>
+    )}
+    {ADS_ENABLED && (
+      <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_LOADER_CLIENT}`} crossorigin="anonymous"></script>
+    )}
+  </head>
+  <body class="min-h-screen antialiased">
+    <a href="#content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2">Skip to content</a>
+    <header class="border-b border-line bg-card/90 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
+        <a href="/" class="font-serif text-xl tracking-tight text-ink">{SITE_NAME}</a>
+        <nav aria-label="Primary" class="flex items-center gap-4 text-sm font-medium text-ink-soft">
+          <details class="relative">
+            <summary class="cursor-pointer list-none hover:text-ink">Calculators</summary>
+            <ul class="absolute right-0 z-20 mt-2 w-64 rounded-xl border border-line bg-card p-2 shadow-sm">
+              <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="/canada-paycheck-calculator">Paycheque calculator</a></li>
+              <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="/overtime-pay-calculator">Overtime pay calculator</a></li>
+              <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="/bonus-tax-calculator">Bonus tax calculator</a></li>
+              <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="/raise-calculator">Raise calculator</a></li>
+              <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="/military-salary-calculator">CAF salary calculator</a></li>
+              <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="/parental-leave-calculator">Parental leave calculator</a></li>
+              <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="/ei-maternity-parental-benefits">EI maternity & parental</a></li>
+              <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="/baby-cost-calculator">Baby cost calculator</a></li>
+              <li><a class="flex min-h-12 items-center rounded-lg px-3 hover:bg-paper" href="/hourly-to-salary-calculator">Hourly ↔ salary</a></li>
+            </ul>
+          </details>
+          <a href="/#provinces" class="hidden hover:text-ink sm:inline">Provinces</a>
+          <a href="/methodology" class="hidden hover:text-ink sm:inline">How it works</a>
+          <a href="/about" class="hover:text-ink">About</a>
+        </nav>
+      </div>
+    </header>
+    <main id="content">
+      <slot />
+    </main>
+    <footer class="mt-16 border-t border-line bg-card">
+      <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 text-sm text-ink-soft sm:px-6 md:flex-row md:justify-between">
+        <div>
+          <p class="font-serif text-base text-ink">{SITE_NAME}</p>
+          <p class="mt-2 max-w-md">Independent Canadian paycheck / take-home pay calculator.</p>
+          <p class="mt-3">Estimates only. Not a CRA, Revenu Québec, or government service.</p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <a href="/canada-paycheck-calculator" class="hover:text-ink">Canada paycheck calculator</a>
+          <a href="/overtime-pay-calculator" class="hover:text-ink">Overtime pay calculator</a>
+          <a href="/bonus-tax-calculator" class="hover:text-ink">Bonus tax calculator</a>
+          <a href="/raise-calculator" class="hover:text-ink">Raise calculator</a>
+          <a href="/military-salary-calculator" class="hover:text-ink">CAF salary calculator</a>
+          <a href="/parental-leave-calculator" class="hover:text-ink">Parental leave calculator</a>
+          <a href="/ei-maternity-parental-benefits" class="hover:text-ink">EI maternity & parental benefits</a>
+          <a href="/baby-cost-calculator" class="hover:text-ink">Baby cost calculator</a>
+          <a href="/hourly-to-salary-calculator" class="hover:text-ink">Hourly to salary calculator</a>
+          <a href="/methodology" class="hover:text-ink">Methodology</a>
+          <a href="/tax-rates" class="hover:text-ink">Tax rates</a>
+          <a href="/about" class="hover:text-ink">About</a>
+          <a href="/privacy" class="hover:text-ink">Privacy</a>
+          <a href="/terms" class="hover:text-ink">Terms</a>
+          <a href="/contact" class="hover:text-ink">Contact</a>
+          <a href="/sitemap.xml" class="hover:text-ink">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </body>
+</html>

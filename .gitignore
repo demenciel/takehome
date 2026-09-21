@@ -3,6 +3,10 @@
 .env
 .env.backup
 .env.production
+dist
+.astro
+.wrangler
+test-results
 .phpactor.json
 .phpunit.result.cache
 /.fleet

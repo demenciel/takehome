@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AnswerSummary from '../components/AnswerSummary.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import ContentBlocks from '../components/ContentBlocks.astro';
+import ConversionCalculator from '../components/ConversionCalculator.astro';
+import { conversionAnswer } from '../lib/answers';
+import { CONVERSIONS } from '../lib/content/hubs';
+import { relatedLinks } from '../lib/related';
+import { absoluteUrl } from '../lib/catalog';
+
+const page = CONVERSIONS.salary_to_hourly;
+const seo = {
+  title: page.title,
+  description: page.description,
+  canonical: absoluteUrl('/salary-to-hourly-calculator'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: page.h1, url: absoluteUrl('/salary-to-hourly-calculator') },
+  ],
+  faqs: [...page.faqs],
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl sm:text-5xl">{page.h1}</h1>
+    <AnswerSummary class="mt-6" summary={conversionAnswer('salary_to_hourly')} />
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">{page.intro}</p>
+    <div class="mt-8 max-w-2xl">
+      <ConversionCalculator mode="salary_to_hourly" />
+    </div>
+  </section>
+  <ContentBlocks blocks={[...page.sections]} />
+  <Faq faqs={[...page.faqs]} />
+  <Related links={relatedLinks()} />
+</Base>

@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import TaxFreshness from '../components/TaxFreshness.astro';
+import { absoluteUrl } from '../lib/catalog';
+import { allProvinces } from '../lib/province';
+import { provinceRules, taxFreshness, taxRulesForYear } from '../lib/tax/rules';
+import { SITE_NAME } from '../lib/site';
+
+const freshness = taxFreshness();
+const rules = taxRulesForYear();
+const federal = rules.federal as Record<string, unknown>;
+const cpp = rules.cpp as Record<string, unknown>;
+const qpp = rules.qpp as Record<string, unknown>;
+const ei = rules.ei as Record<string, unknown>;
+const qpip = rules.qpip as Record<string, unknown>;
+const brackets = federal.brackets as Array<{ threshold: string; rate: string }>;
+const seo = {
+  title: `${freshness.year} Canadian payroll tax rates | ${SITE_NAME}`,
+  description: `The ${freshness.year} federal, provincial, CPP, QPP, EI, and QPIP amounts used by Paycheque.app.`,
+  canonical: absoluteUrl('/tax-rates'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: 'Tax rates', url: absoluteUrl('/tax-rates') },
+  ],
+  includeApplication: false,
+};
+
+function money(value: unknown) {
+  return `$${Number(value).toLocaleString('en-CA', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
+}
+function pct(value: unknown) {
+  return `${(Number(value) * 100).toFixed(2)}%`;
+}
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-4xl">{freshness.year} Canadian payroll tax rates</h1>
+    <TaxFreshness class="mt-4" />
+    <p class="mt-6 text-lg text-ink-soft">These are the amounts this site uses for estimates. They come from the versioned tax files, not from a live government API. Official withholding can still differ. See the <a href="/methodology" class="font-semibold text-accent-dark underline">methodology</a>.</p>
+    <h2 class="mt-10 font-serif text-3xl">Federal income tax</h2>
+    <div class="mt-4 overflow-x-auto">
+      <table class="data-table">
+        <thead><tr><th>Taxable income from</th><th>Rate</th></tr></thead>
+        <tbody>
+          {brackets.map((bracket) => (
+            <tr>
+              <td>{money(bracket.threshold)}</td>
+              <td>{pct(bracket.rate)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-ink-soft">Basic personal amount (most filers): {money(federal.basic_personal_amount_max)}. Canada Employment Amount: {money(federal.canada_employment_amount)}.</p>
+    <h2 class="mt-10 font-serif text-3xl">CPP</h2>
+    <p class="mt-4 text-ink-soft">YMPE {money(cpp.ympe)}, YAMPE {money(cpp.yampe)}, employee rate {pct(cpp.employee_rate)}, maximum {money(cpp.maximum_employee)}. CPP2 maximum {money(cpp.maximum_second_additional)}.</p>
+    <h2 class="mt-10 font-serif text-3xl">QPP</h2>
+    <p class="mt-4 text-ink-soft">MPE {money(qpp.ympe)}, employee rate {pct(qpp.employee_rate)}, maximum {money(qpp.maximum_employee)}.</p>
+    <h2 class="mt-10 font-serif text-3xl">EI and QPIP</h2>
+    <p class="mt-4 text-ink-soft">Maximum insurable earnings {money(ei.maximum_insurable_earnings)}. Employee rate {pct(ei.employee_rate)} (maximum {money(ei.maximum_employee)}). Quebec EI rate {pct(ei.quebec_employee_rate)}.</p>
+    <p class="mt-3 text-ink-soft">QPIP employee rate {pct(qpip.employee_rate)}, maximum {money(qpip.maximum_employee)}.</p>
+    <h2 class="mt-10 font-serif text-3xl">Provincial and territorial basics</h2>
+    <div class="mt-4 overflow-x-auto">
+      <table class="data-table">
+        <thead><tr><th>Jurisdiction</th><th>Lowest rate</th><th>Basic personal amount</th></tr></thead>
+        <tbody>
+          {allProvinces().map((province) => {
+            const data = provinceRules(province);
+            return (
+              <tr>
+                <th><a href={`/${province.slug}-paycheck-calculator`} class="text-accent-dark underline">{province.name}</a></th>
+                <td>{pct(data.lowest_rate)}</td>
+                <td>{money(data.basic_personal_amount ?? federal.basic_personal_amount_max)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-ink-soft">Yukon’s personal amount follows the federal BPAF formula. Manitoba phases out BPAMB at high incomes. Exact brackets are in the tax data files.</p>
+  </article>
+</Base>

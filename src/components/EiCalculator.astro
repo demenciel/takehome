@@ -1,0 +1,30 @@
+---
+---
+
+<div class="rounded-2xl border border-line bg-card p-5 shadow-sm sm:p-8" data-ei>
+  <form class="space-y-5" data-ei-form novalidate>
+    <div>
+      <label for="salary" class="mb-2 block text-sm font-semibold">Annual insurable salary</label>
+      <input id="salary" name="salary" type="text" inputmode="decimal" class="input-field" value="80000" />
+    </div>
+    <div>
+      <label for="program" class="mb-2 block text-sm font-semibold">Program</label>
+      <select id="program" name="program" class="input-field">
+        <option value="maternity" selected>Maternity</option>
+        <option value="standard_parental">Standard parental</option>
+        <option value="extended_parental">Extended parental</option>
+      </select>
+    </div>
+    <div>
+      <label for="weeks" class="mb-2 block text-sm font-semibold">Weeks</label>
+      <input id="weeks" name="weeks" type="text" inputmode="numeric" class="input-field" value="15" />
+    </div>
+    <button type="submit" class="btn-primary">Estimate EI benefit</button>
+    <p data-error class="text-sm text-deduct" hidden></p>
+  </form>
+  <div data-result class="mt-8" hidden></div>
+</div>
+<script>
+  import { initEi } from '../scripts/ei';
+  initEi();
+</script>

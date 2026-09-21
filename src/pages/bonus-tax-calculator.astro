@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AnswerSummary from '../components/AnswerSummary.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import ContentBlocks from '../components/ContentBlocks.astro';
+import BonusCalculator from '../components/BonusCalculator.astro';
+import { bonusAnswer } from '../lib/answers';
+import { bonusNational } from '../lib/content/specialized';
+import { relatedLinks } from '../lib/related';
+import { absoluteUrl } from '../lib/catalog';
+import { comparePayroll } from '../lib/tax/comparison';
+import { Money } from '../lib/money';
+import { provinceFromCode, allProvinces } from '../lib/province';
+
+const page = bonusNational();
+const example = comparePayroll(provinceFromCode('ON')!, Money.fromDollars(80000), Money.fromDollars(90000));
+const seo = {
+  title: page.title,
+  description: page.description,
+  canonical: absoluteUrl('/bonus-tax-calculator'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: page.h1, url: absoluteUrl('/bonus-tax-calculator') },
+  ],
+  faqs: page.faqs,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl sm:text-5xl">{page.h1}</h1>
+    <AnswerSummary class="mt-6" summary={bonusAnswer(null, example)} />
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">{page.intro}</p>
+    <div class="mt-8 max-w-2xl">
+      <BonusCalculator province="ON" />
+    </div>
+  </section>
+  <ContentBlocks blocks={page.sections} />
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <h2 class="font-serif text-3xl">Province bonus calculators</h2>
+    <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {allProvinces().map((province) => (
+        <li>
+          <a href={`/${province.slug}-bonus-tax-calculator`} class="flex min-h-14 items-center rounded-xl border border-line bg-card px-4 font-semibold hover:border-accent">
+            {province.name} bonus
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <Faq faqs={page.faqs} />
+  <Related links={relatedLinks(null, 'bonus')} />
+</Base>

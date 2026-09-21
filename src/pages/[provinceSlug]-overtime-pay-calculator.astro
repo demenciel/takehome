@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AnswerSummary from '../components/AnswerSummary.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import ContentBlocks from '../components/ContentBlocks.astro';
+import OvertimeCalculator from '../components/OvertimeCalculator.astro';
+import { overtimeAnswer } from '../lib/answers';
+import { overtimeProvince } from '../lib/content/specialized';
+import { relatedLinks } from '../lib/related';
+import { allProvinces, isCanonicalProvinceSlug, provinceFromSlug } from '../lib/province';
+import { absoluteUrl } from '../lib/catalog';
+import { estimateOvertime } from '../lib/overtime';
+import { Money } from '../lib/money';
+
+export function getStaticPaths() {
+  return allProvinces().map((province) => ({ params: { provinceSlug: province.slug } }));
+}
+
+const { provinceSlug } = Astro.params;
+if (!provinceSlug || !isCanonicalProvinceSlug(provinceSlug)) {
+  return Astro.redirect('/');
+}
+const province = provinceFromSlug(provinceSlug)!;
+const page = overtimeProvince(province);
+const example = estimateOvertime(province, Money.fromDollars('30'), 40, 8, 'weekly');
+const seo = {
+  title: page.title,
+  description: page.description,
+  canonical: absoluteUrl(`/${province.slug}-overtime-pay-calculator`),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: `${province.name} overtime calculator`, url: absoluteUrl(`/${province.slug}-overtime-pay-calculator`) },
+  ],
+  faqs: page.faqs,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl sm:text-5xl">{page.h1}</h1>
+    <AnswerSummary class="mt-6" summary={overtimeAnswer(province, example)} />
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">{page.intro}</p>
+    <div class="mt-8 max-w-2xl">
+      <OvertimeCalculator province={province.code} />
+    </div>
+  </section>
+  <ContentBlocks blocks={page.sections} />
+  <Faq faqs={page.faqs} />
+  <Related links={relatedLinks(province, 'overtime')} />
+</Base>

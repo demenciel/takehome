@@ -1,0 +1,22 @@
+---
+import { allProvinces } from '../lib/province';
+
+interface Props {
+  name?: string;
+  value?: string;
+  required?: boolean;
+}
+
+const { name = 'province', value = '', required = true } = Astro.props;
+const provinces = allProvinces();
+---
+
+<div>
+  <label for={name} class="mb-2 block text-sm font-semibold">Province or territory</label>
+  <select id={name} name={name} class="input-field" required={required}>
+    <option value="">Select your province</option>
+    {provinces.map((option) => (
+      <option value={option.code} selected={option.code === value}>{option.name}</option>
+    ))}
+  </select>
+</div>
