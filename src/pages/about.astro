@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { absoluteUrl } from '../lib/catalog';
-import { OTHER_PROJECTS, SITE_NAME } from '../lib/site';
+import { OTHER_PROJECTS, SITE_NAME, projectHref } from '../lib/site';
 
 const seo = {
   title: `About ${SITE_NAME}`,
@@ -32,8 +32,8 @@ const seo = {
     <ul class="mt-4 list-disc space-y-2 pl-6 text-ink-soft">
       {OTHER_PROJECTS.map((project) => (
         <li>
-          <a href={project.href} class="font-semibold text-accent-dark underline" target="_blank" rel="noopener">{project.name}</a>
-          {' '}({project.href.replace('https://', '')})
+          <a href={projectHref(project, 'about')} class="font-semibold text-accent-dark underline" target="_blank" rel="noopener">{project.name}</a>
+          {' '}({project.host})
         </li>
       ))}
     </ul>

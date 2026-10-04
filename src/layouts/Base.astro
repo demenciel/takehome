@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { jsonLd, type SeoPage } from '../lib/seo';
-import { SITE_NAME, ANALYTICS_MEASUREMENT_ID, ADS_ENABLED, ADSENSE_LOADER_CLIENT, OTHER_PROJECTS } from '../lib/site';
+import { SITE_NAME, ANALYTICS_MEASUREMENT_ID, ADS_ENABLED, ADSENSE_LOADER_CLIENT, OTHER_PROJECTS, projectHref } from '../lib/site';
 
 interface Props {
   seo: SeoPage;
@@ -105,7 +105,7 @@ const schema = jsonLd(seo);
         <nav aria-label="Other projects" class="flex flex-col gap-2">
           <p class="font-semibold text-ink">Other projects</p>
           {OTHER_PROJECTS.map((project) => (
-            <a href={project.href} class="hover:text-ink" target="_blank" rel="noopener">{project.name}</a>
+            <a href={projectHref(project, 'footer')} class="hover:text-ink" target="_blank" rel="noopener">{project.name}</a>
           ))}
         </nav>
       </div>

@@ -11,8 +11,24 @@ export const TERMS_UPDATED = '2026-09-05';
 export const ADSENSE_LOADER_CLIENT = 'ca-pub-9601080087531926';
 
 export const OTHER_PROJECTS = [
-  { name: 'Founder Triage', href: 'https://triage.alexworks.app' },
-  { name: 'MCP X-Ray', href: 'https://mcpxray.alexworks.app' },
-  { name: 'Alex Works', href: 'https://alexworks.app' },
-  { name: 'Print Ready Check', href: 'https://print.alexworks.app' },
+  { name: 'Founder Triage', host: 'triage.alexworks.app', origin: 'https://triage.alexworks.app', track: true },
+  { name: 'MCP X-Ray', host: 'mcpxray.alexworks.app', origin: 'https://mcpxray.alexworks.app', track: true },
+  { name: 'Alex Works', host: 'alexworks.app', origin: 'https://alexworks.app', track: false },
+  { name: 'Print Ready Check', host: 'print.alexworks.app', origin: 'https://print.alexworks.app', track: false },
 ] as const;
+
+export function projectHref(
+  project: (typeof OTHER_PROJECTS)[number],
+  content: 'footer' | 'about',
+): string {
+  if (!project.track) {
+    return project.origin;
+  }
+
+  const url = new URL(project.origin);
+  url.searchParams.set('utm_source', 'paycheque.app');
+  url.searchParams.set('utm_medium', 'referral');
+  url.searchParams.set('utm_campaign', 'site-backlink');
+  url.searchParams.set('utm_content', content);
+  return url.toString();
+}
