@@ -1,0 +1,3498 @@
+{
+  "origin": "https://paycheque.app",
+  "generated": "2026-09-21",
+  "canonical": [
+    {
+      "old": "/",
+      "new": "/",
+      "status": 200
+    },
+    {
+      "old": "/canada-paycheck-calculator",
+      "new": "/canada-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/about",
+      "new": "/about",
+      "status": 200
+    },
+    {
+      "old": "/methodology",
+      "new": "/methodology",
+      "status": 200
+    },
+    {
+      "old": "/tax-rates",
+      "new": "/tax-rates",
+      "status": 200
+    },
+    {
+      "old": "/privacy",
+      "new": "/privacy",
+      "status": 200
+    },
+    {
+      "old": "/terms",
+      "new": "/terms",
+      "status": 200
+    },
+    {
+      "old": "/contact",
+      "new": "/contact",
+      "status": 200
+    },
+    {
+      "old": "/paycheque-calculator",
+      "new": "/paycheque-calculator",
+      "status": 200
+    },
+    {
+      "old": "/take-home-pay-calculator",
+      "new": "/take-home-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/salary-after-tax-calculator",
+      "new": "/salary-after-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/overtime-pay-calculator",
+      "new": "/overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/bonus-tax-calculator",
+      "new": "/bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/raise-calculator",
+      "new": "/raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/military-salary-calculator",
+      "new": "/military-salary-calculator",
+      "status": 200
+    },
+    {
+      "old": "/hourly-to-salary-calculator",
+      "new": "/hourly-to-salary-calculator",
+      "status": 200
+    },
+    {
+      "old": "/salary-to-hourly-calculator",
+      "new": "/salary-to-hourly-calculator",
+      "status": 200
+    },
+    {
+      "old": "/biweekly-pay-calculator",
+      "new": "/biweekly-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/weekly-pay-calculator",
+      "new": "/weekly-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/parental-leave-calculator",
+      "new": "/parental-leave-calculator",
+      "status": 200
+    },
+    {
+      "old": "/ei-maternity-parental-benefits",
+      "new": "/ei-maternity-parental-benefits",
+      "status": 200
+    },
+    {
+      "old": "/baby-cost-calculator",
+      "new": "/baby-cost-calculator",
+      "status": 200
+    },
+    {
+      "old": "/alberta-paycheck-calculator",
+      "new": "/alberta-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/alberta-overtime-pay-calculator",
+      "new": "/alberta-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/alberta-bonus-tax-calculator",
+      "new": "/alberta-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/alberta-raise-calculator",
+      "new": "/alberta-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/alberta/30000-salary",
+      "new": "/alberta/30000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/35000-salary",
+      "new": "/alberta/35000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/40000-salary",
+      "new": "/alberta/40000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/45000-salary",
+      "new": "/alberta/45000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/50000-salary",
+      "new": "/alberta/50000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/55000-salary",
+      "new": "/alberta/55000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/60000-salary",
+      "new": "/alberta/60000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/65000-salary",
+      "new": "/alberta/65000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/70000-salary",
+      "new": "/alberta/70000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/75000-salary",
+      "new": "/alberta/75000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/80000-salary",
+      "new": "/alberta/80000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/85000-salary",
+      "new": "/alberta/85000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/90000-salary",
+      "new": "/alberta/90000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/100000-salary",
+      "new": "/alberta/100000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/110000-salary",
+      "new": "/alberta/110000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/120000-salary",
+      "new": "/alberta/120000-salary",
+      "status": 200
+    },
+    {
+      "old": "/alberta/150000-salary",
+      "new": "/alberta/150000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia-paycheck-calculator",
+      "new": "/british-columbia-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia-overtime-pay-calculator",
+      "new": "/british-columbia-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia-bonus-tax-calculator",
+      "new": "/british-columbia-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia-raise-calculator",
+      "new": "/british-columbia-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/30000-salary",
+      "new": "/british-columbia/30000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/35000-salary",
+      "new": "/british-columbia/35000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/40000-salary",
+      "new": "/british-columbia/40000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/45000-salary",
+      "new": "/british-columbia/45000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/50000-salary",
+      "new": "/british-columbia/50000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/55000-salary",
+      "new": "/british-columbia/55000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/60000-salary",
+      "new": "/british-columbia/60000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/65000-salary",
+      "new": "/british-columbia/65000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/70000-salary",
+      "new": "/british-columbia/70000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/75000-salary",
+      "new": "/british-columbia/75000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/80000-salary",
+      "new": "/british-columbia/80000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/85000-salary",
+      "new": "/british-columbia/85000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/90000-salary",
+      "new": "/british-columbia/90000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/100000-salary",
+      "new": "/british-columbia/100000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/110000-salary",
+      "new": "/british-columbia/110000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/120000-salary",
+      "new": "/british-columbia/120000-salary",
+      "status": 200
+    },
+    {
+      "old": "/british-columbia/150000-salary",
+      "new": "/british-columbia/150000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba-paycheck-calculator",
+      "new": "/manitoba-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/manitoba-overtime-pay-calculator",
+      "new": "/manitoba-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/manitoba-bonus-tax-calculator",
+      "new": "/manitoba-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/manitoba-raise-calculator",
+      "new": "/manitoba-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/30000-salary",
+      "new": "/manitoba/30000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/35000-salary",
+      "new": "/manitoba/35000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/40000-salary",
+      "new": "/manitoba/40000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/45000-salary",
+      "new": "/manitoba/45000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/50000-salary",
+      "new": "/manitoba/50000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/55000-salary",
+      "new": "/manitoba/55000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/60000-salary",
+      "new": "/manitoba/60000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/65000-salary",
+      "new": "/manitoba/65000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/70000-salary",
+      "new": "/manitoba/70000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/75000-salary",
+      "new": "/manitoba/75000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/80000-salary",
+      "new": "/manitoba/80000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/85000-salary",
+      "new": "/manitoba/85000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/90000-salary",
+      "new": "/manitoba/90000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/100000-salary",
+      "new": "/manitoba/100000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/110000-salary",
+      "new": "/manitoba/110000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/120000-salary",
+      "new": "/manitoba/120000-salary",
+      "status": 200
+    },
+    {
+      "old": "/manitoba/150000-salary",
+      "new": "/manitoba/150000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick-paycheck-calculator",
+      "new": "/new-brunswick-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick-overtime-pay-calculator",
+      "new": "/new-brunswick-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick-bonus-tax-calculator",
+      "new": "/new-brunswick-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick-raise-calculator",
+      "new": "/new-brunswick-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/30000-salary",
+      "new": "/new-brunswick/30000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/35000-salary",
+      "new": "/new-brunswick/35000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/40000-salary",
+      "new": "/new-brunswick/40000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/45000-salary",
+      "new": "/new-brunswick/45000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/50000-salary",
+      "new": "/new-brunswick/50000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/55000-salary",
+      "new": "/new-brunswick/55000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/60000-salary",
+      "new": "/new-brunswick/60000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/65000-salary",
+      "new": "/new-brunswick/65000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/70000-salary",
+      "new": "/new-brunswick/70000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/75000-salary",
+      "new": "/new-brunswick/75000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/80000-salary",
+      "new": "/new-brunswick/80000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/85000-salary",
+      "new": "/new-brunswick/85000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/90000-salary",
+      "new": "/new-brunswick/90000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/100000-salary",
+      "new": "/new-brunswick/100000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/110000-salary",
+      "new": "/new-brunswick/110000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/120000-salary",
+      "new": "/new-brunswick/120000-salary",
+      "status": 200
+    },
+    {
+      "old": "/new-brunswick/150000-salary",
+      "new": "/new-brunswick/150000-salary",
+      "status": 200
+    },
+    {
+      "old": "/newfoundland-and-labrador-paycheck-calculator",
+      "new": "/newfoundland-and-labrador-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/newfoundland-and-labrador-overtime-pay-calculator",
+      "new": "/newfoundland-and-labrador-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/newfoundland-and-labrador-bonus-tax-calculator",
+      "new": "/newfoundland-and-labrador-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/newfoundland-and-labrador-raise-calculator",
+      "new": "/newfoundland-and-labrador-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia-paycheck-calculator",
+      "new": "/nova-scotia-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia-overtime-pay-calculator",
+      "new": "/nova-scotia-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia-bonus-tax-calculator",
+      "new": "/nova-scotia-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia-raise-calculator",
+      "new": "/nova-scotia-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/30000-salary",
+      "new": "/nova-scotia/30000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/35000-salary",
+      "new": "/nova-scotia/35000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/40000-salary",
+      "new": "/nova-scotia/40000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/45000-salary",
+      "new": "/nova-scotia/45000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/50000-salary",
+      "new": "/nova-scotia/50000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/55000-salary",
+      "new": "/nova-scotia/55000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/60000-salary",
+      "new": "/nova-scotia/60000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/65000-salary",
+      "new": "/nova-scotia/65000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/70000-salary",
+      "new": "/nova-scotia/70000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/75000-salary",
+      "new": "/nova-scotia/75000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/80000-salary",
+      "new": "/nova-scotia/80000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/85000-salary",
+      "new": "/nova-scotia/85000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/90000-salary",
+      "new": "/nova-scotia/90000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/100000-salary",
+      "new": "/nova-scotia/100000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/110000-salary",
+      "new": "/nova-scotia/110000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/120000-salary",
+      "new": "/nova-scotia/120000-salary",
+      "status": 200
+    },
+    {
+      "old": "/nova-scotia/150000-salary",
+      "new": "/nova-scotia/150000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario-paycheck-calculator",
+      "new": "/ontario-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/ontario-overtime-pay-calculator",
+      "new": "/ontario-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/ontario-bonus-tax-calculator",
+      "new": "/ontario-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/ontario-raise-calculator",
+      "new": "/ontario-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/ontario/30000-salary",
+      "new": "/ontario/30000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/35000-salary",
+      "new": "/ontario/35000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/40000-salary",
+      "new": "/ontario/40000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/45000-salary",
+      "new": "/ontario/45000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/50000-salary",
+      "new": "/ontario/50000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/55000-salary",
+      "new": "/ontario/55000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/60000-salary",
+      "new": "/ontario/60000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/65000-salary",
+      "new": "/ontario/65000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/70000-salary",
+      "new": "/ontario/70000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/75000-salary",
+      "new": "/ontario/75000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/80000-salary",
+      "new": "/ontario/80000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/85000-salary",
+      "new": "/ontario/85000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/90000-salary",
+      "new": "/ontario/90000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/100000-salary",
+      "new": "/ontario/100000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/110000-salary",
+      "new": "/ontario/110000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/120000-salary",
+      "new": "/ontario/120000-salary",
+      "status": 200
+    },
+    {
+      "old": "/ontario/150000-salary",
+      "new": "/ontario/150000-salary",
+      "status": 200
+    },
+    {
+      "old": "/prince-edward-island-paycheck-calculator",
+      "new": "/prince-edward-island-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/prince-edward-island-overtime-pay-calculator",
+      "new": "/prince-edward-island-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/prince-edward-island-bonus-tax-calculator",
+      "new": "/prince-edward-island-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/prince-edward-island-raise-calculator",
+      "new": "/prince-edward-island-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/quebec-paycheck-calculator",
+      "new": "/quebec-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/quebec-overtime-pay-calculator",
+      "new": "/quebec-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/quebec-bonus-tax-calculator",
+      "new": "/quebec-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/quebec-raise-calculator",
+      "new": "/quebec-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/quebec/30000-salary",
+      "new": "/quebec/30000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/35000-salary",
+      "new": "/quebec/35000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/40000-salary",
+      "new": "/quebec/40000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/45000-salary",
+      "new": "/quebec/45000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/50000-salary",
+      "new": "/quebec/50000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/55000-salary",
+      "new": "/quebec/55000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/60000-salary",
+      "new": "/quebec/60000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/65000-salary",
+      "new": "/quebec/65000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/70000-salary",
+      "new": "/quebec/70000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/75000-salary",
+      "new": "/quebec/75000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/80000-salary",
+      "new": "/quebec/80000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/85000-salary",
+      "new": "/quebec/85000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/90000-salary",
+      "new": "/quebec/90000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/100000-salary",
+      "new": "/quebec/100000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/110000-salary",
+      "new": "/quebec/110000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/120000-salary",
+      "new": "/quebec/120000-salary",
+      "status": 200
+    },
+    {
+      "old": "/quebec/150000-salary",
+      "new": "/quebec/150000-salary",
+      "status": 200
+    },
+    {
+      "old": "/saskatchewan-paycheck-calculator",
+      "new": "/saskatchewan-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/saskatchewan-overtime-pay-calculator",
+      "new": "/saskatchewan-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/saskatchewan-bonus-tax-calculator",
+      "new": "/saskatchewan-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/saskatchewan-raise-calculator",
+      "new": "/saskatchewan-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/northwest-territories-paycheck-calculator",
+      "new": "/northwest-territories-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/northwest-territories-overtime-pay-calculator",
+      "new": "/northwest-territories-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/northwest-territories-bonus-tax-calculator",
+      "new": "/northwest-territories-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/northwest-territories-raise-calculator",
+      "new": "/northwest-territories-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/nunavut-paycheck-calculator",
+      "new": "/nunavut-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/nunavut-overtime-pay-calculator",
+      "new": "/nunavut-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/nunavut-bonus-tax-calculator",
+      "new": "/nunavut-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/nunavut-raise-calculator",
+      "new": "/nunavut-raise-calculator",
+      "status": 200
+    },
+    {
+      "old": "/yukon-paycheck-calculator",
+      "new": "/yukon-paycheck-calculator",
+      "status": 200
+    },
+    {
+      "old": "/yukon-overtime-pay-calculator",
+      "new": "/yukon-overtime-pay-calculator",
+      "status": 200
+    },
+    {
+      "old": "/yukon-bonus-tax-calculator",
+      "new": "/yukon-bonus-tax-calculator",
+      "status": 200
+    },
+    {
+      "old": "/yukon-raise-calculator",
+      "new": "/yukon-raise-calculator",
+      "status": 200
+    }
+  ],
+  "redirects": [
+    {
+      "old": "/canada-paycheque-calculator",
+      "new": "/canada-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/salary-increase-calculator",
+      "new": "/raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/caf-salary-calculator",
+      "new": "/military-salary-calculator",
+      "status": 301
+    },
+    {
+      "old": "/canadian-military-pay-calculator",
+      "new": "/military-salary-calculator",
+      "status": 301
+    },
+    {
+      "old": "/maternity-leave-calculator",
+      "new": "/parental-leave-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ei-parental-benefits",
+      "new": "/ei-maternity-parental-benefits",
+      "status": 301
+    },
+    {
+      "old": "/alberta-paycheque-calculator",
+      "new": "/alberta-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia-paycheque-calculator",
+      "new": "/british-columbia-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/manitoba-paycheque-calculator",
+      "new": "/manitoba-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick-paycheque-calculator",
+      "new": "/new-brunswick-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-and-labrador-paycheque-calculator",
+      "new": "/newfoundland-and-labrador-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia-paycheque-calculator",
+      "new": "/nova-scotia-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ontario-paycheque-calculator",
+      "new": "/ontario-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/prince-edward-island-paycheque-calculator",
+      "new": "/prince-edward-island-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/quebec-paycheque-calculator",
+      "new": "/quebec-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/saskatchewan-paycheque-calculator",
+      "new": "/saskatchewan-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/northwest-territories-paycheque-calculator",
+      "new": "/northwest-territories-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nunavut-paycheque-calculator",
+      "new": "/nunavut-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/yukon-paycheque-calculator",
+      "new": "/yukon-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/bc-paycheck-calculator",
+      "new": "/british-columbia-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/bc-paycheque-calculator",
+      "new": "/british-columbia-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/bc-overtime-pay-calculator",
+      "new": "/british-columbia-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/bc-bonus-tax-calculator",
+      "new": "/british-columbia-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/bc-raise-calculator",
+      "new": "/british-columbia-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia-paycheck-calculator",
+      "new": "/british-columbia-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia-paycheque-calculator",
+      "new": "/british-columbia-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia-overtime-pay-calculator",
+      "new": "/british-columbia-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia-bonus-tax-calculator",
+      "new": "/british-columbia-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia-raise-calculator",
+      "new": "/british-columbia-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nb-paycheck-calculator",
+      "new": "/new-brunswick-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nb-paycheque-calculator",
+      "new": "/new-brunswick-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nb-overtime-pay-calculator",
+      "new": "/new-brunswick-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nb-bonus-tax-calculator",
+      "new": "/new-brunswick-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nb-raise-calculator",
+      "new": "/new-brunswick-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nl-paycheck-calculator",
+      "new": "/newfoundland-and-labrador-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nl-paycheque-calculator",
+      "new": "/newfoundland-and-labrador-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nl-overtime-pay-calculator",
+      "new": "/newfoundland-and-labrador-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nl-bonus-tax-calculator",
+      "new": "/newfoundland-and-labrador-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nl-raise-calculator",
+      "new": "/newfoundland-and-labrador-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-paycheck-calculator",
+      "new": "/newfoundland-and-labrador-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-paycheque-calculator",
+      "new": "/newfoundland-and-labrador-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-overtime-pay-calculator",
+      "new": "/newfoundland-and-labrador-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-bonus-tax-calculator",
+      "new": "/newfoundland-and-labrador-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-raise-calculator",
+      "new": "/newfoundland-and-labrador-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-labrador-paycheck-calculator",
+      "new": "/newfoundland-and-labrador-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-labrador-paycheque-calculator",
+      "new": "/newfoundland-and-labrador-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-labrador-overtime-pay-calculator",
+      "new": "/newfoundland-and-labrador-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-labrador-bonus-tax-calculator",
+      "new": "/newfoundland-and-labrador-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/newfoundland-labrador-raise-calculator",
+      "new": "/newfoundland-and-labrador-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ns-paycheck-calculator",
+      "new": "/nova-scotia-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ns-paycheque-calculator",
+      "new": "/nova-scotia-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ns-overtime-pay-calculator",
+      "new": "/nova-scotia-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ns-bonus-tax-calculator",
+      "new": "/nova-scotia-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ns-raise-calculator",
+      "new": "/nova-scotia-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pei-paycheck-calculator",
+      "new": "/prince-edward-island-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pei-paycheque-calculator",
+      "new": "/prince-edward-island-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pei-overtime-pay-calculator",
+      "new": "/prince-edward-island-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pei-bonus-tax-calculator",
+      "new": "/prince-edward-island-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pei-raise-calculator",
+      "new": "/prince-edward-island-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pe-paycheck-calculator",
+      "new": "/prince-edward-island-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pe-paycheque-calculator",
+      "new": "/prince-edward-island-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pe-overtime-pay-calculator",
+      "new": "/prince-edward-island-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pe-bonus-tax-calculator",
+      "new": "/prince-edward-island-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/pe-raise-calculator",
+      "new": "/prince-edward-island-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nwt-paycheck-calculator",
+      "new": "/northwest-territories-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nwt-paycheque-calculator",
+      "new": "/northwest-territories-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nwt-overtime-pay-calculator",
+      "new": "/northwest-territories-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nwt-bonus-tax-calculator",
+      "new": "/northwest-territories-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nwt-raise-calculator",
+      "new": "/northwest-territories-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/northwest-territory-paycheck-calculator",
+      "new": "/northwest-territories-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/northwest-territory-paycheque-calculator",
+      "new": "/northwest-territories-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/northwest-territory-overtime-pay-calculator",
+      "new": "/northwest-territories-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/northwest-territory-bonus-tax-calculator",
+      "new": "/northwest-territories-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/northwest-territory-raise-calculator",
+      "new": "/northwest-territories-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nt-paycheck-calculator",
+      "new": "/northwest-territories-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nt-paycheque-calculator",
+      "new": "/northwest-territories-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nt-overtime-pay-calculator",
+      "new": "/northwest-territories-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nt-bonus-tax-calculator",
+      "new": "/northwest-territories-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nt-raise-calculator",
+      "new": "/northwest-territories-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nu-paycheck-calculator",
+      "new": "/nunavut-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nu-paycheque-calculator",
+      "new": "/nunavut-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nu-overtime-pay-calculator",
+      "new": "/nunavut-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nu-bonus-tax-calculator",
+      "new": "/nunavut-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/nu-raise-calculator",
+      "new": "/nunavut-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/yt-paycheck-calculator",
+      "new": "/yukon-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/yt-paycheque-calculator",
+      "new": "/yukon-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/yt-overtime-pay-calculator",
+      "new": "/yukon-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/yt-bonus-tax-calculator",
+      "new": "/yukon-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/yt-raise-calculator",
+      "new": "/yukon-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/on-paycheck-calculator",
+      "new": "/ontario-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/on-paycheque-calculator",
+      "new": "/ontario-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/on-overtime-pay-calculator",
+      "new": "/ontario-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/on-bonus-tax-calculator",
+      "new": "/ontario-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/on-raise-calculator",
+      "new": "/ontario-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/qc-paycheck-calculator",
+      "new": "/quebec-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/qc-paycheque-calculator",
+      "new": "/quebec-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/qc-overtime-pay-calculator",
+      "new": "/quebec-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/qc-bonus-tax-calculator",
+      "new": "/quebec-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/qc-raise-calculator",
+      "new": "/quebec-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ab-paycheck-calculator",
+      "new": "/alberta-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ab-paycheque-calculator",
+      "new": "/alberta-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ab-overtime-pay-calculator",
+      "new": "/alberta-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ab-bonus-tax-calculator",
+      "new": "/alberta-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ab-raise-calculator",
+      "new": "/alberta-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/mb-paycheck-calculator",
+      "new": "/manitoba-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/mb-paycheque-calculator",
+      "new": "/manitoba-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/mb-overtime-pay-calculator",
+      "new": "/manitoba-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/mb-bonus-tax-calculator",
+      "new": "/manitoba-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/mb-raise-calculator",
+      "new": "/manitoba-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/sk-paycheck-calculator",
+      "new": "/saskatchewan-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/sk-paycheque-calculator",
+      "new": "/saskatchewan-paycheck-calculator",
+      "status": 301
+    },
+    {
+      "old": "/sk-overtime-pay-calculator",
+      "new": "/saskatchewan-overtime-pay-calculator",
+      "status": 301
+    },
+    {
+      "old": "/sk-bonus-tax-calculator",
+      "new": "/saskatchewan-bonus-tax-calculator",
+      "status": 301
+    },
+    {
+      "old": "/sk-raise-calculator",
+      "new": "/saskatchewan-raise-calculator",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/30000",
+      "new": "/ontario/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/30000-salary",
+      "new": "/ontario/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/30000",
+      "new": "/ontario/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/35000",
+      "new": "/ontario/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/35000-salary",
+      "new": "/ontario/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/35000",
+      "new": "/ontario/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/40000",
+      "new": "/ontario/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/40000-salary",
+      "new": "/ontario/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/40000",
+      "new": "/ontario/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/45000",
+      "new": "/ontario/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/45000-salary",
+      "new": "/ontario/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/45000",
+      "new": "/ontario/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/50000",
+      "new": "/ontario/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/50000-salary",
+      "new": "/ontario/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/50000",
+      "new": "/ontario/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/55000",
+      "new": "/ontario/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/55000-salary",
+      "new": "/ontario/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/55000",
+      "new": "/ontario/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/60000",
+      "new": "/ontario/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/60000-salary",
+      "new": "/ontario/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/60000",
+      "new": "/ontario/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/65000",
+      "new": "/ontario/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/65000-salary",
+      "new": "/ontario/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/65000",
+      "new": "/ontario/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/70000",
+      "new": "/ontario/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/70000-salary",
+      "new": "/ontario/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/70000",
+      "new": "/ontario/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/75000",
+      "new": "/ontario/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/75000-salary",
+      "new": "/ontario/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/75000",
+      "new": "/ontario/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/80000",
+      "new": "/ontario/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/80000-salary",
+      "new": "/ontario/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/80000",
+      "new": "/ontario/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/85000",
+      "new": "/ontario/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/85000-salary",
+      "new": "/ontario/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/85000",
+      "new": "/ontario/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/90000",
+      "new": "/ontario/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/90000-salary",
+      "new": "/ontario/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/90000",
+      "new": "/ontario/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/100000",
+      "new": "/ontario/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/100000-salary",
+      "new": "/ontario/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/100000",
+      "new": "/ontario/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/110000",
+      "new": "/ontario/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/110000-salary",
+      "new": "/ontario/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/110000",
+      "new": "/ontario/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/120000",
+      "new": "/ontario/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/120000-salary",
+      "new": "/ontario/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/120000",
+      "new": "/ontario/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ontario/salary/150000",
+      "new": "/ontario/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/150000-salary",
+      "new": "/ontario/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/on/salary/150000",
+      "new": "/ontario/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/30000",
+      "new": "/quebec/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/30000-salary",
+      "new": "/quebec/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/30000",
+      "new": "/quebec/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/35000",
+      "new": "/quebec/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/35000-salary",
+      "new": "/quebec/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/35000",
+      "new": "/quebec/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/40000",
+      "new": "/quebec/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/40000-salary",
+      "new": "/quebec/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/40000",
+      "new": "/quebec/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/45000",
+      "new": "/quebec/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/45000-salary",
+      "new": "/quebec/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/45000",
+      "new": "/quebec/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/50000",
+      "new": "/quebec/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/50000-salary",
+      "new": "/quebec/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/50000",
+      "new": "/quebec/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/55000",
+      "new": "/quebec/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/55000-salary",
+      "new": "/quebec/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/55000",
+      "new": "/quebec/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/60000",
+      "new": "/quebec/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/60000-salary",
+      "new": "/quebec/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/60000",
+      "new": "/quebec/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/65000",
+      "new": "/quebec/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/65000-salary",
+      "new": "/quebec/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/65000",
+      "new": "/quebec/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/70000",
+      "new": "/quebec/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/70000-salary",
+      "new": "/quebec/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/70000",
+      "new": "/quebec/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/75000",
+      "new": "/quebec/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/75000-salary",
+      "new": "/quebec/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/75000",
+      "new": "/quebec/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/80000",
+      "new": "/quebec/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/80000-salary",
+      "new": "/quebec/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/80000",
+      "new": "/quebec/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/85000",
+      "new": "/quebec/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/85000-salary",
+      "new": "/quebec/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/85000",
+      "new": "/quebec/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/90000",
+      "new": "/quebec/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/90000-salary",
+      "new": "/quebec/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/90000",
+      "new": "/quebec/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/100000",
+      "new": "/quebec/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/100000-salary",
+      "new": "/quebec/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/100000",
+      "new": "/quebec/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/110000",
+      "new": "/quebec/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/110000-salary",
+      "new": "/quebec/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/110000",
+      "new": "/quebec/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/120000",
+      "new": "/quebec/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/120000-salary",
+      "new": "/quebec/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/120000",
+      "new": "/quebec/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/quebec/salary/150000",
+      "new": "/quebec/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/150000-salary",
+      "new": "/quebec/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/qc/salary/150000",
+      "new": "/quebec/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/30000",
+      "new": "/british-columbia/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/30000-salary",
+      "new": "/british-columbia/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/30000",
+      "new": "/british-columbia/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/30000-salary",
+      "new": "/british-columbia/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/30000",
+      "new": "/british-columbia/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/35000",
+      "new": "/british-columbia/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/35000-salary",
+      "new": "/british-columbia/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/35000",
+      "new": "/british-columbia/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/35000-salary",
+      "new": "/british-columbia/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/35000",
+      "new": "/british-columbia/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/40000",
+      "new": "/british-columbia/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/40000-salary",
+      "new": "/british-columbia/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/40000",
+      "new": "/british-columbia/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/40000-salary",
+      "new": "/british-columbia/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/40000",
+      "new": "/british-columbia/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/45000",
+      "new": "/british-columbia/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/45000-salary",
+      "new": "/british-columbia/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/45000",
+      "new": "/british-columbia/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/45000-salary",
+      "new": "/british-columbia/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/45000",
+      "new": "/british-columbia/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/50000",
+      "new": "/british-columbia/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/50000-salary",
+      "new": "/british-columbia/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/50000",
+      "new": "/british-columbia/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/50000-salary",
+      "new": "/british-columbia/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/50000",
+      "new": "/british-columbia/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/55000",
+      "new": "/british-columbia/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/55000-salary",
+      "new": "/british-columbia/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/55000",
+      "new": "/british-columbia/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/55000-salary",
+      "new": "/british-columbia/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/55000",
+      "new": "/british-columbia/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/60000",
+      "new": "/british-columbia/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/60000-salary",
+      "new": "/british-columbia/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/60000",
+      "new": "/british-columbia/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/60000-salary",
+      "new": "/british-columbia/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/60000",
+      "new": "/british-columbia/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/65000",
+      "new": "/british-columbia/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/65000-salary",
+      "new": "/british-columbia/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/65000",
+      "new": "/british-columbia/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/65000-salary",
+      "new": "/british-columbia/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/65000",
+      "new": "/british-columbia/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/70000",
+      "new": "/british-columbia/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/70000-salary",
+      "new": "/british-columbia/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/70000",
+      "new": "/british-columbia/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/70000-salary",
+      "new": "/british-columbia/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/70000",
+      "new": "/british-columbia/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/75000",
+      "new": "/british-columbia/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/75000-salary",
+      "new": "/british-columbia/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/75000",
+      "new": "/british-columbia/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/75000-salary",
+      "new": "/british-columbia/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/75000",
+      "new": "/british-columbia/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/80000",
+      "new": "/british-columbia/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/80000-salary",
+      "new": "/british-columbia/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/80000",
+      "new": "/british-columbia/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/80000-salary",
+      "new": "/british-columbia/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/80000",
+      "new": "/british-columbia/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/85000",
+      "new": "/british-columbia/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/85000-salary",
+      "new": "/british-columbia/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/85000",
+      "new": "/british-columbia/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/85000-salary",
+      "new": "/british-columbia/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/85000",
+      "new": "/british-columbia/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/90000",
+      "new": "/british-columbia/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/90000-salary",
+      "new": "/british-columbia/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/90000",
+      "new": "/british-columbia/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/90000-salary",
+      "new": "/british-columbia/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/90000",
+      "new": "/british-columbia/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/100000",
+      "new": "/british-columbia/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/100000-salary",
+      "new": "/british-columbia/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/100000",
+      "new": "/british-columbia/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/100000-salary",
+      "new": "/british-columbia/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/100000",
+      "new": "/british-columbia/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/110000",
+      "new": "/british-columbia/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/110000-salary",
+      "new": "/british-columbia/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/110000",
+      "new": "/british-columbia/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/110000-salary",
+      "new": "/british-columbia/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/110000",
+      "new": "/british-columbia/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/120000",
+      "new": "/british-columbia/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/120000-salary",
+      "new": "/british-columbia/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/120000",
+      "new": "/british-columbia/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/120000-salary",
+      "new": "/british-columbia/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/120000",
+      "new": "/british-columbia/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/british-columbia/salary/150000",
+      "new": "/british-columbia/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/150000-salary",
+      "new": "/british-columbia/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/bc/salary/150000",
+      "new": "/british-columbia/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/150000-salary",
+      "new": "/british-columbia/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/britishcolumbia/salary/150000",
+      "new": "/british-columbia/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/30000",
+      "new": "/alberta/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/30000-salary",
+      "new": "/alberta/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/30000",
+      "new": "/alberta/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/35000",
+      "new": "/alberta/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/35000-salary",
+      "new": "/alberta/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/35000",
+      "new": "/alberta/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/40000",
+      "new": "/alberta/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/40000-salary",
+      "new": "/alberta/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/40000",
+      "new": "/alberta/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/45000",
+      "new": "/alberta/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/45000-salary",
+      "new": "/alberta/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/45000",
+      "new": "/alberta/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/50000",
+      "new": "/alberta/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/50000-salary",
+      "new": "/alberta/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/50000",
+      "new": "/alberta/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/55000",
+      "new": "/alberta/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/55000-salary",
+      "new": "/alberta/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/55000",
+      "new": "/alberta/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/60000",
+      "new": "/alberta/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/60000-salary",
+      "new": "/alberta/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/60000",
+      "new": "/alberta/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/65000",
+      "new": "/alberta/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/65000-salary",
+      "new": "/alberta/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/65000",
+      "new": "/alberta/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/70000",
+      "new": "/alberta/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/70000-salary",
+      "new": "/alberta/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/70000",
+      "new": "/alberta/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/75000",
+      "new": "/alberta/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/75000-salary",
+      "new": "/alberta/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/75000",
+      "new": "/alberta/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/80000",
+      "new": "/alberta/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/80000-salary",
+      "new": "/alberta/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/80000",
+      "new": "/alberta/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/85000",
+      "new": "/alberta/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/85000-salary",
+      "new": "/alberta/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/85000",
+      "new": "/alberta/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/90000",
+      "new": "/alberta/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/90000-salary",
+      "new": "/alberta/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/90000",
+      "new": "/alberta/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/100000",
+      "new": "/alberta/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/100000-salary",
+      "new": "/alberta/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/100000",
+      "new": "/alberta/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/110000",
+      "new": "/alberta/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/110000-salary",
+      "new": "/alberta/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/110000",
+      "new": "/alberta/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/120000",
+      "new": "/alberta/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/120000-salary",
+      "new": "/alberta/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/120000",
+      "new": "/alberta/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/alberta/salary/150000",
+      "new": "/alberta/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/150000-salary",
+      "new": "/alberta/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ab/salary/150000",
+      "new": "/alberta/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/30000",
+      "new": "/new-brunswick/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/30000-salary",
+      "new": "/new-brunswick/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/30000",
+      "new": "/new-brunswick/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/35000",
+      "new": "/new-brunswick/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/35000-salary",
+      "new": "/new-brunswick/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/35000",
+      "new": "/new-brunswick/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/40000",
+      "new": "/new-brunswick/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/40000-salary",
+      "new": "/new-brunswick/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/40000",
+      "new": "/new-brunswick/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/45000",
+      "new": "/new-brunswick/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/45000-salary",
+      "new": "/new-brunswick/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/45000",
+      "new": "/new-brunswick/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/50000",
+      "new": "/new-brunswick/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/50000-salary",
+      "new": "/new-brunswick/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/50000",
+      "new": "/new-brunswick/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/55000",
+      "new": "/new-brunswick/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/55000-salary",
+      "new": "/new-brunswick/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/55000",
+      "new": "/new-brunswick/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/60000",
+      "new": "/new-brunswick/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/60000-salary",
+      "new": "/new-brunswick/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/60000",
+      "new": "/new-brunswick/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/65000",
+      "new": "/new-brunswick/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/65000-salary",
+      "new": "/new-brunswick/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/65000",
+      "new": "/new-brunswick/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/70000",
+      "new": "/new-brunswick/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/70000-salary",
+      "new": "/new-brunswick/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/70000",
+      "new": "/new-brunswick/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/75000",
+      "new": "/new-brunswick/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/75000-salary",
+      "new": "/new-brunswick/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/75000",
+      "new": "/new-brunswick/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/80000",
+      "new": "/new-brunswick/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/80000-salary",
+      "new": "/new-brunswick/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/80000",
+      "new": "/new-brunswick/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/85000",
+      "new": "/new-brunswick/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/85000-salary",
+      "new": "/new-brunswick/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/85000",
+      "new": "/new-brunswick/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/90000",
+      "new": "/new-brunswick/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/90000-salary",
+      "new": "/new-brunswick/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/90000",
+      "new": "/new-brunswick/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/100000",
+      "new": "/new-brunswick/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/100000-salary",
+      "new": "/new-brunswick/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/100000",
+      "new": "/new-brunswick/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/110000",
+      "new": "/new-brunswick/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/110000-salary",
+      "new": "/new-brunswick/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/110000",
+      "new": "/new-brunswick/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/120000",
+      "new": "/new-brunswick/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/120000-salary",
+      "new": "/new-brunswick/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/120000",
+      "new": "/new-brunswick/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/new-brunswick/salary/150000",
+      "new": "/new-brunswick/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/150000-salary",
+      "new": "/new-brunswick/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nb/salary/150000",
+      "new": "/new-brunswick/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/30000",
+      "new": "/nova-scotia/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/30000-salary",
+      "new": "/nova-scotia/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/30000",
+      "new": "/nova-scotia/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/35000",
+      "new": "/nova-scotia/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/35000-salary",
+      "new": "/nova-scotia/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/35000",
+      "new": "/nova-scotia/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/40000",
+      "new": "/nova-scotia/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/40000-salary",
+      "new": "/nova-scotia/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/40000",
+      "new": "/nova-scotia/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/45000",
+      "new": "/nova-scotia/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/45000-salary",
+      "new": "/nova-scotia/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/45000",
+      "new": "/nova-scotia/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/50000",
+      "new": "/nova-scotia/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/50000-salary",
+      "new": "/nova-scotia/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/50000",
+      "new": "/nova-scotia/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/55000",
+      "new": "/nova-scotia/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/55000-salary",
+      "new": "/nova-scotia/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/55000",
+      "new": "/nova-scotia/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/60000",
+      "new": "/nova-scotia/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/60000-salary",
+      "new": "/nova-scotia/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/60000",
+      "new": "/nova-scotia/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/65000",
+      "new": "/nova-scotia/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/65000-salary",
+      "new": "/nova-scotia/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/65000",
+      "new": "/nova-scotia/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/70000",
+      "new": "/nova-scotia/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/70000-salary",
+      "new": "/nova-scotia/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/70000",
+      "new": "/nova-scotia/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/75000",
+      "new": "/nova-scotia/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/75000-salary",
+      "new": "/nova-scotia/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/75000",
+      "new": "/nova-scotia/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/80000",
+      "new": "/nova-scotia/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/80000-salary",
+      "new": "/nova-scotia/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/80000",
+      "new": "/nova-scotia/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/85000",
+      "new": "/nova-scotia/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/85000-salary",
+      "new": "/nova-scotia/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/85000",
+      "new": "/nova-scotia/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/90000",
+      "new": "/nova-scotia/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/90000-salary",
+      "new": "/nova-scotia/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/90000",
+      "new": "/nova-scotia/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/100000",
+      "new": "/nova-scotia/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/100000-salary",
+      "new": "/nova-scotia/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/100000",
+      "new": "/nova-scotia/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/110000",
+      "new": "/nova-scotia/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/110000-salary",
+      "new": "/nova-scotia/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/110000",
+      "new": "/nova-scotia/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/120000",
+      "new": "/nova-scotia/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/120000-salary",
+      "new": "/nova-scotia/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/120000",
+      "new": "/nova-scotia/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/nova-scotia/salary/150000",
+      "new": "/nova-scotia/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/150000-salary",
+      "new": "/nova-scotia/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/ns/salary/150000",
+      "new": "/nova-scotia/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/30000",
+      "new": "/manitoba/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/30000-salary",
+      "new": "/manitoba/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/30000",
+      "new": "/manitoba/30000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/35000",
+      "new": "/manitoba/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/35000-salary",
+      "new": "/manitoba/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/35000",
+      "new": "/manitoba/35000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/40000",
+      "new": "/manitoba/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/40000-salary",
+      "new": "/manitoba/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/40000",
+      "new": "/manitoba/40000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/45000",
+      "new": "/manitoba/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/45000-salary",
+      "new": "/manitoba/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/45000",
+      "new": "/manitoba/45000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/50000",
+      "new": "/manitoba/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/50000-salary",
+      "new": "/manitoba/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/50000",
+      "new": "/manitoba/50000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/55000",
+      "new": "/manitoba/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/55000-salary",
+      "new": "/manitoba/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/55000",
+      "new": "/manitoba/55000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/60000",
+      "new": "/manitoba/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/60000-salary",
+      "new": "/manitoba/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/60000",
+      "new": "/manitoba/60000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/65000",
+      "new": "/manitoba/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/65000-salary",
+      "new": "/manitoba/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/65000",
+      "new": "/manitoba/65000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/70000",
+      "new": "/manitoba/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/70000-salary",
+      "new": "/manitoba/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/70000",
+      "new": "/manitoba/70000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/75000",
+      "new": "/manitoba/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/75000-salary",
+      "new": "/manitoba/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/75000",
+      "new": "/manitoba/75000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/80000",
+      "new": "/manitoba/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/80000-salary",
+      "new": "/manitoba/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/80000",
+      "new": "/manitoba/80000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/85000",
+      "new": "/manitoba/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/85000-salary",
+      "new": "/manitoba/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/85000",
+      "new": "/manitoba/85000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/90000",
+      "new": "/manitoba/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/90000-salary",
+      "new": "/manitoba/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/90000",
+      "new": "/manitoba/90000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/100000",
+      "new": "/manitoba/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/100000-salary",
+      "new": "/manitoba/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/100000",
+      "new": "/manitoba/100000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/110000",
+      "new": "/manitoba/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/110000-salary",
+      "new": "/manitoba/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/110000",
+      "new": "/manitoba/110000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/120000",
+      "new": "/manitoba/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/120000-salary",
+      "new": "/manitoba/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/120000",
+      "new": "/manitoba/120000-salary",
+      "status": 301
+    },
+    {
+      "old": "/manitoba/salary/150000",
+      "new": "/manitoba/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/150000-salary",
+      "new": "/manitoba/150000-salary",
+      "status": 301
+    },
+    {
+      "old": "/mb/salary/150000",
+      "new": "/manitoba/150000-salary",
+      "status": 301
+    }
+  ]
+}

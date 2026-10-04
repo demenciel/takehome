@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AnswerSummary from '../components/AnswerSummary.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import ContentBlocks from '../components/ContentBlocks.astro';
+import BabyCalculator from '../components/BabyCalculator.astro';
+import { babyAnswer } from '../lib/answers';
+import { babyPage } from '../lib/content/specialized';
+import { relatedLinks } from '../lib/related';
+import { absoluteUrl } from '../lib/catalog';
+import { babyStartupDefaults, babyRecurringDefaults, summarizeBaby } from '../lib/family/baby';
+
+const page = babyPage();
+const example = summarizeBaby(babyStartupDefaults(), babyRecurringDefaults());
+const seo = {
+  title: page.title,
+  description: page.description,
+  canonical: absoluteUrl('/baby-cost-calculator'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: page.h1, url: absoluteUrl('/baby-cost-calculator') },
+  ],
+  faqs: page.faqs,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl sm:text-5xl">{page.h1}</h1>
+    <AnswerSummary class="mt-6" summary={babyAnswer(example)} />
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">{page.intro}</p>
+    <div class="mt-8">
+      <BabyCalculator />
+    </div>
+  </section>
+  <ContentBlocks blocks={page.sections} />
+  <Faq faqs={page.faqs} />
+  <Related links={relatedLinks(null, 'baby')} />
+</Base>

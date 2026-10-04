@@ -1,0 +1,63 @@
+---
+import { babyRecurringDefaults, babyStartupDefaults } from '../lib/family/baby';
+
+const startup = babyStartupDefaults();
+const recurring = babyRecurringDefaults();
+---
+
+<div class="rounded-2xl border border-line bg-card p-5 shadow-sm sm:p-8" data-baby>
+  <form class="space-y-6" data-baby-form novalidate>
+    <div>
+      <h2 class="font-serif text-2xl">Startup purchases</h2>
+      <div class="mt-4 space-y-3">
+        {startup.map((item) => (
+          <div class="grid gap-2 rounded-xl bg-paper p-3 sm:grid-cols-[1fr_7rem_auto]">
+            <label class="text-sm font-semibold" for={`startup-${item.id}`}>{item.label}</label>
+            <input id={`startup-${item.id}`} name={`startup-${item.id}`} type="text" inputmode="decimal" class="input-field" value={item.planned} />
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" name={`gift-${item.id}`} /> Gift</label>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div>
+      <h2 class="font-serif text-2xl">Monthly recurring</h2>
+      <div class="mt-4 space-y-3">
+        {recurring.map((item) => (
+          <div class="grid gap-2 rounded-xl bg-paper p-3 sm:grid-cols-[1fr_7rem]">
+            <label class="text-sm font-semibold" for={`recurring-${item.id}`}>{item.label}</label>
+            <input id={`recurring-${item.id}`} name={`recurring-${item.id}`} type="text" inputmode="decimal" class="input-field" value={item.planned} />
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <label class="flex items-center gap-3 text-sm sm:col-span-2">
+        <input type="checkbox" name="childcareNeeded" />
+        Include childcare
+      </label>
+      <div>
+        <label for="childcareMonthly" class="mb-2 block text-sm font-semibold">Monthly childcare</label>
+        <input id="childcareMonthly" name="childcareMonthly" type="text" inputmode="decimal" class="input-field" />
+      </div>
+      <div>
+        <label for="ccbMonthly" class="mb-2 block text-sm font-semibold">Monthly CCB (optional)</label>
+        <input id="ccbMonthly" name="ccbMonthly" type="text" inputmode="decimal" class="input-field" />
+      </div>
+      <div>
+        <label for="currentSavings" class="mb-2 block text-sm font-semibold">Current savings</label>
+        <input id="currentSavings" name="currentSavings" type="text" inputmode="decimal" class="input-field" />
+      </div>
+      <div>
+        <label for="monthlySaved" class="mb-2 block text-sm font-semibold">Saving each month</label>
+        <input id="monthlySaved" name="monthlySaved" type="text" inputmode="decimal" class="input-field" />
+      </div>
+    </div>
+    <button type="submit" class="btn-primary">Update baby budget</button>
+    <p data-error class="text-sm text-deduct" hidden></p>
+  </form>
+  <div data-result class="mt-8" hidden></div>
+</div>
+<script>
+  import { initBaby } from '../scripts/baby';
+  initBaby();
+</script>

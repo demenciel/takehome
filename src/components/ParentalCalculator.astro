@@ -1,0 +1,71 @@
+---
+import { allProvinces } from '../lib/province';
+import { PAY_FREQUENCIES, frequencyLabel } from '../lib/frequency';
+
+const provinces = allProvinces();
+---
+
+<div class="rounded-2xl border border-line bg-card p-5 shadow-sm sm:p-8" data-parental>
+  <form class="space-y-5" data-parental-form novalidate>
+    <div>
+      <label for="province" class="mb-2 block text-sm font-semibold">Province or territory</label>
+      <select id="province" name="province" class="input-field" required>
+        {provinces.map((option) => (
+          <option value={option.code} selected={option.code === 'ON'}>{option.name}</option>
+        ))}
+      </select>
+    </div>
+    <div>
+      <label for="salary" class="mb-2 block text-sm font-semibold">Annual salary</label>
+      <input id="salary" name="salary" type="text" inputmode="decimal" class="input-field" value="80000" />
+    </div>
+    <div>
+      <label for="frequency" class="mb-2 block text-sm font-semibold">Regular pay frequency</label>
+      <select id="frequency" name="frequency" class="input-field">
+        {PAY_FREQUENCIES.map((option) => (
+          <option value={option} selected={option === 'biweekly'}>{frequencyLabel(option)}</option>
+        ))}
+      </select>
+    </div>
+    <div>
+      <label for="leaveType" class="mb-2 block text-sm font-semibold">Leave path</label>
+      <select id="leaveType" name="leaveType" class="input-field">
+        <option value="maternity_standard" selected>Maternity + standard parental</option>
+        <option value="maternity_extended">Maternity + extended parental</option>
+        <option value="standard">Standard parental only</option>
+        <option value="extended">Extended parental only</option>
+      </select>
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="plannedWeeks" class="mb-2 block text-sm font-semibold">Your planned weeks</label>
+        <input id="plannedWeeks" name="plannedWeeks" type="text" inputmode="numeric" class="input-field" value="50" />
+      </div>
+      <div>
+        <label for="partnerWeeks" class="mb-2 block text-sm font-semibold">Partner weeks</label>
+        <input id="partnerWeeks" name="partnerWeeks" type="text" inputmode="numeric" class="input-field" value="0" />
+      </div>
+    </div>
+    <label class="flex items-center gap-3 text-sm">
+      <input type="checkbox" name="topUpEnabled" />
+      Include employer top-up
+    </label>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="topUpPercent" class="mb-2 block text-sm font-semibold">Top-up to % of regular pay</label>
+        <input id="topUpPercent" name="topUpPercent" type="text" inputmode="decimal" class="input-field" value="80" />
+      </div>
+      <div>
+        <label for="topUpWeeks" class="mb-2 block text-sm font-semibold">Top-up weeks</label>
+        <input id="topUpWeeks" name="topUpWeeks" type="text" inputmode="numeric" class="input-field" value="17" />
+      </div>
+    </div>
+    <button type="submit" class="btn-primary">Estimate leave income</button>
+    <p data-error class="text-sm text-deduct" hidden></p>
+  </form>
+  <div data-result class="mt-8" hidden></div>
+</div>
+<script>
+  import { initParental } from '../scripts/parental';
+  initParental();
+</script>

@@ -1,0 +1,115 @@
+---
+import { allProvinces } from '../lib/province';
+import { PAY_FREQUENCIES, frequencyLabel, type PayFrequency } from '../lib/frequency';
+import calculatorCopy from '../data/calculator-copy.json';
+
+interface Props {
+  province?: string;
+  salary?: string;
+  frequency?: PayFrequency;
+  inputMode?: 'annual' | 'hourly';
+  autoCalculate?: boolean;
+}
+
+const provinces = allProvinces();
+const {
+  province = '',
+  salary = '',
+  frequency = 'biweekly',
+  inputMode = 'annual',
+  autoCalculate = false,
+} = Astro.props;
+---
+
+<div class="rounded-2xl border border-line bg-card p-5 shadow-sm sm:p-8" data-paycheck>
+  <form class="space-y-5" data-paycheck-form data-autocalc={autoCalculate ? 'true' : 'false'} novalidate>
+    <fieldset class="space-y-3">
+      <legend class="text-sm font-semibold text-ink-soft">{calculatorCopy.input_mode}</legend>
+      <div class="grid grid-cols-2 gap-2">
+        <label class="flex min-h-12 cursor-pointer items-center justify-center rounded-xl border border-line px-3 text-sm font-semibold has-[:checked]:border-accent has-[:checked]:bg-accent/10 has-[:checked]:text-accent-dark">
+          <input type="radio" name="inputMode" value="annual" class="sr-only" checked={inputMode === 'annual'} />
+          {calculatorCopy.mode_annual}
+        </label>
+        <label class="flex min-h-12 cursor-pointer items-center justify-center rounded-xl border border-line px-3 text-sm font-semibold has-[:checked]:border-accent has-[:checked]:bg-accent/10 has-[:checked]:text-accent-dark">
+          <input type="radio" name="inputMode" value="hourly" class="sr-only" checked={inputMode === 'hourly'} />
+          {calculatorCopy.mode_hourly}
+        </label>
+      </div>
+    </fieldset>
+
+    <div data-hourly-fields hidden={inputMode !== 'hourly'}>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label for="hourlyWage" class="mb-2 block text-sm font-semibold">{calculatorCopy.hourly_label}</label>
+          <input id="hourlyWage" name="hourlyWage" type="text" inputmode="decimal" class="input-field" placeholder="25.00" autocomplete="off" />
+        </div>
+        <div>
+          <label for="hoursPerWeek" class="mb-2 block text-sm font-semibold">{calculatorCopy.hours_label}</label>
+          <input id="hoursPerWeek" name="hoursPerWeek" type="text" inputmode="decimal" class="input-field" value="40" />
+        </div>
+      </div>
+    </div>
+
+    <div data-annual-fields hidden={inputMode === 'hourly'}>
+      <label for="salary" class="mb-2 block text-lg font-semibold">{calculatorCopy.how_much}</label>
+      <div class="relative">
+        <span class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-soft">$</span>
+        <input id="salary" name="salary" type="text" inputmode="decimal" class="input-field pl-8 text-xl" placeholder="75,000" autocomplete="off" value={salary} />
+      </div>
+      <p class="mt-2 text-sm text-ink-soft">{calculatorCopy.salary_label}</p>
+    </div>
+
+    <div>
+      <label for="province" class="mb-2 block text-sm font-semibold">{calculatorCopy.province_label}</label>
+      <select id="province" name="province" class="input-field" required>
+        <option value="">{calculatorCopy.province_placeholder}</option>
+        {provinces.map((option) => (
+          <option value={option.code} selected={option.code === province}>{option.name}</option>
+        ))}
+      </select>
+    </div>
+
+    <div>
+      <label for="frequency" class="mb-2 block text-sm font-semibold">{calculatorCopy.frequency_label}</label>
+      <select id="frequency" name="frequency" class="input-field">
+        {PAY_FREQUENCIES.map((option) => (
+          <option value={option} selected={option === frequency}>{frequencyLabel(option)}</option>
+        ))}
+      </select>
+    </div>
+
+    <p class="text-sm text-ink-soft">{calculatorCopy.using_basic_claim} · Tax year 2026</p>
+    <button type="button" class="text-sm font-semibold text-accent underline" data-advanced-toggle>{calculatorCopy.advanced}</button>
+    <div class="grid gap-4 rounded-xl bg-paper p-4 sm:grid-cols-2" data-advanced hidden>
+      <div>
+        <label for="rrsp" class="mb-2 block text-sm font-semibold">{calculatorCopy.rrsp_label}</label>
+        <input id="rrsp" name="rrsp" type="text" inputmode="decimal" class="input-field" placeholder="0" />
+      </div>
+      <div>
+        <label for="pension" class="mb-2 block text-sm font-semibold">{calculatorCopy.pension_label}</label>
+        <input id="pension" name="pension" type="text" inputmode="decimal" class="input-field" placeholder="0" />
+      </div>
+      <div>
+        <label for="unionDues" class="mb-2 block text-sm font-semibold">{calculatorCopy.union_label}</label>
+        <input id="unionDues" name="unionDues" type="text" inputmode="decimal" class="input-field" placeholder="0" />
+      </div>
+      <div>
+        <label for="otherDeductions" class="mb-2 block text-sm font-semibold">{calculatorCopy.other_label}</label>
+        <input id="otherDeductions" name="otherDeductions" type="text" inputmode="decimal" class="input-field" placeholder="0" />
+      </div>
+      <div class="sm:col-span-2">
+        <label for="additionalTax" class="mb-2 block text-sm font-semibold">{calculatorCopy.additional_tax_label}</label>
+        <input id="additionalTax" name="additionalTax" type="text" inputmode="decimal" class="input-field" placeholder="0" />
+      </div>
+    </div>
+
+    <button type="submit" class="btn-primary">{calculatorCopy.submit}</button>
+    <p data-error class="text-sm text-deduct" hidden></p>
+  </form>
+  <div data-result class="mt-8" hidden></div>
+</div>
+
+<script>
+  import { initPaycheck } from '../scripts/paycheck';
+  initPaycheck();
+</script>

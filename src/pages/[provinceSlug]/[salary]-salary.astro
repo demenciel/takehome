@@ -1,0 +1,104 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AnswerSummary from '../../components/AnswerSummary.astro';
+import Faq from '../../components/Faq.astro';
+import Related from '../../components/Related.astro';
+import ContentBlocks from '../../components/ContentBlocks.astro';
+import PaycheckCalculator from '../../components/PaycheckCalculator.astro';
+import { salaryAnswer, salaryExplanation, salaryFaqs } from '../../lib/answers';
+import { provinceCopy } from '../../lib/content/paycheck';
+import { relatedLinks } from '../../lib/related';
+import { allProvinces, isCanonicalProvinceSlug, provinceFromSlug } from '../../lib/province';
+import { POPULAR_SALARIES, SALARY_PAGE_PROVINCES, salaryCompare, salaryNeighbors, salaryPageAllowed, absoluteUrl } from '../../lib/catalog';
+import { calculatePayroll } from '../../lib/tax/payroll';
+import { hourlyFromAnnual, assumptionLabel } from '../../lib/hourly';
+import { Money } from '../../lib/money';
+
+export function getStaticPaths() {
+  return allProvinces()
+    .filter((province) => SALARY_PAGE_PROVINCES.includes(province.code))
+    .flatMap((province) =>
+      POPULAR_SALARIES.map((salary) => ({
+        params: { provinceSlug: province.slug, salary: String(salary) },
+      })),
+    );
+}
+
+const { provinceSlug, salary: salaryParam } = Astro.params;
+const salary = Number(salaryParam);
+if (!provinceSlug || !isCanonicalProvinceSlug(provinceSlug) || Number.isNaN(salary)) {
+  return Astro.redirect('/');
+}
+const province = provinceFromSlug(provinceSlug)!;
+if (!salaryPageAllowed(province, salary)) {
+  return Astro.redirect(`/${province.slug}-paycheck-calculator`);
+}
+
+const result = calculatePayroll({ annual_salary: String(salary), province: province.code, frequency: 'annual' });
+const content = provinceCopy(province);
+const explanation = salaryExplanation(province, salary, result);
+const faqs = salaryFaqs(province, salary, result);
+const neighbors = salaryNeighbors(salary);
+const compare = salaryCompare(salary);
+const hourly = hourlyFromAnnual(Money.fromDollars(salary));
+const formatted = `$${salary.toLocaleString('en-CA')}`;
+const seo = {
+  title: `${formatted} Salary After Tax in ${province.name}`,
+  description: `Estimated take-home pay for a ${formatted} salary in ${province.name} after income tax, ${province.usesQpp ? 'QPP' : 'CPP'}, and EI.`,
+  canonical: absoluteUrl(`/${province.slug}/${salary}-salary`),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: province.name, url: absoluteUrl(`/${province.slug}-paycheck-calculator`) },
+    { name: `${formatted} salary`, url: absoluteUrl(`/${province.slug}/${salary}-salary`) },
+  ],
+  faqs,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl sm:text-5xl">{formatted} after tax in {province.name}</h1>
+    <AnswerSummary class="mt-6" summary={salaryAnswer(province, salary, result)} />
+    <p class="mt-4 max-w-3xl text-lg text-ink-soft">{explanation}</p>
+    <div class="mt-8 overflow-x-auto">
+      <table class="data-table">
+        <thead><tr><th>Breakdown</th><th class="text-right">Annual</th></tr></thead>
+        <tbody>
+          <tr><th>Gross salary</th><td class="text-right">{Money.fromDollars(salary).format()}</td></tr>
+          <tr><th>Federal tax</th><td class="text-right">{result.metrics.federal_tax.format()}</td></tr>
+          <tr><th>{province.name} tax</th><td class="text-right">{result.metrics.provincial_tax.format()}</td></tr>
+          <tr><th>{province.usesQpp ? 'QPP' : 'CPP'}</th><td class="text-right">{result.metrics.cpp.format()}</td></tr>
+          {result.metrics.cpp2.isPositive() && (
+            <tr><th>{province.usesQpp ? 'QPP2' : 'CPP2'}</th><td class="text-right">{result.metrics.cpp2.format()}</td></tr>
+          )}
+          <tr><th>EI</th><td class="text-right">{result.metrics.ei.format()}</td></tr>
+          {result.metrics.qpip.isPositive() && (
+            <tr><th>QPIP</th><td class="text-right">{result.metrics.qpip.format()}</td></tr>
+          )}
+          <tr><th>Estimated take-home</th><td class="text-right">{result.metrics.net_annual.format()}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-ink-soft">Hourly equivalent using {assumptionLabel()}: {hourly.format()}/hour before tax.</p>
+    <div class="mt-8 max-w-2xl">
+      <PaycheckCalculator province={province.code} salary={String(salary)} frequency="annual" autoCalculate />
+    </div>
+  </section>
+  <ContentBlocks blocks={content.body} />
+  {(neighbors.previous || neighbors.next || compare.length > 0) && (
+    <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+      <h2 class="font-serif text-3xl">Nearby {province.name} salaries</h2>
+      <div class="mt-6 flex flex-wrap gap-3">
+        {compare.map((amount) => (
+          <a href={`/${province.slug}/${amount}-salary`} class="rounded-full border border-line bg-card px-4 py-2 font-semibold hover:border-accent">
+            ${amount.toLocaleString('en-CA')}
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+  <Faq faqs={faqs} />
+  <Related links={relatedLinks(province)} />
+</Base>

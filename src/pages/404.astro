@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { absoluteUrl } from '../lib/catalog';
+
+const seo = {
+  title: 'Page not found | Paycheque.app',
+  description: 'That page is not in the Paycheque.app calculator set.',
+  canonical: absoluteUrl('/404'),
+  includeApplication: false,
+};
+---
+
+<Base seo={seo}>
+  <section class="mx-auto max-w-3xl px-4 py-20 sm:px-6">
+    <h1 class="font-serif text-4xl">Page not found</h1>
+    <p class="mt-4 text-lg text-ink-soft">That URL is not a current Paycheque.app calculator or article.</p>
+    <p class="mt-6">
+      <a href="/" class="font-semibold text-accent-dark underline">Go to the Canadian paycheck calculator</a>
+    </p>
+  </section>
+</Base>

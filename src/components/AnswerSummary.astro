@@ -1,0 +1,30 @@
+---
+import type { AnswerSummary } from '../lib/answers';
+
+interface Props {
+  summary: AnswerSummary;
+  class?: string;
+}
+
+const { summary, class: className = '' } = Astro.props;
+---
+
+<aside class:list={['rounded-2xl border border-line bg-card p-5', className]} data-answer-summary>
+  <p class="text-sm font-semibold text-accent">{summary.question}</p>
+  <p class="mt-3 text-lg text-ink">{summary.answer}</p>
+  {summary.facts.length > 0 && (
+    <dl class="mt-4 grid gap-2 text-sm sm:grid-cols-2">
+      {summary.facts.map((fact) => (
+        <div>
+          <dt class="text-ink-soft">{fact.label}</dt>
+          <dd class="font-semibold">{fact.value}</dd>
+        </div>
+      ))}
+    </dl>
+  )}
+  <p class="mt-4 text-sm text-ink-soft">
+    {summary.jurisdiction && <span>{summary.jurisdiction} · </span>}
+    Tax year {summary.year} · Last updated {summary.updated} ·
+    <a href="/methodology" class="font-semibold text-accent-dark underline">Methodology</a>
+  </p>
+</aside>

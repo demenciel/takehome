@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AnswerSummary from '../components/AnswerSummary.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import ContentBlocks from '../components/ContentBlocks.astro';
+import EiCalculator from '../components/EiCalculator.astro';
+import { eiBenefitsAnswer } from '../lib/answers';
+import { eiBenefitsPage } from '../lib/content/specialized';
+import { relatedLinks } from '../lib/related';
+import { absoluteUrl } from '../lib/catalog';
+import { estimateBenefits } from '../lib/family/benefits';
+import { Money } from '../lib/money';
+
+const page = eiBenefitsPage();
+const example = estimateBenefits(Money.fromDollars(80000), 'maternity', 15);
+const seo = {
+  title: page.title,
+  description: page.description,
+  canonical: absoluteUrl('/ei-maternity-parental-benefits'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: page.h1, url: absoluteUrl('/ei-maternity-parental-benefits') },
+  ],
+  faqs: page.faqs,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl sm:text-5xl">{page.h1}</h1>
+    <AnswerSummary class="mt-6" summary={eiBenefitsAnswer(example)} />
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">{page.intro}</p>
+    <div class="mt-8 max-w-2xl">
+      <EiCalculator />
+    </div>
+  </section>
+  <ContentBlocks blocks={page.sections} />
+  <Faq faqs={page.faqs} />
+  <Related links={relatedLinks(null, 'ei_benefits')} />
+</Base>

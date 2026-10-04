@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { absoluteUrl } from '../lib/catalog';
+import { OTHER_PROJECTS, SITE_NAME, projectHref } from '../lib/site';
+
+const seo = {
+  title: `About ${SITE_NAME}`,
+  description: `${SITE_NAME} is an independent Canadian take-home pay calculator. It estimates federal tax, provincial tax, CPP or QPP, EI, and net pay.`,
+  canonical: absoluteUrl('/about'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: 'About', url: absoluteUrl('/about') },
+  ],
+  includeApplication: false,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-4xl">About {SITE_NAME}</h1>
+    <p class="mt-6 text-lg text-ink-soft">{SITE_NAME} is an independent Canadian take-home pay calculator. It estimates federal tax, provincial or territorial tax, CPP or QPP, EI, and net pay from the salary, province, and pay frequency you enter.</p>
+    <h2 class="mt-10 font-serif text-3xl">Not a government service</h2>
+    <p class="mt-4 text-ink-soft">This site is not affiliated with the Canada Revenue Agency, Revenu Québec, or any provincial government. Official withholding tools and employer payroll software remain the authority for an actual paycheque.</p>
+    <h2 class="mt-10 font-serif text-3xl">Where the numbers come from</h2>
+    <p class="mt-4 text-ink-soft">Tax rules are stored as versioned data files and calculated in TypeScript in your browser. There is no AI API and no call to an external tax service when you calculate. The current rules follow CRA T4127 payroll formulas, with Revenu Québec parameters for Quebec provincial tax. Details are on the <a href="/methodology" class="font-semibold text-accent-dark underline">methodology</a> page.</p>
+    <h2 class="mt-10 font-serif text-3xl">What this is not</h2>
+    <p class="mt-4 text-ink-soft">It is not an employer payroll system, a tax-filing product, or official tax advice. Actual paycheques depend on TD1 claims, benefits, pensions, and your employer’s software.</p>
+    <h2 class="mt-10 font-serif text-3xl">Other projects</h2>
+    <p class="mt-4 text-ink-soft">{SITE_NAME} is part of a small set of independent tools. These sites are related projects:</p>
+    <ul class="mt-4 list-disc space-y-2 pl-6 text-ink-soft">
+      {OTHER_PROJECTS.map((project) => (
+        <li>
+          <a href={projectHref(project, 'about')} class="font-semibold text-accent-dark underline" target="_blank" rel="noopener">{project.name}</a>
+          {' '}({project.host})
+        </li>
+      ))}
+    </ul>
+    <h2 class="mt-10 font-serif text-3xl">Contact and policies</h2>
+    <ul class="mt-4 list-disc space-y-2 pl-6 text-ink-soft">
+      <li><a href="/contact" class="font-semibold text-accent-dark underline">Contact</a></li>
+      <li><a href="/privacy" class="font-semibold text-accent-dark underline">Privacy policy</a> — cookies, analytics, and ads</li>
+      <li><a href="/terms" class="font-semibold text-accent-dark underline">Terms of use</a></li>
+      <li><a href="/methodology" class="font-semibold text-accent-dark underline">Methodology</a></li>
+    </ul>
+  </article>
+</Base>

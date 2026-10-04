@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { absoluteUrl } from '../lib/catalog';
+import { CONTACT_EMAIL, SITE_NAME } from '../lib/site';
+
+const seo = {
+  title: `Contact | ${SITE_NAME}`,
+  description: 'Contact Paycheque.app about the calculator, tax data, privacy, or a problem with the site.',
+  canonical: absoluteUrl('/contact'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: 'Contact', url: absoluteUrl('/contact') },
+  ],
+  includeApplication: false,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <article class="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+    <h1 class="font-serif text-4xl">Contact</h1>
+    <p class="mt-6 text-lg text-ink-soft">Questions about the calculator, tax data, privacy, or a problem with the site. Do not send a SIN, bank details, or a full tax return.</p>
+    <p class="mt-4 text-ink-soft">
+      Email
+      <a href={`mailto:${CONTACT_EMAIL}`} class="font-semibold text-accent-dark underline">{CONTACT_EMAIL}</a>.
+      There is no contact form and no message database.
+    </p>
+    <p class="mt-8 text-sm text-ink-soft">
+      How we handle messages is described in the
+      <a href="/privacy" class="font-semibold text-accent-dark underline">privacy policy</a>.
+    </p>
+  </article>
+</Base>

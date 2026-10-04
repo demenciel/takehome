@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AnswerSummary from '../components/AnswerSummary.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import ContentBlocks from '../components/ContentBlocks.astro';
+import ParentalCalculator from '../components/ParentalCalculator.astro';
+import { parentalAnswer } from '../lib/answers';
+import { parentalPage } from '../lib/content/specialized';
+import { relatedLinks } from '../lib/related';
+import { absoluteUrl } from '../lib/catalog';
+import { projectParentalLeave } from '../lib/family/parental';
+
+const page = parentalPage();
+const example = projectParentalLeave({
+  province: 'ON',
+  salary: '80000',
+  leave_type: 'maternity_standard',
+  planned_weeks: 50,
+});
+const seo = {
+  title: page.title,
+  description: page.description,
+  canonical: absoluteUrl('/parental-leave-calculator'),
+  breadcrumbs: [
+    { name: 'Home', url: absoluteUrl('/') },
+    { name: page.h1, url: absoluteUrl('/parental-leave-calculator') },
+  ],
+  faqs: page.faqs,
+};
+---
+
+<Base seo={seo}>
+  <Breadcrumbs items={seo.breadcrumbs} />
+  <section class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6">
+    <h1 class="font-serif text-4xl sm:text-5xl">{page.h1}</h1>
+    <AnswerSummary class="mt-6" summary={parentalAnswer(example)} />
+    <p class="mt-4 max-w-2xl text-lg text-ink-soft">{page.intro}</p>
+    <div class="mt-8 max-w-2xl">
+      <ParentalCalculator />
+    </div>
+  </section>
+  <ContentBlocks blocks={page.sections} />
+  <Faq faqs={page.faqs} />
+  <Related links={relatedLinks(null, 'parental')} />
+</Base>

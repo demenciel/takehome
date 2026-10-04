@@ -1,0 +1,47 @@
+---
+import ProvinceSelect from './ProvinceSelect.astro';
+
+interface Props {
+  province?: string;
+}
+
+const { province = '' } = Astro.props;
+---
+
+<div class="rounded-2xl border border-line bg-card p-5 shadow-sm sm:p-8" data-raise>
+  <form class="space-y-5" data-raise-form novalidate>
+    <ProvinceSelect value={province} />
+    <div>
+      <label for="currentSalary" class="mb-2 block text-sm font-semibold">Current annual salary</label>
+      <input id="currentSalary" name="currentSalary" type="text" inputmode="decimal" class="input-field" value="75000" />
+    </div>
+    <fieldset class="space-y-3">
+      <legend class="text-sm font-semibold text-ink-soft">How do you want to enter the raise?</legend>
+      <div class="grid grid-cols-2 gap-2">
+        <label class="flex min-h-12 cursor-pointer items-center justify-center rounded-xl border border-line px-3 text-sm font-semibold has-[:checked]:border-accent has-[:checked]:bg-accent/10">
+          <input type="radio" name="raiseMode" value="amount" class="sr-only" checked />
+          New salary
+        </label>
+        <label class="flex min-h-12 cursor-pointer items-center justify-center rounded-xl border border-line px-3 text-sm font-semibold has-[:checked]:border-accent has-[:checked]:bg-accent/10">
+          <input type="radio" name="raiseMode" value="percent" class="sr-only" />
+          Raise %
+        </label>
+      </div>
+    </fieldset>
+    <div data-new-salary>
+      <label for="newSalary" class="mb-2 block text-sm font-semibold">New annual salary</label>
+      <input id="newSalary" name="newSalary" type="text" inputmode="decimal" class="input-field" value="85000" />
+    </div>
+    <div data-raise-percent hidden>
+      <label for="raisePercent" class="mb-2 block text-sm font-semibold">Raise percentage</label>
+      <input id="raisePercent" name="raisePercent" type="text" inputmode="decimal" class="input-field" value="10" />
+    </div>
+    <button type="submit" class="btn-primary">Calculate net raise</button>
+    <p data-error class="text-sm text-deduct" hidden></p>
+  </form>
+  <div data-result class="mt-8" hidden></div>
+</div>
+<script>
+  import { initRaise } from '../scripts/raise';
+  initRaise();
+</script>

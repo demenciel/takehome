@@ -1,0 +1,20 @@
+---
+interface Props {
+  links: Array<{ label: string; href: string }>;
+}
+
+const { links } = Astro.props;
+---
+
+<section class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+  <h2 class="font-serif text-2xl">Related calculators</h2>
+  <ul class="mt-4 flex flex-wrap gap-3">
+    {links.map((link) => (
+      <li>
+        <a href={link.href} class="rounded-full border border-line bg-card px-4 py-2 font-semibold hover:border-accent">
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

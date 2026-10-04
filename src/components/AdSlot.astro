@@ -1,0 +1,23 @@
+---
+import { ADS_ENABLED, ADS_PROVIDER, ADS_CLIENT, ADSENSE_LOADER_CLIENT } from '../lib/site';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className = '' } = Astro.props;
+---
+
+{ADS_ENABLED && (ADS_PROVIDER === 'adsense' || !ADS_PROVIDER) ? (
+  <div class:list={['ad-slot', className]}>
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={ADS_CLIENT || ADSENSE_LOADER_CLIENT}
+      data-ad-slot={name}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    />
+  </div>
+) : null}
