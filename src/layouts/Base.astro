@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { jsonLd, type SeoPage } from '../lib/seo';
-import { SITE_NAME, ANALYTICS_MEASUREMENT_ID, ADS_ENABLED, ADSENSE_LOADER_CLIENT } from '../lib/site';
+import { SITE_NAME, ANALYTICS_MEASUREMENT_ID, ADS_ENABLED, ADSENSE_LOADER_CLIENT, OTHER_PROJECTS } from '../lib/site';
 
 interface Props {
   seo: SeoPage;
@@ -78,7 +78,7 @@ const schema = jsonLd(seo);
       <slot />
     </main>
     <footer class="mt-16 border-t border-line bg-card">
-      <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 text-sm text-ink-soft sm:px-6 md:flex-row md:justify-between">
+      <div class="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 text-sm text-ink-soft sm:px-6 md:flex-row md:justify-between">
         <div>
           <p class="font-serif text-base text-ink">{SITE_NAME}</p>
           <p class="mt-2 max-w-md">Independent Canadian paycheck / take-home pay calculator.</p>
@@ -102,6 +102,12 @@ const schema = jsonLd(seo);
           <a href="/contact" class="hover:text-ink">Contact</a>
           <a href="/sitemap.xml" class="hover:text-ink">Sitemap</a>
         </div>
+        <nav aria-label="Other projects" class="flex flex-col gap-2">
+          <p class="font-semibold text-ink">Other projects</p>
+          {OTHER_PROJECTS.map((project) => (
+            <a href={project.href} class="hover:text-ink" target="_blank" rel="noopener">{project.name}</a>
+          ))}
+        </nav>
       </div>
     </footer>
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />

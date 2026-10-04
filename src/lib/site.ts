@@ -9,3 +9,10 @@ export const ADS_CLIENT = import.meta.env.PUBLIC_ADS_CLIENT || '';
 export const PRIVACY_UPDATED = '2026-09-21';
 export const TERMS_UPDATED = '2026-09-05';
 export const ADSENSE_LOADER_CLIENT = 'ca-pub-9601080087531926';
+
+export const OTHER_PROJECTS = [
+  { name: 'Founder Triage', href: 'https://triage.alexworks.app' },
+  { name: 'MCP X-Ray', href: 'https://mcpxray.alexworks.app' },
+  { name: 'Alex Works', href: 'https://alexworks.app' },
+  { name: 'Print Ready Check', href: 'https://print.alexworks.app' },
+] as const;
